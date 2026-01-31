@@ -3,7 +3,6 @@ import type { Root } from "react-dom/client";
 import * as semver from "semver";
 import { ChatView, VIEW_TYPE_CHAT } from "./components/chat/ChatView";
 import { mountFloatingChat } from "./components/chat/FloatingChatView";
-import { mountCodeBlockChat } from "./components/chat/CodeBlockChatView";
 import {
 	createSettingsStore,
 	type SettingsStore,
@@ -222,15 +221,6 @@ export default class AgentClientPlugin extends Plugin {
 
 		// Mount initial floating chat component
 		this.openNewFloatingChat();
-
-		// Register agent-client code block processor
-		this.registerMarkdownCodeBlockProcessor("agent-client", (source, el, ctx) => {
-			const root = mountCodeBlockChat(this, el, source);
-			// Create a proper MarkdownRenderChild for cleanup
-			const child = new MarkdownRenderChild(el);
-			child.onunload = () => root.unmount();
-			ctx.addChild(child);
-		});
 
 		// Clean up all ACP sessions when Obsidian quits
 		// Note: We don't wait for disconnect to complete to avoid blocking quit
