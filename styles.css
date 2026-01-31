@@ -184,6 +184,20 @@ If your plugin does not need CSS, delete this file.
 	font-size: 0.9em;
 }
 
+.agent-client-message-tool-call-command {
+	color: var(--text-muted);
+	margin: 4px 0;
+}
+
+.agent-client-message-tool-call-command code {
+	display: block;
+	font-family: var(--font-monospace);
+	font-size: 0.9em;
+	background: var(--background-secondary);
+	padding: 2px 6px;
+	border-radius: 3px;
+}
+
 .agent-client-message-tool-call-status {
 	color: var(--text-muted);
 	user-select: text;

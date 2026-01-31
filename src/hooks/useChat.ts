@@ -185,6 +185,11 @@ function mergeToolCallContent(
 			update.locations !== undefined
 				? update.locations
 				: existing.locations,
+		rawInput:
+			update.rawInput !== undefined &&
+			Object.keys(update.rawInput).length > 0
+				? update.rawInput
+				: existing.rawInput,
 		permissionRequest:
 			update.permissionRequest !== undefined
 				? update.permissionRequest
@@ -466,6 +471,7 @@ export function useChat(
 						kind: update.kind,
 						content: update.content,
 						locations: update.locations,
+						rawInput: update.rawInput,
 						permissionRequest: update.permissionRequest,
 					});
 					break;
