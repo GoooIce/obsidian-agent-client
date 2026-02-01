@@ -985,6 +985,9 @@ export class AcpAdapter implements IAgentClient, IAcpClient {
 					kind: update.kind ?? undefined,
 					content: AcpTypeConverter.toToolCallContent(update.content),
 					locations: update.locations ?? undefined,
+					rawInput: update.rawInput as
+						| { [k: string]: unknown }
+						| undefined,
 				});
 				break;
 			}
@@ -1196,6 +1199,9 @@ export class AcpAdapter implements IAgentClient, IAcpClient {
 			content: AcpTypeConverter.toToolCallContent(
 				toolCallInfo?.content as acp.ToolCallContent[] | undefined,
 			),
+			rawInput: toolCallInfo?.rawInput as
+				| { [k: string]: unknown }
+				| undefined,
 			permissionRequest: permissionRequestData,
 		});
 

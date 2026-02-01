@@ -75,6 +75,7 @@ export interface ToolCall extends SessionUpdateBase {
 	kind?: ToolKind;
 	content?: ToolCallContent[];
 	locations?: ToolCallLocation[];
+	rawInput?: { [k: string]: unknown };
 	permissionRequest?: {
 		requestId: string;
 		options: PermissionOption[];
@@ -97,6 +98,7 @@ export interface ToolCallUpdate extends SessionUpdateBase {
 	kind?: ToolKind;
 	content?: ToolCallContent[];
 	locations?: ToolCallLocation[];
+	rawInput?: { [k: string]: unknown };
 	permissionRequest?: {
 		requestId: string;
 		options: PermissionOption[];

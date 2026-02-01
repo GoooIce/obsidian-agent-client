@@ -133,7 +133,10 @@ export class TerminalManager {
 			process: childProcess,
 			output: "",
 			exitStatus: null,
-			outputByteLimit: params.outputByteLimit ?? undefined,
+			outputByteLimit:
+				params.outputByteLimit !== undefined
+					? Number(params.outputByteLimit)
+					: undefined,
 			waitPromises: [],
 		};
 

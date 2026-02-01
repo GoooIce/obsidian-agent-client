@@ -34,7 +34,7 @@ export function ToolCallRenderer({
 		toolCallId,
 		permissionRequest,
 		locations,
-		// rawInput,
+		rawInput,
 		content: toolContent,
 	} = content;
 
@@ -102,6 +102,18 @@ export function ToolCallRenderer({
 					)}
 					{title}
 				</div>
+				{kind === "execute" &&
+					rawInput &&
+					typeof rawInput.command === "string" && (
+						<div className="agent-client-message-tool-call-command">
+							<code>
+								{rawInput.command}
+								{Array.isArray(rawInput.args) &&
+									rawInput.args.length > 0 &&
+									` ${(rawInput.args as string[]).join(" ")}`}
+							</code>
+						</div>
+					)}
 				{locations && locations.length > 0 && (
 					<div className="agent-client-message-tool-call-locations">
 						{locations.map((loc, idx) => (
