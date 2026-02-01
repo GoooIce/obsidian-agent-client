@@ -25,7 +25,7 @@ import { HeaderMenu } from "./HeaderMenu";
 import { NoteMentionService } from "../../adapters/obsidian/mention-service";
 
 // Utility imports
-import { Logger } from "../../shared/logger";
+import { getLogger, Logger } from "../../shared/logger";
 import { ChatExporter } from "../../shared/chat-exporter";
 
 // Adapter imports
@@ -79,7 +79,7 @@ function ChatComponent({
 	// ============================================================
 	// Memoized Services & Adapters
 	// ============================================================
-	const logger = useMemo(() => new Logger(plugin), [plugin]);
+	const logger = getLogger();
 
 	const vaultPath = useMemo(() => {
 		const adapter = plugin.app.vault.adapter;
@@ -1220,7 +1220,7 @@ export class ChatView extends ItemView {
 	constructor(leaf: WorkspaceLeaf, plugin: AgentClientPlugin) {
 		super(leaf);
 		this.plugin = plugin;
-		this.logger = new Logger(plugin);
+		this.logger = getLogger();
 		// Use leaf.id if available, otherwise generate UUID
 		this.viewId = (leaf as { id?: string }).id ?? crypto.randomUUID();
 	}

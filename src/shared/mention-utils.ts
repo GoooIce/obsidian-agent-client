@@ -1,6 +1,5 @@
 import { TFile } from "obsidian";
-import { Logger } from "./logger";
-import type AgentClientPlugin from "../plugin";
+import { getLogger } from "./logger";
 
 // Interface for mention service to avoid circular dependency
 export interface IMentionService {
@@ -18,9 +17,8 @@ export interface MentionContext {
 export function detectMention(
 	text: string,
 	cursorPosition: number,
-	plugin: AgentClientPlugin,
 ): MentionContext | null {
-	const logger = new Logger(plugin);
+	const logger = getLogger();
 	logger.log("[DEBUG] detectMention called with:", { text, cursorPosition });
 
 	if (cursorPosition < 0 || cursorPosition > text.length) {

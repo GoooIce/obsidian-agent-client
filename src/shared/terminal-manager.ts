@@ -1,7 +1,7 @@
 import { spawn, ChildProcess, SpawnOptions } from "child_process";
 import * as acp from "@agentclientprotocol/sdk";
 import type AgentClientPlugin from "../plugin";
-import { Logger } from "./logger";
+import { getLogger, Logger } from "./logger";
 import { Platform } from "obsidian";
 import { wrapCommandForWsl } from "./wsl-utils";
 import { resolveCommandDirectory } from "./path-utils";
@@ -26,7 +26,7 @@ export class TerminalManager {
 	private plugin: AgentClientPlugin;
 
 	constructor(plugin: AgentClientPlugin) {
-		this.logger = new Logger(plugin);
+		this.logger = getLogger();
 		this.plugin = plugin;
 	}
 

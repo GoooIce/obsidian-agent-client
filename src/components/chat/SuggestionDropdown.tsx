@@ -1,6 +1,6 @@
 import * as React from "react";
-const { useRef, useEffect, useMemo } = React;
-import { Logger } from "../../shared/logger";
+const { useRef, useEffect } = React;
+import { getLogger } from "../../shared/logger";
 import type AgentClientPlugin from "../../plugin";
 import type { ChatView } from "./ChatView";
 import type { NoteMetadata } from "../../domain/ports/vault-access.port";
@@ -59,7 +59,7 @@ export function SuggestionDropdown({
 	view,
 }: SuggestionDropdownProps) {
 	const dropdownRef = useRef<HTMLDivElement>(null);
-	const logger = useMemo(() => new Logger(plugin), [plugin]);
+	const logger = getLogger();
 
 	logger.log(`[DEBUG] SuggestionDropdown (${type}) rendering with:`, {
 		itemsCount: items.length,

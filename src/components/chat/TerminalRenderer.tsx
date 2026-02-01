@@ -1,7 +1,7 @@
 import * as React from "react";
-const { useState, useRef, useEffect, useMemo } = React;
+const { useState, useRef, useEffect } = React;
 import type { IAcpClient } from "../../adapters/acp/acp.adapter";
-import { Logger } from "../../shared/logger";
+import { getLogger } from "../../shared/logger";
 import type AgentClientPlugin from "../../plugin";
 
 interface TerminalRendererProps {
@@ -15,7 +15,7 @@ export function TerminalRenderer({
 	acpClient,
 	plugin,
 }: TerminalRendererProps) {
-	const logger = useMemo(() => new Logger(plugin), [plugin]);
+	const logger = getLogger();
 	const [output, setOutput] = useState("");
 	const [exitStatus, setExitStatus] = useState<{
 		exitCode: number | null;

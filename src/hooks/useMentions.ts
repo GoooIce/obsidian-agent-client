@@ -60,7 +60,7 @@ export function useMentions(
 
 	const updateSuggestions = useCallback(
 		async (input: string, cursorPosition: number) => {
-			const ctx = detectMention(input, cursorPosition, plugin);
+			const ctx = detectMention(input, cursorPosition);
 
 			if (!ctx) {
 				setSuggestions([]);

@@ -1,8 +1,8 @@
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import type { ChatMessage } from "../domain/models/chat-message";
 import type { ChatSession } from "../domain/models/chat-session";
 import { ChatExporter } from "../shared/chat-exporter";
-import { Logger } from "../shared/logger";
+import { getLogger } from "../shared/logger";
 import { Notice } from "obsidian";
 import type AgentClientPlugin from "../plugin";
 
@@ -61,7 +61,7 @@ export interface UseAutoExportReturn {
  * @param plugin - Plugin instance for settings and exporter
  */
 export function useAutoExport(plugin: AgentClientPlugin): UseAutoExportReturn {
-	const loggerRef = useRef(new Logger(plugin));
+	const logger = getLogger();
 
 	/**
 	 * Export chat to markdown file.
@@ -97,7 +97,7 @@ export function useAutoExport(plugin: AgentClientPlugin): UseAutoExportReturn {
 
 				return filePath;
 			} catch (error) {
-				loggerRef.current.error("Export failed:", error);
+				logger.error("Export failed:", error);
 				throw error;
 			}
 		},
@@ -144,9 +144,7 @@ export function useAutoExport(plugin: AgentClientPlugin): UseAutoExportReturn {
 					// Log success
 					const context =
 						trigger === "newChat" ? "new session" : "closing chat";
-					loggerRef.current.log(
-						`Chat auto-exported before ${context}`,
-					);
+					logger.log(`Chat auto-exported before ${context}`);
 				}
 			} catch {
 				// Show error notification

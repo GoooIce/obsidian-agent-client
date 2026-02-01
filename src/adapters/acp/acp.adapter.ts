@@ -23,7 +23,7 @@ import type {
 } from "../../domain/models/session-info";
 import { AcpTypeConverter } from "./acp-type-converter";
 import { TerminalManager } from "../../shared/terminal-manager";
-import { Logger } from "../../shared/logger";
+import { getLogger, Logger } from "../../shared/logger";
 import type AgentClientPlugin from "../../plugin";
 import type {
 	SlashCommand,
@@ -112,7 +112,7 @@ export class AcpAdapter implements IAgentClient, IAcpClient {
 	}> = [];
 
 	constructor(private plugin: AgentClientPlugin) {
-		this.logger = new Logger(plugin);
+		this.logger = getLogger();
 		// Initialize with no-op callback
 		this.updateMessage = () => {};
 

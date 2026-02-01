@@ -1,5 +1,5 @@
 import * as React from "react";
-const { useRef, useState, useEffect, useCallback, useMemo } = React;
+const { useRef, useState, useEffect, useCallback } = React;
 import { setIcon, DropdownComponent, Notice } from "obsidian";
 
 import type AgentClientPlugin from "../../plugin";
@@ -17,7 +17,7 @@ import type { UseAutoMentionReturn } from "../../hooks/useAutoMention";
 import { SuggestionDropdown } from "./SuggestionDropdown";
 import { ErrorOverlay } from "./ErrorOverlay";
 import { ImagePreviewStrip, type AttachedImage } from "./ImagePreviewStrip";
-import { Logger } from "../../shared/logger";
+import { getLogger } from "../../shared/logger";
 import type { ErrorInfo } from "../../domain/models/agent-error";
 import { useSettings } from "../../hooks/useSettings";
 
@@ -151,7 +151,7 @@ export function ChatInput({
 	errorInfo,
 	onClearError,
 }: ChatInputProps) {
-	const logger = useMemo(() => new Logger(plugin), [plugin]);
+	const logger = getLogger();
 	const settings = useSettings(plugin);
 	const showEmojis = plugin.settings.displaySettings.showEmojis;
 

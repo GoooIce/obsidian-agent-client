@@ -1,6 +1,6 @@
 import { TFile, prepareFuzzySearch } from "obsidian";
 import type AgentClientPlugin from "../../plugin";
-import { Logger } from "../../shared/logger";
+import { getLogger, Logger } from "../../shared/logger";
 
 // Note mention service for @-mention functionality
 export class NoteMentionService {
@@ -12,7 +12,7 @@ export class NoteMentionService {
 
 	constructor(plugin: AgentClientPlugin) {
 		this.plugin = plugin;
-		this.logger = new Logger(plugin);
+		this.logger = getLogger();
 		this.rebuildIndex();
 
 		// Listen for vault changes to keep index up to date

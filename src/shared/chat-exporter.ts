@@ -3,7 +3,7 @@ import type {
 	ChatMessage,
 	MessageContent,
 } from "../domain/models/chat-message";
-import { Logger } from "./logger";
+import { getLogger, Logger } from "./logger";
 import { TFile } from "obsidian";
 
 /**
@@ -26,7 +26,7 @@ export class ChatExporter {
 	private logger: Logger;
 
 	constructor(private plugin: AgentClientPlugin) {
-		this.logger = new Logger(plugin);
+		this.logger = getLogger();
 	}
 
 	async exportToMarkdown(

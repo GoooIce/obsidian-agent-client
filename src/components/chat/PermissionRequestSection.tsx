@@ -1,7 +1,5 @@
-import * as React from "react";
-const { useMemo } = React;
 import type AgentClientPlugin from "../../plugin";
-import { Logger } from "../../shared/logger";
+import { getLogger } from "../../shared/logger";
 import * as acp from "@agentclientprotocol/sdk";
 
 interface PermissionRequestSectionProps {
@@ -29,7 +27,7 @@ export function PermissionRequestSection({
 	onApprovePermission,
 	onOptionSelected,
 }: PermissionRequestSectionProps) {
-	const logger = useMemo(() => new Logger(plugin), [plugin]);
+	const logger = getLogger();
 	const showEmojis = plugin.settings.displaySettings.showEmojis;
 
 	const isSelected = permissionRequest.selectedOptionId !== undefined;
