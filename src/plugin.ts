@@ -1,6 +1,8 @@
 import { Plugin, WorkspaceLeaf, Notice, requestUrl } from "obsidian";
+import type { Root } from "react-dom/client";
 import * as semver from "semver";
 import { ChatView, VIEW_TYPE_CHAT } from "./components/chat/ChatView";
+import { mountFloatingChat } from "./components/chat/FloatingChatView";
 import {
 	createSettingsStore,
 	type SettingsStore,
@@ -80,6 +82,11 @@ export interface AgentClientPluginSettings {
 	};
 	// Locally saved session metadata (for agents without session/list support)
 	savedSessions: SavedSessionInfo[];
+	// Floating chat button settings
+	showFloatingButton: boolean;
+	floatingButtonImage: string;
+	floatingWindowSize: { width: number; height: number };
+	floatingWindowPosition: { x: number; y: number } | null;
 }
 
 const DEFAULT_SETTINGS: AgentClientPluginSettings = {
@@ -136,6 +143,10 @@ const DEFAULT_SETTINGS: AgentClientPluginSettings = {
 		showEmojis: true,
 	},
 	savedSessions: [],
+	showFloatingButton: false,
+	floatingButtonImage: "",
+	floatingWindowSize: { width: 400, height: 500 },
+	floatingWindowPosition: null,
 };
 
 export default class AgentClientPlugin extends Plugin {
@@ -146,6 +157,10 @@ export default class AgentClientPlugin extends Plugin {
 	private _adapters: Map<string, AcpAdapter> = new Map();
 	/** Track the last active ChatView for keybind targeting */
 	private _lastActiveChatViewId: string | null = null;
+	/** Map of instanceId to floating chat roots and containers */
+	private floatingChatInstances: Map<string, { root: Root; container: HTMLElement }> = new Map();
+	/** Counter for generating unique floating chat instance IDs */
+	private floatingChatCounter = 0;
 
 	async onload() {
 		await this.loadSettings();
@@ -207,6 +222,9 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addSettingTab(new AgentClientSettingTab(this.app, this));
 
+		// Mount initial floating chat component
+		this.openNewFloatingChat();
+
 		// Clean up all ACP sessions when Obsidian quits
 		// Note: We don't wait for disconnect to complete to avoid blocking quit
 		this.registerEvent(
@@ -225,7 +243,14 @@ export default class AgentClientPlugin extends Plugin {
 		);
 	}
 
-	onunload() {}
+	onunload() {
+		// Unmount all floating chat instances
+		for (const [, { root, container }] of this.floatingChatInstances) {
+			root.unmount();
+			container.remove();
+		}
+		this.floatingChatInstances.clear();
+	}
 
 	/**
 	 * Get or create an AcpAdapter for a specific view.
@@ -421,6 +446,46 @@ export default class AgentClientPlugin extends Plugin {
 				}
 			}, 0);
 		}
+	}
+
+	/**
+	 * Open a new floating chat window.
+	 * Each window is independent with its own session.
+	 */
+	openNewFloatingChat(initialExpanded = false): void {
+		const instanceId = `floating-${this.floatingChatCounter++}`;
+		const { root, container } = mountFloatingChat(this, instanceId, initialExpanded);
+		this.floatingChatInstances.set(instanceId, { root, container });
+	}
+
+	/**
+	 * Close a specific floating chat window.
+	 */
+	closeFloatingChat(instanceId: string): void {
+		const instance = this.floatingChatInstances.get(instanceId);
+		if (instance) {
+			instance.root.unmount();
+			instance.container.remove();
+			this.floatingChatInstances.delete(instanceId);
+		}
+	}
+
+	/**
+	 * Get all floating chat instance IDs.
+	 */
+	getFloatingChatInstances(): string[] {
+		return Array.from(this.floatingChatInstances.keys());
+	}
+
+	/**
+	 * Expand a specific floating chat window by triggering a custom event.
+	 */
+	expandFloatingChat(instanceId: string): void {
+		window.dispatchEvent(
+			new CustomEvent("agent-client:expand-floating-chat", {
+				detail: { instanceId },
+			}),
+		);
 	}
 
 	/**
@@ -914,6 +979,44 @@ export default class AgentClientPlugin extends Plugin {
 			savedSessions: Array.isArray(rawSettings.savedSessions)
 				? (rawSettings.savedSessions as SavedSessionInfo[])
 				: DEFAULT_SETTINGS.savedSessions,
+			showFloatingButton:
+				typeof rawSettings.showFloatingButton === "boolean"
+					? rawSettings.showFloatingButton
+					: DEFAULT_SETTINGS.showFloatingButton,
+			floatingButtonImage:
+				typeof rawSettings.floatingButtonImage === "string"
+					? rawSettings.floatingButtonImage
+					: DEFAULT_SETTINGS.floatingButtonImage,
+			floatingWindowSize: (() => {
+				const raw = rawSettings.floatingWindowSize as
+					| { width?: number; height?: number }
+					| null
+					| undefined;
+				if (
+					raw &&
+					typeof raw === "object" &&
+					typeof raw.width === "number" &&
+					typeof raw.height === "number"
+				) {
+					return { width: raw.width, height: raw.height };
+				}
+				return DEFAULT_SETTINGS.floatingWindowSize;
+			})(),
+			floatingWindowPosition: (() => {
+				const raw = rawSettings.floatingWindowPosition as
+					| { x?: number; y?: number }
+					| null
+					| undefined;
+				if (
+					raw &&
+					typeof raw === "object" &&
+					typeof raw.x === "number" &&
+					typeof raw.y === "number"
+				) {
+					return { x: raw.x, y: raw.y };
+				}
+				return null;
+			})(),
 		};
 
 		this.ensureDefaultAgentId();
