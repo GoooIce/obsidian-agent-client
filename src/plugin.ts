@@ -225,8 +225,10 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addSettingTab(new AgentClientSettingTab(this.app, this));
 
-		// Mount initial floating chat component
-		this.openNewFloatingChat();
+		// Mount initial floating chat component only if enabled
+		if (this.settings.showFloatingButton) {
+			this.openNewFloatingChat();
+		}
 
 		// Clean up all ACP sessions when Obsidian quits
 		// Note: We don't wait for disconnect to complete to avoid blocking quit
