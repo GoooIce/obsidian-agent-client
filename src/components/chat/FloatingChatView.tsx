@@ -250,6 +250,7 @@ function FloatingChatComponent({
 	// ============================================================
 	const [isExpanded, setIsExpanded] = useState(initialExpanded);
 	const [showInstanceMenu, setShowInstanceMenu] = useState(false);
+	const instanceMenuRef = useRef<HTMLDivElement>(null);
 	const [size, setSize] = useState(settings.floatingWindowSize);
 	const [position, setPosition] = useState(() => {
 		if (initialPosition) return initialPosition;
@@ -350,6 +351,25 @@ function FloatingChatComponent({
 			setIsExpanded(true);
 		}
 	}, [plugin]);
+
+	// Close instance menu on outside click
+	useEffect(() => {
+		if (!showInstanceMenu) return;
+
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				instanceMenuRef.current &&
+				!instanceMenuRef.current.contains(event.target as Node)
+			) {
+				setShowInstanceMenu(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [showInstanceMenu]);
 
 	// Listen for expand requests from other instances
 	useEffect(() => {
@@ -766,6 +786,7 @@ function FloatingChatComponent({
 						)}
 					</div>
 					<div
+						ref={instanceMenuRef}
 						className="agent-client-floating-instance-menu"
 						onClick={(e) => e.stopPropagation()}
 					>
@@ -806,13 +827,6 @@ function FloatingChatComponent({
 								)}
 							</div>
 						))}
-						<div className="agent-client-floating-instance-menu-separator" />
-						<div
-							className="agent-client-floating-instance-menu-item"
-							onClick={() => setShowInstanceMenu(false)}
-						>
-							Cancel
-						</div>
 					</div>
 				</>
 			);
