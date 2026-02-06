@@ -718,7 +718,6 @@ function FloatingChatComponent({
 					availableAgents={availableAgents}
 					currentAgentId={session.agentId}
 					isUpdateAvailable={isUpdateAvailable}
-					canShowSessionHistory={sessionHistory.canShowSessionHistory}
 					hasMessages={messages.length > 0}
 					onAgentChange={(agentId) => void handleSwitchAgent(agentId)}
 					onNewSession={() => void handleNewChat()}

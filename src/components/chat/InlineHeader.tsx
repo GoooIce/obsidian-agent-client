@@ -21,8 +21,6 @@ export interface InlineHeaderProps {
 	currentAgentId: string;
 	/** Whether a plugin update is available */
 	isUpdateAvailable: boolean;
-	/** Whether session history is supported (show History button) */
-	canShowSessionHistory: boolean;
 	/** Whether there are messages to export */
 	hasMessages: boolean;
 	/** Callback to switch agent */
@@ -57,7 +55,6 @@ export function InlineHeader({
 	availableAgents,
 	currentAgentId,
 	isUpdateAvailable,
-	canShowSessionHistory,
 	hasMessages,
 	onAgentChange,
 	onNewSession,
@@ -159,17 +156,11 @@ export function InlineHeader({
 					tooltip="New session"
 					onClick={onNewSession}
 				/>
-				{canShowSessionHistory ? (
-					<HeaderButton
-						iconName="history"
-						tooltip="Session history"
-						onClick={onOpenHistory}
-					/>
-				) : (
-					<span
-						style={{ width: "20px", height: "20px", flexShrink: 0 }}
-					/>
-				)}
+				<HeaderButton
+					iconName="history"
+					tooltip="Session history"
+					onClick={onOpenHistory}
+				/>
 				<HeaderButton
 					iconName="save"
 					tooltip="Export chat to Markdown"
