@@ -246,6 +246,56 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		}
 
 		// ─────────────────────────────────────────────────────────────────────
+		// Floating Chat Button
+		// ─────────────────────────────────────────────────────────────────────
+
+		new Setting(containerEl).setName("Floating Chat Button").setHeading();
+
+		new Setting(containerEl)
+			.setName("Show floating button")
+			.setDesc(
+				"Display a floating chat button that opens a draggable chat window.",
+			)
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.showFloatingButton)
+					.onChange(async (value) => {
+						const wasEnabled =
+							this.plugin.settings.showFloatingButton;
+						this.plugin.settings.showFloatingButton = value;
+						await this.plugin.saveSettings();
+
+						// Handle dynamic toggle of floating chat
+						if (value && !wasEnabled) {
+							// Turning ON: create floating chat instance
+							this.plugin.openNewFloatingChat();
+						} else if (!value && wasEnabled) {
+							// Turning OFF: close all floating chat instances
+							const instances =
+								this.plugin.getFloatingChatInstances();
+							for (const instanceId of instances) {
+								this.plugin.closeFloatingChat(instanceId);
+							}
+						}
+					}),
+			);
+
+		new Setting(containerEl)
+			.setName("Floating button image")
+			.setDesc(
+				"URL or path to an image for the floating button. Leave empty for default icon.",
+			)
+			.addText((text) =>
+				text
+					.setPlaceholder("https://example.com/avatar.png")
+					.setValue(this.plugin.settings.floatingButtonImage)
+					.onChange(async (value) => {
+						this.plugin.settings.floatingButtonImage = value.trim();
+						await this.plugin.saveSettings();
+					}),
+			);
+
+		// ─────────────────────────────────────────────────────────────────────
 		// Permissions
 		// ─────────────────────────────────────────────────────────────────────
 
@@ -491,56 +541,6 @@ export class AgentClientSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						this.plugin.settings.exportSettings.openFileAfterExport =
 							value;
-						await this.plugin.saveSettings();
-					}),
-			);
-
-		// ─────────────────────────────────────────────────────────────────────
-		// Floating Chat Button
-		// ─────────────────────────────────────────────────────────────────────
-
-		new Setting(containerEl).setName("Floating Chat Button").setHeading();
-
-		new Setting(containerEl)
-			.setName("Show floating button")
-			.setDesc(
-				"Display a floating chat button that opens a draggable chat window.",
-			)
-			.addToggle((toggle) =>
-				toggle
-					.setValue(this.plugin.settings.showFloatingButton)
-					.onChange(async (value) => {
-						const wasEnabled =
-							this.plugin.settings.showFloatingButton;
-						this.plugin.settings.showFloatingButton = value;
-						await this.plugin.saveSettings();
-
-						// Handle dynamic toggle of floating chat
-						if (value && !wasEnabled) {
-							// Turning ON: create floating chat instance
-							this.plugin.openNewFloatingChat();
-						} else if (!value && wasEnabled) {
-							// Turning OFF: close all floating chat instances
-							const instances =
-								this.plugin.getFloatingChatInstances();
-							for (const instanceId of instances) {
-								this.plugin.closeFloatingChat(instanceId);
-							}
-						}
-					}),
-			);
-
-		new Setting(containerEl)
-			.setName("Floating button image")
-			.setDesc(
-				"URL or path to an image for the floating button. Leave empty for default icon.",
-			)
-			.addText((text) =>
-				text
-					.setPlaceholder("https://example.com/avatar.png")
-					.setValue(this.plugin.settings.floatingButtonImage)
-					.onChange(async (value) => {
-						this.plugin.settings.floatingButtonImage = value.trim();
 						await this.plugin.saveSettings();
 					}),
 			);
