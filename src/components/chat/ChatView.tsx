@@ -567,6 +567,7 @@ function ChatComponent({
 				// Error overlay props
 				errorInfo={errorInfo}
 				onClearError={handleClearError}
+				messages={messages}
 			/>
 		</div>
 	);

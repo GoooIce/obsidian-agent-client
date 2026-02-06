@@ -14,9 +14,11 @@ import type { ImagePromptContent } from "../../domain/models/prompt-content";
 import type { UseMentionsReturn } from "../../hooks/useMentions";
 import type { UseSlashCommandsReturn } from "../../hooks/useSlashCommands";
 import type { UseAutoMentionReturn } from "../../hooks/useAutoMention";
+import type { ChatMessage } from "../../domain/models/chat-message";
 import { SuggestionDropdown } from "./SuggestionDropdown";
 import { ErrorOverlay } from "./ErrorOverlay";
 import { ImagePreviewStrip, type AttachedImage } from "./ImagePreviewStrip";
+import { useInputHistory } from "../../hooks/useInputHistory";
 import { getLogger } from "../../shared/logger";
 import type { ErrorInfo } from "../../domain/models/agent-error";
 import { useSettings } from "../../hooks/useSettings";
@@ -106,6 +108,8 @@ export interface ChatInputProps {
 	errorInfo: ErrorInfo | null;
 	/** Callback to clear the error */
 	onClearError: () => void;
+	/** Messages array for input history navigation */
+	messages: ChatMessage[];
 }
 
 /**
@@ -150,6 +154,8 @@ export function ChatInput({
 	// Error overlay props
 	errorInfo,
 	onClearError,
+	// Input history
+	messages,
 }: ChatInputProps) {
 	const logger = getLogger();
 	const settings = useSettings(plugin);
@@ -166,6 +172,12 @@ export function ChatInput({
 	const [hintText, setHintText] = useState<string | null>(null);
 	const [commandText, setCommandText] = useState<string>("");
 	const [isDraggingOver, setIsDraggingOver] = useState(false);
+
+	// Input history navigation (ArrowUp/ArrowDown)
+	const { handleHistoryKeyDown, resetHistory } = useInputHistory(
+		messages,
+		onInputChange,
+	);
 
 	// Refs
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -534,6 +546,7 @@ export function ChatInput({
 		onAttachedImagesChange([]);
 		setHintText(null);
 		setCommandText("");
+		resetHistory();
 
 		await onSendMessage(
 			messageToSend,
@@ -547,6 +560,7 @@ export function ChatInput({
 		onStopGeneration,
 		onInputChange,
 		onAttachedImagesChange,
+		resetHistory,
 	]);
 
 	/**
@@ -638,6 +652,11 @@ export function ChatInput({
 				return;
 			}
 
+			// Handle input history navigation (ArrowUp/ArrowDown)
+			if (handleHistoryKeyDown(e, textareaRef.current)) {
+				return;
+			}
+
 			// Normal input handling - check if should send based on shortcut setting
 			if (e.key === "Enter" && !e.nativeEvent.isComposing) {
 				const shouldSend =
@@ -656,6 +675,7 @@ export function ChatInput({
 		},
 		[
 			handleDropdownKeyPress,
+			handleHistoryKeyDown,
 			isSending,
 			isButtonDisabled,
 			handleSendOrStop,

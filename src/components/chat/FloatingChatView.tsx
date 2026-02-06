@@ -780,6 +780,7 @@ function FloatingChatComponent({
 					onAttachedImagesChange={setAttachedImages}
 					errorInfo={errorInfo}
 					onClearError={handleClearError}
+					messages={messages}
 				/>
 			</div>
 		</div>
