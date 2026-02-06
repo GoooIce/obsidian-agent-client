@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useEffect, useRef } from "react";
+import { DropdownComponent, setIcon } from "obsidian";
 import { HeaderButton } from "./HeaderButton";
 
 // Agent info for display
@@ -66,22 +68,85 @@ export function InlineHeader({
 	onOpenNewWindow,
 	onClose,
 }: InlineHeaderProps) {
+	// Refs for agent dropdown
+	const agentDropdownRef = useRef<HTMLDivElement>(null);
+	const agentDropdownInstance = useRef<DropdownComponent | null>(null);
+
+	// Stable ref for onAgentChange callback
+	const onAgentChangeRef = useRef(onAgentChange);
+	onAgentChangeRef.current = onAgentChange;
+
+	// Initialize agent dropdown
+	useEffect(() => {
+		const containerEl = agentDropdownRef.current;
+		if (!containerEl) return;
+
+		// Only show dropdown if there are multiple agents
+		if (availableAgents.length <= 1) {
+			if (agentDropdownInstance.current) {
+				containerEl.empty();
+				agentDropdownInstance.current = null;
+			}
+			return;
+		}
+
+		// Create dropdown if not exists
+		if (!agentDropdownInstance.current) {
+			const dropdown = new DropdownComponent(containerEl);
+			agentDropdownInstance.current = dropdown;
+
+			// Add options
+			for (const agent of availableAgents) {
+				dropdown.addOption(agent.id, agent.displayName);
+			}
+
+			// Set initial value
+			if (currentAgentId) {
+				dropdown.setValue(currentAgentId);
+			}
+
+			// Handle change
+			dropdown.onChange((value) => {
+				onAgentChangeRef.current?.(value);
+			});
+		}
+
+		// Cleanup on unmount or when availableAgents change
+		return () => {
+			if (agentDropdownInstance.current) {
+				containerEl.empty();
+				agentDropdownInstance.current = null;
+			}
+		};
+	}, [availableAgents]);
+
+	// Update dropdown value when currentAgentId changes
+	useEffect(() => {
+		if (agentDropdownInstance.current && currentAgentId) {
+			agentDropdownInstance.current.setValue(currentAgentId);
+		}
+	}, [currentAgentId]);
+
 	return (
 		<div
 			className={`agent-client-inline-header agent-client-inline-header-${variant}`}
 		>
 			<div className="agent-client-inline-header-main">
-				<select
-					className="agent-client-agent-selector"
-					value={currentAgentId}
-					onChange={(e) => onAgentChange(e.target.value)}
-				>
-					{availableAgents.map((agent) => (
-						<option key={agent.id} value={agent.id}>
-							{agent.displayName}
-						</option>
-					))}
-				</select>
+				{availableAgents.length > 1 ? (
+					<div className="agent-client-agent-selector">
+						<div ref={agentDropdownRef} />
+						<span
+							className="agent-client-agent-selector-icon"
+							ref={(el) => {
+								if (el) setIcon(el, "chevron-down");
+							}}
+						/>
+					</div>
+				) : (
+					<span className="agent-client-agent-label">
+						{agentLabel}
+					</span>
+				)}
 			</div>
 			{isUpdateAvailable && (
 				<p className="agent-client-chat-view-header-update">
