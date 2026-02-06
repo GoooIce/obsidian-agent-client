@@ -1838,8 +1838,8 @@ If your plugin does not need CSS, delete this file.
 
 .agent-client-floating-button {
 	position: fixed;
-	bottom: 20px;
-	right: 20px;
+	bottom: 30px;
+	right: 40px;
 	width: 48px;
 	height: 48px;
 	min-width: 48px;
