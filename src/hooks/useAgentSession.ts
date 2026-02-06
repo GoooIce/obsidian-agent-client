@@ -467,6 +467,37 @@ export function useAgentSession(
 					agentInfo: needsInitialize ? agentInfo : prev.agentInfo,
 					lastActivityAt: new Date(),
 				}));
+
+				// Restore last used model if available
+				if (sessionResult.models && sessionResult.sessionId) {
+					const savedModelId = settings.lastUsedModels[agentId];
+					if (
+						savedModelId &&
+						savedModelId !== sessionResult.models.currentModelId &&
+						sessionResult.models.availableModels.some(
+							(m) => m.modelId === savedModelId,
+						)
+					) {
+						try {
+							await agentClient.setSessionModel(
+								sessionResult.sessionId,
+								savedModelId,
+							);
+							setSession((prev) => {
+								if (!prev.models) return prev;
+								return {
+									...prev,
+									models: {
+										...prev.models,
+										currentModelId: savedModelId,
+									},
+								};
+							});
+						} catch {
+							// Agent default model is fine as fallback
+						}
+					}
+				}
 			} catch (error) {
 				// Error - update to error state
 				setSession((prev) => ({ ...prev, state: "error" }));
@@ -830,6 +861,17 @@ export function useAgentSession(
 				await agentClient.setSessionModel(session.sessionId, modelId);
 				// Note: Unlike modes, there is no dedicated notification for model changes.
 				// UI is already updated optimistically above.
+
+				// Persist last used model for this agent
+				if (session.agentId) {
+					const currentSettings = settingsAccess.getSnapshot();
+					void settingsAccess.updateSettings({
+						lastUsedModels: {
+							...currentSettings.lastUsedModels,
+							[session.agentId]: modelId,
+						},
+					});
+				}
 			} catch (error) {
 				console.error("Failed to set model:", error);
 				// Rollback to previous model on error
@@ -847,7 +889,13 @@ export function useAgentSession(
 				}
 			}
 		},
-		[agentClient, session.sessionId, session.models?.currentModelId],
+		[
+			agentClient,
+			session.sessionId,
+			session.models?.currentModelId,
+			settingsAccess,
+			session.agentId,
+		],
 	);
 
 	// Register error callback for process-level errors
