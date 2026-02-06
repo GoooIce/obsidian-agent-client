@@ -1826,13 +1826,25 @@ If your plugin does not need CSS, delete this file.
 }
 
 /* ===== Floating Chat Button ===== */
-.agent-client-floating-root {
+/* Floating button & menu root — higher z-index, always above windows */
+.agent-client-floating-button-root {
+	position: fixed;
+	z-index: 30;
+	pointer-events: none;
+}
+
+.agent-client-floating-button-root > * {
+	pointer-events: auto;
+}
+
+/* Floating chat window root — lower z-index */
+.agent-client-floating-view-root {
 	position: fixed;
 	z-index: 20;
 	pointer-events: none;
 }
 
-.agent-client-floating-root > * {
+.agent-client-floating-view-root > * {
 	pointer-events: auto;
 }
 
@@ -1966,7 +1978,6 @@ If your plugin does not need CSS, delete this file.
 	border: 1px solid var(--background-modifier-border);
 	border-radius: 8px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-	z-index: 1000;
 	overflow: hidden;
 }
 
@@ -1994,11 +2005,6 @@ If your plugin does not need CSS, delete this file.
 	background: var(--background-modifier-hover);
 }
 
-.agent-client-floating-instance-menu-item.active {
-	background: var(--background-modifier-active-hover);
-	color: var(--text-accent);
-}
-
 .agent-client-floating-instance-menu-close {
 	background: none;
 	border: none;
@@ -2021,12 +2027,6 @@ If your plugin does not need CSS, delete this file.
 .agent-client-floating-instance-menu-close:hover {
 	background: var(--background-modifier-error);
 	color: var(--text-error);
-}
-
-.agent-client-floating-instance-menu-separator {
-	height: 1px;
-	background: var(--background-modifier-border);
-	margin: 4px 0;
 }
 
 /* ===== Code Block Chat View ===== */

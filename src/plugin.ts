@@ -6,6 +6,7 @@ import {
 	createFloatingChat,
 	FloatingViewContainer,
 } from "./components/chat/FloatingChatView";
+import { FloatingButtonContainer } from "./components/chat/FloatingButton";
 import { ChatViewRegistry } from "./shared/chat-view-registry";
 import {
 	createSettingsStore,
@@ -162,6 +163,8 @@ export default class AgentClientPlugin extends Plugin {
 
 	/** Map of viewId to AcpAdapter for multi-session support */
 	private _adapters: Map<string, AcpAdapter> = new Map();
+	/** Floating button container (independent from chat view instances) */
+	private floatingButton: FloatingButtonContainer | null = null;
 	/** Map of viewId to floating chat roots and containers (legacy, being migrated to viewRegistry) */
 	private floatingChatInstances: Map<
 		string,
@@ -230,7 +233,11 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addSettingTab(new AgentClientSettingTab(this.app, this));
 
-		// Mount initial floating chat component only if enabled
+		// Mount floating button (always present; visibility controlled by settings inside component)
+		this.floatingButton = new FloatingButtonContainer(this);
+		this.floatingButton.mount();
+
+		// Mount initial floating chat instance only if enabled
 		if (this.settings.showFloatingButton) {
 			this.openNewFloatingChat();
 		}
@@ -254,6 +261,10 @@ export default class AgentClientPlugin extends Plugin {
 	}
 
 	onunload() {
+		// Unmount floating button
+		this.floatingButton?.unmount();
+		this.floatingButton = null;
+
 		// Unmount all floating chat instances via registry
 		for (const container of this.viewRegistry.getByType("floating")) {
 			if (container instanceof FloatingViewContainer) {

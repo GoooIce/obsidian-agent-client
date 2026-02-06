@@ -20,6 +20,8 @@ import { InlineHeader } from "./InlineHeader";
 // Hooks imports
 import { useChatController } from "../../hooks/useChatController";
 
+import { clampPosition } from "./floating-utils";
+
 // ============================================================
 // Type Definitions
 // ============================================================
@@ -78,7 +80,7 @@ export class FloatingViewContainer implements IChatViewContainer {
 		// viewId format: "floating-chat-{instanceId}" to match useChatController's adapter key
 		this.viewId = `floating-chat-${instanceId}`;
 		this.containerEl = document.body.createDiv({
-			cls: "agent-client-floating-root",
+			cls: "agent-client-floating-view-root",
 		});
 	}
 
@@ -177,21 +179,6 @@ export class FloatingViewContainer implements IChatViewContainer {
 // FloatingChatComponent
 // ============================================================
 
-/**
- * Clamp position so the floating window stays within the viewport.
- */
-function clampPosition(
-	x: number,
-	y: number,
-	width: number,
-	height: number,
-): { x: number; y: number } {
-	return {
-		x: Math.max(0, Math.min(x, window.innerWidth - width)),
-		y: Math.max(0, Math.min(y, window.innerHeight - height)),
-	};
-}
-
 interface FloatingChatComponentProps {
 	plugin: AgentClientPlugin;
 	viewId: string; // Full viewId passed from FloatingViewContainer
@@ -254,8 +241,6 @@ function FloatingChatComponent({
 	// UI State (View-Specific)
 	// ============================================================
 	const [isExpanded, setIsExpanded] = useState(initialExpanded);
-	const [showInstanceMenu, setShowInstanceMenu] = useState(false);
-	const instanceMenuRef = useRef<HTMLDivElement>(null);
 	const [size, setSize] = useState(settings.floatingWindowSize);
 	const [position, setPosition] = useState(() => {
 		if (initialPosition) return initialPosition;
@@ -308,26 +293,6 @@ function FloatingChatComponent({
 		};
 	}, []);
 
-	// Floating button image source
-	const floatingButtonImageSrc = useMemo(() => {
-		const img = settings.floatingButtonImage;
-		if (!img) return null;
-		if (
-			img.startsWith("http://") ||
-			img.startsWith("https://") ||
-			img.startsWith("data:")
-		) {
-			return img;
-		}
-		// Treat as local path
-		interface VaultAdapterWithResourcePath {
-			getResourcePath?: (path: string) => string;
-		}
-		return (
-			plugin.app.vault.adapter as VaultAdapterWithResourcePath
-		).getResourcePath?.(img);
-	}, [settings.floatingButtonImage, plugin.app.vault.adapter]);
-
 	// Handlers for window management
 	const handleOpenNewFloatingChat = useCallback(() => {
 		// Open new window with 30px offset from current position, clamped to viewport
@@ -346,45 +311,13 @@ function FloatingChatComponent({
 		setIsExpanded(false);
 	}, []);
 
-	const handleButtonClick = useCallback(() => {
-		const instances = plugin.getFloatingChatInstances();
-		if (instances.length > 1) {
-			// Multiple instances exist, show menu to select
-			setShowInstanceMenu(true);
-		} else {
-			// Single instance, just expand
-			setIsExpanded(true);
-		}
-	}, [plugin]);
-
-	// Close instance menu on outside click
-	useEffect(() => {
-		if (!showInstanceMenu) return;
-
-		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				instanceMenuRef.current &&
-				!instanceMenuRef.current.contains(event.target as Node)
-			) {
-				setShowInstanceMenu(false);
-			}
-		};
-
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, [showInstanceMenu]);
-
-	// Listen for expand requests from other instances
+	// Listen for expand requests
 	useEffect(() => {
 		const handleExpandRequest = (
 			event: CustomEvent<{ viewId: string }>,
 		) => {
-			// Compare using viewId (format: "floating-chat-{id}")
 			if (event.detail.viewId === viewId) {
 				setIsExpanded(true);
-				setShowInstanceMenu(false);
 			}
 		};
 
@@ -762,228 +695,87 @@ function FloatingChatComponent({
 	// ============================================================
 	// Render
 	// ============================================================
-	if (!settings.showFloatingButton) return null;
+	if (!isExpanded) return null;
 
-	// Only show button for the first instance (others are hidden)
-	const allInstances = plugin.getFloatingChatInstances();
-	const isFirstInstance = allInstances[0] === viewId;
-
-	// Build display labels with duplicate numbering
-	const instanceLabels = useMemo(() => {
-		const views = plugin.viewRegistry.getByType("floating");
-		const entries = views.map((v) => ({
-			viewId: v.viewId,
-			label: v.getDisplayName(),
-		}));
-		// Count occurrences of each label
-		const countMap = new Map<string, number>();
-		for (const e of entries) {
-			countMap.set(e.label, (countMap.get(e.label) ?? 0) + 1);
-		}
-		// Assign numbered suffix only when duplicates exist
-		const indexMap = new Map<string, number>();
-		return entries.map((e) => {
-			if ((countMap.get(e.label) ?? 0) > 1) {
-				const idx = (indexMap.get(e.label) ?? 0) + 1;
-				indexMap.set(e.label, idx);
-				return {
-					viewId: e.viewId,
-					label: idx === 1 ? e.label : `${e.label} ${idx}`,
-				};
-			}
-			return e;
-		});
-	}, [plugin.viewRegistry, allInstances, showInstanceMenu]);
-
-	// Render button (only from first instance)
-	const renderButton = () => {
-		if (!isFirstInstance) return null;
-
-		// Show instance selector menu if requested
-		if (showInstanceMenu) {
-			return (
-				<>
-					<div
-						className="agent-client-floating-button"
-						style={
-							floatingButtonImageSrc
-								? { background: "transparent" }
-								: undefined
-						}
-					>
-						{floatingButtonImageSrc ? (
-							<img src={floatingButtonImageSrc} alt="AI" />
-						) : (
-							<div className="agent-client-floating-button-fallback">
-								<span>AI</span>
-							</div>
-						)}
-					</div>
-					<div
-						ref={instanceMenuRef}
-						className="agent-client-floating-instance-menu"
-						onClick={(e) => e.stopPropagation()}
-					>
-						<div className="agent-client-floating-instance-menu-header">
-							Select session to open
-						</div>
-						{instanceLabels.map(({ viewId: id, label }) => (
-							<div
-								key={id}
-								className="agent-client-floating-instance-menu-item"
-							>
-								<span
-									onClick={() => {
-										plugin.expandFloatingChat(id);
-										setShowInstanceMenu(false);
-									}}
-									style={{ flex: 1, cursor: "pointer" }}
-								>
-									{label}
-								</span>
-								{instanceLabels.length > 1 && (
-									<button
-										className="agent-client-floating-instance-menu-close"
-										onClick={(e) => {
-											e.stopPropagation();
-											plugin.closeFloatingChat(id);
-											// Close menu only if one or fewer instances remain
-											if (instanceLabels.length <= 2) {
-												setShowInstanceMenu(false);
-											}
-										}}
-										title="Close session"
-									>
-										×
-									</button>
-								)}
-							</div>
-						))}
-					</div>
-				</>
-			);
-		}
-
-		// Always show button from first instance
-		return (
-			<div
-				className="agent-client-floating-button"
-				onClick={handleButtonClick}
-				style={
-					floatingButtonImageSrc
-						? { background: "transparent" }
-						: undefined
-				}
-			>
-				{floatingButtonImageSrc ? (
-					<img src={floatingButtonImageSrc} alt="AI" />
-				) : (
-					<div className="agent-client-floating-button-fallback">
-						<span>AI</span>
-					</div>
-				)}
-			</div>
-		);
-	};
-
-	// If this instance is not expanded, only render button (if first instance)
-	if (!isExpanded) {
-		return renderButton();
-	}
-
-	// If this instance is expanded, render both button and window
 	return (
-		<>
-			{renderButton()}
+		<div
+			ref={containerRef}
+			className="agent-client-floating-window"
+			style={{
+				left: position.x,
+				top: position.y,
+				width: size.width,
+				height: size.height,
+			}}
+		>
 			<div
-				ref={containerRef}
-				className="agent-client-floating-window"
-				style={{
-					left: position.x,
-					top: position.y,
-					width: size.width,
-					height: size.height,
-				}}
+				className="agent-client-floating-header"
+				onMouseDown={onMouseDown}
 			>
-				<div
-					className="agent-client-floating-header"
-					onMouseDown={onMouseDown}
-				>
-					<InlineHeader
-						variant="floating"
-						agentLabel={activeAgentLabel}
-						availableAgents={availableAgents}
-						currentAgentId={session.agentId}
-						isUpdateAvailable={isUpdateAvailable}
-						canShowSessionHistory={
-							sessionHistory.canShowSessionHistory
-						}
-						hasMessages={messages.length > 0}
-						onAgentChange={(agentId) =>
-							void handleSwitchAgent(agentId)
-						}
-						onNewSession={() => void handleNewChat()}
-						onOpenHistory={() => void handleOpenHistory()}
-						onExportChat={() => void handleExportChat()}
-						onRestartAgent={() => void handleRestartAgent()}
-						onOpenNewWindow={handleOpenNewFloatingChat}
-						onClose={handleCloseWindow}
-					/>
-				</div>
+				<InlineHeader
+					variant="floating"
+					agentLabel={activeAgentLabel}
+					availableAgents={availableAgents}
+					currentAgentId={session.agentId}
+					isUpdateAvailable={isUpdateAvailable}
+					canShowSessionHistory={sessionHistory.canShowSessionHistory}
+					hasMessages={messages.length > 0}
+					onAgentChange={(agentId) => void handleSwitchAgent(agentId)}
+					onNewSession={() => void handleNewChat()}
+					onOpenHistory={() => void handleOpenHistory()}
+					onExportChat={() => void handleExportChat()}
+					onRestartAgent={() => void handleRestartAgent()}
+					onOpenNewWindow={handleOpenNewFloatingChat}
+					onClose={handleCloseWindow}
+				/>
+			</div>
 
-				<div className="agent-client-floating-content">
-					<div className="agent-client-floating-messages-container">
-						<ChatMessages
-							messages={messages}
-							isSending={isSending}
-							isSessionReady={isSessionReady}
-							isRestoringSession={sessionHistory.loading}
-							agentLabel={activeAgentLabel}
-							plugin={plugin}
-							view={viewHost}
-							acpClient={acpClientRef.current}
-							onApprovePermission={permission.approvePermission}
-						/>
-					</div>
-
-					<ChatInput
+			<div className="agent-client-floating-content">
+				<div className="agent-client-floating-messages-container">
+					<ChatMessages
+						messages={messages}
 						isSending={isSending}
 						isSessionReady={isSessionReady}
 						isRestoringSession={sessionHistory.loading}
 						agentLabel={activeAgentLabel}
-						availableCommands={session.availableCommands || []}
-						autoMentionEnabled={settings.autoMentionActiveNote}
-						restoredMessage={restoredMessage}
-						mentions={mentions}
-						slashCommands={slashCommands}
-						autoMention={autoMention}
 						plugin={plugin}
 						view={viewHost}
-						onSendMessage={handleSendMessage}
-						onStopGeneration={handleStopGeneration}
-						onRestoredMessageConsumed={
-							handleRestoredMessageConsumed
-						}
-						modes={session.modes}
-						onModeChange={(modeId) => void handleSetMode(modeId)}
-						models={session.models}
-						onModelChange={(modelId) =>
-							void handleSetModel(modelId)
-						}
-						supportsImages={
-							session.promptCapabilities?.image ?? false
-						}
-						agentId={session.agentId}
-						inputValue={inputValue}
-						onInputChange={setInputValue}
-						attachedImages={attachedImages}
-						onAttachedImagesChange={setAttachedImages}
-						errorInfo={errorInfo}
-						onClearError={handleClearError}
+						acpClient={acpClientRef.current}
+						onApprovePermission={permission.approvePermission}
 					/>
 				</div>
+
+				<ChatInput
+					isSending={isSending}
+					isSessionReady={isSessionReady}
+					isRestoringSession={sessionHistory.loading}
+					agentLabel={activeAgentLabel}
+					availableCommands={session.availableCommands || []}
+					autoMentionEnabled={settings.autoMentionActiveNote}
+					restoredMessage={restoredMessage}
+					mentions={mentions}
+					slashCommands={slashCommands}
+					autoMention={autoMention}
+					plugin={plugin}
+					view={viewHost}
+					onSendMessage={handleSendMessage}
+					onStopGeneration={handleStopGeneration}
+					onRestoredMessageConsumed={handleRestoredMessageConsumed}
+					modes={session.modes}
+					onModeChange={(modeId) => void handleSetMode(modeId)}
+					models={session.models}
+					onModelChange={(modelId) => void handleSetModel(modelId)}
+					supportsImages={session.promptCapabilities?.image ?? false}
+					agentId={session.agentId}
+					inputValue={inputValue}
+					onInputChange={setInputValue}
+					attachedImages={attachedImages}
+					onAttachedImagesChange={setAttachedImages}
+					errorInfo={errorInfo}
+					onClearError={handleClearError}
+				/>
 			</div>
-		</>
+		</div>
 	);
 }
 /**
