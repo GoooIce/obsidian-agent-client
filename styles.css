@@ -264,7 +264,6 @@ If your plugin does not need CSS, delete this file.
 .agent-client-message-permission-request {
 	padding: 6px 0px;
 	margin-top: 4px;
-	background-color: var(--background-secondary);
 	font-size: 14px;
 	user-select: text;
 	overflow-wrap: break-word;
