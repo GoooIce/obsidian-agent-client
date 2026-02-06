@@ -796,9 +796,7 @@ function FloatingChatComponent({
 						{allInstances.map((id, index) => (
 							<div
 								key={id}
-								className={`agent-client-floating-instance-menu-item ${
-									id === viewId ? "active" : ""
-								}`}
+								className="agent-client-floating-instance-menu-item"
 							>
 								<span
 									onClick={() => {
@@ -807,10 +805,7 @@ function FloatingChatComponent({
 									}}
 									style={{ flex: 1, cursor: "pointer" }}
 								>
-									Chat {index + 1}{" "}
-									{id === viewId
-										? `(${activeAgentLabel})`
-										: ""}
+									Chat {index + 1}
 								</span>
 								{allInstances.length > 1 && (
 									<button
