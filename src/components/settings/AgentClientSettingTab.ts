@@ -533,7 +533,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName("Floating button image")
 			.setDesc(
-				"URL or path to an image for the floating button. Leave empty for default 'AI' text.",
+				"URL or path to an image for the floating button. Leave empty for default icon.",
 			)
 			.addText((text) =>
 				text
