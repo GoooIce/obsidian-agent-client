@@ -172,6 +172,21 @@ export class FloatingViewContainer implements IChatViewContainer {
 // FloatingChatComponent
 // ============================================================
 
+/**
+ * Clamp position so the floating window stays within the viewport.
+ */
+function clampPosition(
+	x: number,
+	y: number,
+	width: number,
+	height: number,
+): { x: number; y: number } {
+	return {
+		x: Math.max(0, Math.min(x, window.innerWidth - width)),
+		y: Math.max(0, Math.min(y, window.innerHeight - height)),
+	};
+}
+
 interface FloatingChatComponentProps {
 	plugin: AgentClientPlugin;
 	viewId: string; // Full viewId passed from FloatingViewContainer
@@ -309,12 +324,17 @@ function FloatingChatComponent({
 
 	// Handlers for window management
 	const handleOpenNewFloatingChat = useCallback(() => {
-		// Open new window with 30px offset from current position
-		plugin.openNewFloatingChat(true, {
-			x: position.x - 30,
-			y: position.y - 30,
-		});
-	}, [plugin, position]);
+		// Open new window with 30px offset from current position, clamped to viewport
+		plugin.openNewFloatingChat(
+			true,
+			clampPosition(
+				position.x - 30,
+				position.y - 30,
+				size.width,
+				size.height,
+			),
+		);
+	}, [plugin, position, size.width, size.height]);
 
 	const handleCloseWindow = useCallback(() => {
 		setIsExpanded(false);
@@ -435,10 +455,14 @@ function FloatingChatComponent({
 	useEffect(() => {
 		const onMouseMove = (e: MouseEvent) => {
 			if (!isDragging) return;
-			setPosition({
-				x: e.clientX - dragOffset.current.x,
-				y: e.clientY - dragOffset.current.y,
-			});
+			setPosition(
+				clampPosition(
+					e.clientX - dragOffset.current.x,
+					e.clientY - dragOffset.current.y,
+					size.width,
+					size.height,
+				),
+			);
 		};
 
 		const onMouseUp = () => {
@@ -454,7 +478,7 @@ function FloatingChatComponent({
 			window.removeEventListener("mousemove", onMouseMove);
 			window.removeEventListener("mouseup", onMouseUp);
 		};
-	}, [isDragging]);
+	}, [isDragging, size.width, size.height]);
 
 	// ============================================================
 	// Callback Registration for IChatViewContainer
