@@ -847,7 +847,10 @@ function FloatingChatComponent({
 										onClick={(e) => {
 											e.stopPropagation();
 											plugin.closeFloatingChat(id);
-											setShowInstanceMenu(false);
+											// Close menu only if one or fewer instances remain
+											if (instanceLabels.length <= 2) {
+												setShowInstanceMenu(false);
+											}
 										}}
 										title="Close session"
 									>
