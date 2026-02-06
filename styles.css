@@ -1909,7 +1909,7 @@ If your plugin does not need CSS, delete this file.
 	overflow: hidden;
 	resize: both;
 	min-width: 300px;
-	min-height: 400px;
+	min-height: 460px;
 }
 
 .agent-client-floating-header {
