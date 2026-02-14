@@ -77,6 +77,7 @@ export interface AgentClientPluginSettings {
 		maxNoteLength: number;
 		maxSelectionLength: number;
 		showEmojis: boolean;
+		fontSize: number;
 	};
 	// Locally saved session metadata (for agents without session/list support)
 	savedSessions: SavedSessionInfo[];
@@ -134,6 +135,7 @@ const DEFAULT_SETTINGS: AgentClientPluginSettings = {
 		maxNoteLength: 10000,
 		maxSelectionLength: 10000,
 		showEmojis: true,
+		fontSize: 12,
 	},
 	savedSessions: [],
 };
@@ -907,6 +909,12 @@ export default class AgentClientPlugin extends Plugin {
 							typeof rawDisplay.showEmojis === "boolean"
 								? rawDisplay.showEmojis
 								: DEFAULT_SETTINGS.displaySettings.showEmojis,
+						fontSize:
+							typeof rawDisplay.fontSize === "number" &&
+							rawDisplay.fontSize >= 10 &&
+							rawDisplay.fontSize <= 24
+								? rawDisplay.fontSize
+								: DEFAULT_SETTINGS.displaySettings.fontSize,
 					};
 				}
 				return DEFAULT_SETTINGS.displaySettings;

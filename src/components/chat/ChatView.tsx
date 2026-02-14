@@ -1112,7 +1112,14 @@ function ChatComponent({
 	// Render
 	// ============================================================
 	return (
-		<div className="agent-client-chat-view-container">
+		<div
+			className="agent-client-chat-view-container"
+			style={
+				{
+					"--ac-chat-font-size": `${settings.displaySettings.fontSize}px`,
+				} as React.CSSProperties
+			}
+		>
 			<ChatHeader
 				agentLabel={activeAgentLabel}
 				isUpdateAvailable={isUpdateAvailable}

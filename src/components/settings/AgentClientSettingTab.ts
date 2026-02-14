@@ -188,6 +188,24 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
+			.setName("Chat font size")
+			.setDesc("Adjust the font size of the chat message area (px).")
+			.addText((text) =>
+				text
+					.setPlaceholder("12")
+					.setValue(
+						String(this.plugin.settings.displaySettings.fontSize),
+					)
+					.onChange(async (value) => {
+						const num = parseInt(value, 10);
+						if (!isNaN(num) && num >= 8) {
+							this.plugin.settings.displaySettings.fontSize = num;
+							await this.plugin.saveSettings();
+						}
+					}),
+			);
+
+		new Setting(containerEl)
 			.setName("Show emojis")
 			.setDesc(
 				"Display emoji icons in tool calls, thoughts, plans, and terminal blocks.",
