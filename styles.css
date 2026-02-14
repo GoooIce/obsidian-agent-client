@@ -396,6 +396,66 @@ If your plugin does not need CSS, delete this file.
 	padding: 0;
 }
 
+.agent-client-chat-view-container.agent-client-chat-font-size-10 {
+	--ac-chat-font-size: 10px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-11 {
+	--ac-chat-font-size: 11px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-12 {
+	--ac-chat-font-size: 12px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-13 {
+	--ac-chat-font-size: 13px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-14 {
+	--ac-chat-font-size: 14px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-15 {
+	--ac-chat-font-size: 15px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-16 {
+	--ac-chat-font-size: 16px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-17 {
+	--ac-chat-font-size: 17px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-18 {
+	--ac-chat-font-size: 18px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-19 {
+	--ac-chat-font-size: 19px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-20 {
+	--ac-chat-font-size: 20px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-21 {
+	--ac-chat-font-size: 21px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-22 {
+	--ac-chat-font-size: 22px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-23 {
+	--ac-chat-font-size: 23px;
+}
+
+.agent-client-chat-view-container.agent-client-chat-font-size-24 {
+	--ac-chat-font-size: 24px;
+}
+
 /* Header */
 .agent-client-chat-view-header {
 	padding: 16px;

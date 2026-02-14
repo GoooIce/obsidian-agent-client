@@ -12,6 +12,11 @@ import type {
 	ChatViewLocation,
 } from "../../plugin";
 import { normalizeEnvVars } from "../../shared/settings-utils";
+import {
+	CHAT_FONT_SIZE_MAX,
+	CHAT_FONT_SIZE_MIN,
+	normalizeChatFontSize,
+} from "../../shared/display-settings";
 
 export class AgentClientSettingTab extends PluginSettingTab {
 	plugin: AgentClientPlugin;
@@ -189,17 +194,22 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("Chat font size")
-			.setDesc("Adjust the font size of the chat message area (px).")
+			.setDesc(
+				`Adjust the font size of the chat message area (${CHAT_FONT_SIZE_MIN}-${CHAT_FONT_SIZE_MAX}px).`,
+			)
 			.addText((text) =>
 				text
-					.setPlaceholder("12")
+					.setPlaceholder(
+						`${CHAT_FONT_SIZE_MIN}-${CHAT_FONT_SIZE_MAX}`,
+					)
 					.setValue(
 						String(this.plugin.settings.displaySettings.fontSize),
 					)
 					.onChange(async (value) => {
 						const num = parseInt(value, 10);
-						if (!isNaN(num) && num >= 8) {
-							this.plugin.settings.displaySettings.fontSize = num;
+						if (!isNaN(num)) {
+							this.plugin.settings.displaySettings.fontSize =
+								normalizeChatFontSize(num);
 							await this.plugin.saveSettings();
 						}
 					}),

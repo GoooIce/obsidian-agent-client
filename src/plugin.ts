@@ -14,6 +14,10 @@ import {
 	ensureUniqueCustomAgentIds,
 } from "./shared/settings-utils";
 import {
+	CHAT_FONT_SIZE_DEFAULT,
+	normalizeChatFontSize,
+} from "./shared/display-settings";
+import {
 	AgentEnvVar,
 	GeminiAgentSettings,
 	ClaudeAgentSettings,
@@ -135,7 +139,7 @@ const DEFAULT_SETTINGS: AgentClientPluginSettings = {
 		maxNoteLength: 10000,
 		maxSelectionLength: 10000,
 		showEmojis: true,
-		fontSize: 12,
+		fontSize: CHAT_FONT_SIZE_DEFAULT,
 	},
 	savedSessions: [],
 };
@@ -909,12 +913,7 @@ export default class AgentClientPlugin extends Plugin {
 							typeof rawDisplay.showEmojis === "boolean"
 								? rawDisplay.showEmojis
 								: DEFAULT_SETTINGS.displaySettings.showEmojis,
-						fontSize:
-							typeof rawDisplay.fontSize === "number" &&
-							rawDisplay.fontSize >= 10 &&
-							rawDisplay.fontSize <= 24
-								? rawDisplay.fontSize
-								: DEFAULT_SETTINGS.displaySettings.fontSize,
+						fontSize: normalizeChatFontSize(rawDisplay.fontSize),
 					};
 				}
 				return DEFAULT_SETTINGS.displaySettings;

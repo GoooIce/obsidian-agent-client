@@ -27,6 +27,7 @@ import { NoteMentionService } from "../../adapters/obsidian/mention-service";
 // Utility imports
 import { getLogger, Logger } from "../../shared/logger";
 import { ChatExporter } from "../../shared/chat-exporter";
+import { normalizeChatFontSize } from "../../shared/display-settings";
 
 // Adapter imports
 import type { IAcpClient } from "../../adapters/acp/acp.adapter";
@@ -1111,14 +1112,13 @@ function ChatComponent({
 	// ============================================================
 	// Render
 	// ============================================================
+	const chatFontSizeClass = `agent-client-chat-font-size-${normalizeChatFontSize(
+		settings.displaySettings.fontSize,
+	)}`;
+
 	return (
 		<div
-			className="agent-client-chat-view-container"
-			style={
-				{
-					"--ac-chat-font-size": `${settings.displaySettings.fontSize}px`,
-				} as React.CSSProperties
-			}
+			className={`agent-client-chat-view-container ${chatFontSizeClass}`}
 		>
 			<ChatHeader
 				agentLabel={activeAgentLabel}
