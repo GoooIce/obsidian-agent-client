@@ -15,7 +15,7 @@ import { normalizeEnvVars } from "../../shared/settings-utils";
 import {
 	CHAT_FONT_SIZE_MAX,
 	CHAT_FONT_SIZE_MIN,
-	normalizeChatFontSize,
+	parseChatFontSize,
 } from "../../shared/display-settings";
 
 export class AgentClientSettingTab extends PluginSettingTab {
@@ -197,23 +197,87 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			.setDesc(
 				`Adjust the font size of the chat message area (${CHAT_FONT_SIZE_MIN}-${CHAT_FONT_SIZE_MAX}px).`,
 			)
-			.addText((text) =>
+			.addText((text) => {
+				const getCurrentDisplayValue = (): string => {
+					const currentFontSize =
+						this.plugin.settings.displaySettings.fontSize;
+					return currentFontSize === null ? "" : String(currentFontSize);
+				};
+
 				text
 					.setPlaceholder(
 						`${CHAT_FONT_SIZE_MIN}-${CHAT_FONT_SIZE_MAX}`,
 					)
-					.setValue(
-						String(this.plugin.settings.displaySettings.fontSize),
-					)
+					.setValue(getCurrentDisplayValue())
 					.onChange(async (value) => {
-						const num = parseInt(value, 10);
-						if (!isNaN(num)) {
+						if (value.trim().length === 0) {
+							const hasChanged =
+								this.plugin.settings.displaySettings.fontSize !==
+								null;
+							if (hasChanged) {
+								this.plugin.settings.displaySettings.fontSize =
+									null;
+								await this.plugin.saveSettings();
+							}
+							return;
+						}
+
+						const trimmedValue = value.trim();
+						if (!/^-?\d+$/.test(trimmedValue)) {
+							return;
+						}
+
+						const numericValue = Number.parseInt(trimmedValue, 10);
+						if (
+							numericValue < CHAT_FONT_SIZE_MIN ||
+							numericValue > CHAT_FONT_SIZE_MAX
+						) {
+							return;
+						}
+
+						const parsedFontSize = parseChatFontSize(numericValue);
+						if (parsedFontSize === null) {
+							return;
+						}
+
+						const hasChanged =
+							this.plugin.settings.displaySettings.fontSize !==
+							parsedFontSize;
+						if (hasChanged) {
 							this.plugin.settings.displaySettings.fontSize =
-								normalizeChatFontSize(num);
+								parsedFontSize;
 							await this.plugin.saveSettings();
 						}
-					}),
-			);
+					});
+
+					text.inputEl.addEventListener("blur", () => {
+						const currentInputValue = text.getValue();
+						const parsedFontSize = parseChatFontSize(currentInputValue);
+
+						if (
+							currentInputValue.trim().length > 0 &&
+							parsedFontSize === null
+						) {
+							text.setValue(getCurrentDisplayValue());
+							return;
+						}
+
+						if (parsedFontSize !== null) {
+							text.setValue(String(parsedFontSize));
+							const hasChanged =
+								this.plugin.settings.displaySettings.fontSize !==
+								parsedFontSize;
+							if (hasChanged) {
+								this.plugin.settings.displaySettings.fontSize =
+									parsedFontSize;
+								void this.plugin.saveSettings();
+							}
+							return;
+						}
+
+						text.setValue("");
+					});
+			});
 
 		new Setting(containerEl)
 			.setName("Show emojis")

@@ -14,8 +14,7 @@ import {
 	ensureUniqueCustomAgentIds,
 } from "./shared/settings-utils";
 import {
-	CHAT_FONT_SIZE_DEFAULT,
-	normalizeChatFontSize,
+	parseChatFontSize,
 } from "./shared/display-settings";
 import {
 	AgentEnvVar,
@@ -81,7 +80,7 @@ export interface AgentClientPluginSettings {
 		maxNoteLength: number;
 		maxSelectionLength: number;
 		showEmojis: boolean;
-		fontSize: number;
+		fontSize: number | null;
 	};
 	// Locally saved session metadata (for agents without session/list support)
 	savedSessions: SavedSessionInfo[];
@@ -139,7 +138,7 @@ const DEFAULT_SETTINGS: AgentClientPluginSettings = {
 		maxNoteLength: 10000,
 		maxSelectionLength: 10000,
 		showEmojis: true,
-		fontSize: CHAT_FONT_SIZE_DEFAULT,
+		fontSize: null,
 	},
 	savedSessions: [],
 };
@@ -913,7 +912,7 @@ export default class AgentClientPlugin extends Plugin {
 							typeof rawDisplay.showEmojis === "boolean"
 								? rawDisplay.showEmojis
 								: DEFAULT_SETTINGS.displaySettings.showEmojis,
-						fontSize: normalizeChatFontSize(rawDisplay.fontSize),
+						fontSize: parseChatFontSize(rawDisplay.fontSize),
 					};
 				}
 				return DEFAULT_SETTINGS.displaySettings;

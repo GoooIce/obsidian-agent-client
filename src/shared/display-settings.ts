@@ -1,17 +1,32 @@
 export const CHAT_FONT_SIZE_MIN = 10;
 export const CHAT_FONT_SIZE_MAX = 24;
-export const CHAT_FONT_SIZE_DEFAULT = 12;
 
-export const normalizeChatFontSize = (value: unknown): number => {
-	const numericValue =
-		typeof value === "number"
-			? value
-			: typeof value === "string"
-				? Number.parseInt(value, 10)
-				: Number.NaN;
+export const parseChatFontSize = (value: unknown): number | null => {
+	if (value === null || value === undefined) {
+		return null;
+	}
+
+	const numericValue = (() => {
+		if (typeof value === "number") {
+			return value;
+		}
+
+		if (typeof value === "string") {
+			const trimmedValue = value.trim();
+			if (trimmedValue.length === 0) {
+				return Number.NaN;
+			}
+			if (!/^-?\d+$/.test(trimmedValue)) {
+				return Number.NaN;
+			}
+			return Number.parseInt(trimmedValue, 10);
+		}
+
+		return Number.NaN;
+	})();
 
 	if (!Number.isFinite(numericValue)) {
-		return CHAT_FONT_SIZE_DEFAULT;
+		return null;
 	}
 
 	return Math.min(
