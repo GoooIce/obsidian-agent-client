@@ -1,4 +1,10 @@
-import { Plugin, WorkspaceLeaf, Notice, requestUrl } from "obsidian";
+import {
+	Plugin,
+	WorkspaceLeaf,
+	WorkspaceSplit,
+	Notice,
+	requestUrl,
+} from "obsidian";
 import type { Root } from "react-dom/client";
 import * as semver from "semver";
 import { ChatView, VIEW_TYPE_CHAT } from "./components/chat/ChatView";
@@ -44,10 +50,15 @@ export type SendMessageShortcut = "enter" | "cmd-enter";
 /**
  * Chat view location configuration.
  * - 'right-tab': Open in right pane as tabs (default)
+ * - 'right-split': Open in right pane with vertical split
  * - 'editor-tab': Open in editor area as tabs
  * - 'editor-split': Open in editor area with right split
  */
-export type ChatViewLocation = "right-tab" | "editor-tab" | "editor-split";
+export type ChatViewLocation =
+	| "right-tab"
+	| "right-split"
+	| "editor-tab"
+	| "editor-split";
 
 export interface AgentClientPluginSettings {
 	gemini: GeminiAgentSettings;
@@ -452,14 +463,50 @@ export default class AgentClientPlugin extends Plugin {
 
 		switch (location) {
 			case "right-tab":
+				if (isAdditional) {
+					return this.createSidebarTab("right");
+				}
+				return workspace.getRightLeaf(false);
+			case "right-split":
 				return workspace.getRightLeaf(isAdditional);
 			case "editor-tab":
 				return workspace.getLeaf("tab");
 			case "editor-split":
 				return workspace.getLeaf("split");
 			default:
-				return workspace.getRightLeaf(isAdditional);
+				return workspace.getRightLeaf(false);
 		}
+	}
+
+	/**
+	 * Create a new tab within an existing sidebar tab group.
+	 * Uses the parent of an existing chat leaf to add a sibling tab,
+	 * avoiding the vertical split caused by getRightLeaf(true).
+	 */
+	private createSidebarTab(side: "right" | "left"): WorkspaceLeaf | null {
+		const { workspace } = this.app;
+		const split =
+			side === "right" ? workspace.rightSplit : workspace.leftSplit;
+
+		// Find an existing chat leaf in this sidebar to get its tab group
+		const existingLeaves = workspace.getLeavesOfType(VIEW_TYPE_CHAT);
+		const sidebarLeaf = existingLeaves.find(
+			(leaf) => leaf.getRoot() === split,
+		);
+
+		if (sidebarLeaf) {
+			const tabGroup = sidebarLeaf.parent;
+			// Index is clamped by Obsidian, so a large value appends to the end
+			return workspace.createLeafInParent(
+				tabGroup as unknown as WorkspaceSplit,
+				Number.MAX_SAFE_INTEGER,
+			);
+		}
+
+		// Fallback: no existing chat leaf in sidebar, create first one
+		return side === "right"
+			? workspace.getRightLeaf(false)
+			: workspace.getLeftLeaf(false);
 	}
 
 	/**
@@ -995,6 +1042,7 @@ export default class AgentClientPlugin extends Plugin {
 					: DEFAULT_SETTINGS.sendMessageShortcut,
 			chatViewLocation:
 				rawSettings.chatViewLocation === "right-tab" ||
+				rawSettings.chatViewLocation === "right-split" ||
 				rawSettings.chatViewLocation === "editor-tab" ||
 				rawSettings.chatViewLocation === "editor-split"
 					? rawSettings.chatViewLocation

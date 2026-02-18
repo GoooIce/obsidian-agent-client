@@ -182,6 +182,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			.addDropdown((dropdown) =>
 				dropdown
 					.addOption("right-tab", "Right pane (tabs)")
+					.addOption("right-split", "Right pane (split)")
 					.addOption("editor-tab", "Editor area (tabs)")
 					.addOption("editor-split", "Editor area (split)")
 					.setValue(this.plugin.settings.chatViewLocation)
