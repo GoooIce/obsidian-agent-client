@@ -1882,6 +1882,12 @@ If your plugin does not need CSS, delete this file.
 	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
+.agent-client-floating-button.is-dragging {
+	cursor: grabbing;
+	transition: none;
+	user-select: none;
+}
+
 .agent-client-floating-button img {
 	width: 48px;
 	height: 48px;

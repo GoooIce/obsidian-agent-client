@@ -107,6 +107,7 @@ export interface AgentClientPluginSettings {
 	floatingButtonImage: string;
 	floatingWindowSize: { width: number; height: number };
 	floatingWindowPosition: { x: number; y: number } | null;
+	floatingButtonPosition: { x: number; y: number } | null;
 }
 
 const DEFAULT_SETTINGS: AgentClientPluginSettings = {
@@ -169,6 +170,7 @@ const DEFAULT_SETTINGS: AgentClientPluginSettings = {
 	floatingButtonImage: "",
 	floatingWindowSize: { width: 400, height: 500 },
 	floatingWindowPosition: null,
+	floatingButtonPosition: null,
 };
 
 export default class AgentClientPlugin extends Plugin {
@@ -1134,6 +1136,21 @@ export default class AgentClientPlugin extends Plugin {
 			})(),
 			floatingWindowPosition: (() => {
 				const raw = rawSettings.floatingWindowPosition as
+					| { x?: number; y?: number }
+					| null
+					| undefined;
+				if (
+					raw &&
+					typeof raw === "object" &&
+					typeof raw.x === "number" &&
+					typeof raw.y === "number"
+				) {
+					return { x: raw.x, y: raw.y };
+				}
+				return null;
+			})(),
+			floatingButtonPosition: (() => {
+				const raw = rawSettings.floatingButtonPosition as
 					| { x?: number; y?: number }
 					| null
 					| undefined;
