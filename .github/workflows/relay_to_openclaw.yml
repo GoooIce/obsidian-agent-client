@@ -26,10 +26,10 @@ jobs:
           jq -n \
             --arg msg "GitHub ${{ github.event_name }} on ${{ github.repository }}
 
-          Translate the full text into Japanese and post it to Discord.
+          Translate the full text into Japanese and post it to Discord channel ID ${{ secrets.OPENCLAW_DISCORD_CHANNEL }} using the message tool.
 
           $GH_EVENT" \
-            '{"message": $msg}' | \
+            '{"message": $msg, deliver: false}' | \
           curl -sf -X POST \
             "${OPENCLAW_WEBHOOK_URL}/hooks/agent" \
             -H "Authorization: Bearer ${OPENCLAW_HOOKS_TOKEN}" \
