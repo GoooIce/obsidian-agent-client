@@ -31,10 +31,12 @@ jobs:
           TITLE=$(echo "$GH_EVENT" | jq -r '.issue.title // .pull_request.title // ""')
           BODY=$(echo "$GH_EVENT" | jq -r '.comment.body // .issue.body // .pull_request.body // ""')
           URL=$(echo "$GH_EVENT" | jq -r '.comment.html_url // .issue.html_url // .pull_request.html_url // ""')
+          USER=$(echo "$GH_EVENT" | jq -r '.sender.login // ""')
 
           jq -n \
             --arg msg "GitHub ${{ github.event_name }} on ${{ github.repository }}
 
+          user: $USER
           title: $TITLE
           body: $BODY
           url: $URL
