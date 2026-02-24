@@ -48,6 +48,42 @@ If your plugin does not need CSS, delete this file.
 	visibility: hidden;
 }
 
+/* ===== Scroll to Bottom Button ===== */
+.agent-client-scroll-to-bottom {
+	position: sticky;
+	bottom: 4px;
+	align-self: center;
+	padding: 6px !important;
+	margin: 0 !important;
+	border: none !important;
+	border-radius: 50%;
+	background-color: var(--background-primary) !important;
+	color: var(--text-muted);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	outline: none !important;
+	appearance: none;
+	box-shadow: none !important;
+	min-width: unset !important;
+	min-height: unset !important;
+	z-index: 10;
+}
+
+.agent-client-scroll-to-bottom svg {
+	color: var(--text-muted);
+	transition: color 0.2s ease;
+}
+
+.agent-client-scroll-to-bottom:hover {
+	background-color: var(--background-primary) !important;
+}
+
+.agent-client-scroll-to-bottom:hover svg {
+	color: var(--interactive-accent);
+}
+
 .agent-client-loading-dots {
 	display: grid;
 	grid-template-columns: repeat(3, 4px);

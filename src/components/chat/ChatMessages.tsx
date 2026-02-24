@@ -5,6 +5,7 @@ import type { ChatMessage } from "../../domain/models/chat-message";
 import type { IAcpClient } from "../../adapters/acp/acp.adapter";
 import type AgentClientPlugin from "../../plugin";
 import type { IChatViewHost } from "./types";
+import { setIcon } from "obsidian";
 import { MessageRenderer } from "./MessageRenderer";
 
 /**
@@ -143,6 +144,20 @@ export function ChatMessages({
 							<div className="agent-client-loading-dot"></div>
 						</div>
 					</div>
+					{!isAtBottom && (
+						<button
+							className="agent-client-scroll-to-bottom"
+							onClick={() => {
+								const container = containerRef.current;
+								if (container) {
+									container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+								}
+							}}
+							ref={(el) => {
+								if (el) setIcon(el, "chevron-down");
+							}}
+						/>
+					)}
 				</>
 			)}
 		</div>
