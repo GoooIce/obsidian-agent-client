@@ -8,64 +8,64 @@
 </p>
 
 <p align="center">
-  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a>
+  <a href="README_en.md">English</a> | <a href="README.ja.md">日本語</a>
 </p>
 
-<p align="center">
-  <a href="https://www.buymeacoffee.com/rait09" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50" ></a>
-</p>
+> ⚠️ **个人实验版**
+>
+> 这是一个个人实验版本，用于测试和探索功能。如需稳定版本，请使用[上游官方仓库](https://github.com/RAIT-09/obsidian-agent-client)。
 
-Bring AI agents (Claude Code, Codex, Gemini CLI) directly into Obsidian. Chat with your AI assistant right from your vault.
+将 AI 智能体（Claude Code、Codex、Gemini CLI）直接集成到 Obsidian 中。在您的 Vault 内与 AI 助手聊天。
 
-Built on [Agent Client Protocol (ACP)](https://github.com/zed-industries/agent-client-protocol) by Zed.
+基于 Zed 的 [Agent Client Protocol (ACP)](https://github.com/zed-industries/agent-client-protocol) 构建。
 
 https://github.com/user-attachments/assets/1c538349-b3fb-44dd-a163-7331cbca7824
 
-## Features
+## 功能特性
 
-- **Note Mentions**: Reference your notes with `@notename` syntax
-- **Image Attachments**: Paste or drag-and-drop images into the chat
-- **Slash Commands**: Use `/` commands provided by your agent
-- **Multi-Agent Support**: Switch between Claude Code, Codex, Gemini CLI, and custom agents
-- **Multi-Session**: Run multiple agents simultaneously in separate views
-- **Floating Chat**: A persistent, collapsible chat window for quick access
-- **Mode & Model Switching**: Change AI models and agent modes from the chat
-- **Session History**: Resume or fork previous conversations
-- **Chat Export**: Save conversations as Markdown notes
-- **Terminal Integration**: Let agents execute commands and return results
+- **笔记提及**：使用 `@笔记名` 语法引用您的笔记
+- **图片附件**：粘贴或拖放图片到聊天中
+- **斜杠命令**：使用智能体提供的 `/` 命令
+- **多智能体支持**：在 Claude Code、Codex、Gemini CLI 和自定义智能体之间切换
+- **多会话**：在独立的视图中同时运行多个智能体
+- **浮动聊天**：持久、可折叠的聊天窗口，便于快速访问
+- **模式与模型切换**：从聊天中更改 AI 模型和智能体模式
+- **会话历史**：恢复或分支之前的对话
+- **聊天导出**：将对话保存为 Markdown 笔记
+- **终端集成**：让智能体执行命令并返回结果
 
-## Installation
+## 安装
 
-### Via BRAT (Recommended)
+### 通过 BRAT 安装（推荐）
 
-1. Install the [BRAT](https://github.com/TfTHacker/obsidian42-brat) plugin
-2. Go to **Settings → BRAT → Add Beta Plugin**
-3. Paste: `https://github.com/RAIT-09/obsidian-agent-client`
-4. Enable **Agent Client** from the plugin list
+1. 安装 [BRAT](https://github.com/TfTHacker/obsidian42-brat) 插件
+2. 进入 **设置 → BRAT → Add Beta Plugin**
+3. 粘贴：`https://github.com/RAIT-09/obsidian-agent-client`
+4. 在插件列表中启用 **Agent Client**
 
-### Manual Installation
+### 手动安装
 
-1. Download `main.js`, `manifest.json`, `styles.css` from [Releases](https://github.com/RAIT-09/obsidian-agent-client/releases)
-2. Place them in `VaultFolder/.obsidian/plugins/agent-client/`
-3. Enable the plugin in **Settings → Community Plugins**
+1. 从 [Releases](https://github.com/RAIT-09/obsidian-agent-client/releases) 下载 `main.js`、`manifest.json`、`styles.css`
+2. 将它们放入 `VaultFolder/.obsidian/plugins/agent-client/`
+3. 在 **设置 → 社区插件** 中启用该插件
 
-## Quick Start
+## 快速开始
 
-Open a terminal (Terminal on macOS/Linux, PowerShell on Windows) and run the following commands.
+打开终端（macOS/Linux 使用 Terminal，Windows 使用 PowerShell）并运行以下命令。
 
-1. **Install an agent and its ACP adapter** (e.g., Claude Code):
+1. **安装智能体及其 ACP 适配器**（例如 Claude Code）：
    ```bash
-   curl -fsSL https://claude.ai/install.sh | bash   # Install Claude Code
-   npm install -g @zed-industries/claude-agent-acp   # Install ACP adapter
+   curl -fsSL https://claude.ai/install.sh | bash   # 安装 Claude Code
+   npm install -g @zed-industries/claude-agent-acp   # 安装 ACP 适配器
    ```
 
-2. **Login** (skip if using API key):
+2. **登录**（使用 API 密钥可跳过）：
    ```bash
    claude
    ```
-   Follow the prompts to authenticate with your Anthropic account.
+   按照提示使用您的 Anthropic 账户进行身份验证。
 
-3. **Find the paths**:
+3. **查找路径**：
    ```bash
    which node   # macOS/Linux
    which claude-agent-acp
@@ -74,37 +74,45 @@ Open a terminal (Terminal on macOS/Linux, PowerShell on Windows) and run the fol
    where.exe claude-agent-acp
    ```
 
-4. **Configure** in **Settings → Agent Client**:
-   - **Node.js path**: e.g., `/usr/local/bin/node`
-   - **Built-in agents → Claude Code → Path**: e.g., `/usr/local/bin/claude-agent-acp` (not `claude`)
-   - **API key**: Add your key, or leave empty if logged in via CLI
+4. **在 设置 → Agent Client 中配置**：
+   - **Node.js path**：例如 `/usr/local/bin/node`
+   - **Built-in agents → Claude Code → Path**：例如 `/usr/local/bin/claude-agent-acp`（不是 `claude`）
+   - **API key**：添加您的密钥，或如果已通过 CLI 登录则留空
 
-5. **Start chatting**: Click the robot icon in the ribbon
+5. **开始聊天**：点击侧边栏的机器人图标
 
-### Setup Guides
+### 设置指南
 
 - [Claude Code](https://goooice.github.io/obsidian-agent-client/agent-setup/claude-code.html)
 - [Codex](https://goooice.github.io/obsidian-agent-client/agent-setup/codex.html)
 - [Gemini CLI](https://goooice.github.io/obsidian-agent-client/agent-setup/gemini-cli.html)
-- [Custom Agents](https://goooice.github.io/obsidian-agent-client/agent-setup/custom-agents.html) (OpenCode, Qwen Code, Kiro, Mistral Vibe, etc.)
+- [自定义智能体](https://goooice.github.io/obsidian-agent-client/agent-setup/custom-agents.html)（OpenCode、Qwen Code、Kiro、Mistral Vibe 等）
 
-**[Full Documentation](https://goooice.github.io/obsidian-agent-client/)**
+**[完整文档](https://goooice.github.io/obsidian-agent-client/)**
 
-## Development
+## 开发
 
 ```bash
 npm install
 npm run dev
 ```
 
-For production builds:
+生产构建：
 ```bash
 npm run build
 ```
 
-## License
+## 致谢
 
-Apache License 2.0 - see [LICENSE](LICENSE) for details.
+本项目 Fork 自 [RAIT-09/obsidian-agent-client](https://github.com/RAIT-09/obsidian-agent-client)，感谢原作者的出色工作！
+
+同时也感谢以下项目：
+- [Zed Industries](https://github.com/zed-industries) - 提供 [Agent Client Protocol (ACP)](https://github.com/zed-industries/agent-client-protocol)
+- [Obsidian](https://obsidian.md) - 优秀的知识管理工具
+
+## 许可证
+
+Apache License 2.0 - 详见 [LICENSE](LICENSE)。
 
 ## Star History
 

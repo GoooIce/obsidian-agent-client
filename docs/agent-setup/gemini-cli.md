@@ -1,87 +1,87 @@
-# Gemini CLI Setup
+# Gemini CLI 设置
 
-Gemini CLI is Google's AI assistant. You can authenticate using your **Google account**, an **API key**, or **Vertex AI**.
+Gemini CLI 是 Google 的 AI 助手。你可以使用 **Google 账户**、**API 密钥**或 **Vertex AI** 进行身份验证。
 
-## Install and Configure
+## 安装和配置
 
-Open a terminal (Terminal on macOS/Linux, PowerShell on Windows) and run the following commands.
+打开终端（macOS/Linux 上是 Terminal，Windows 上是 PowerShell）并运行以下命令。
 
-1. Install Gemini CLI:
+1. 安装 Gemini CLI：
 
 ```bash
 npm install -g @google/gemini-cli
 ```
 
-2. Find the installation path:
+2. 查找安装路径：
 
 ::: code-group
 
 ```bash [macOS/Linux]
 which gemini
-# Example output: /usr/local/bin/gemini
+# 示例输出：/usr/local/bin/gemini
 ```
 
 ```cmd [Windows]
 where.exe gemini
-# Example output: C:\Users\Username\AppData\Roaming\npm\gemini.cmd
+# 示例输出：C:\Users\Username\AppData\Roaming\npm\gemini.cmd
 ```
 
 :::
 
-3. Open **Settings → Agent Client** and set the **Gemini CLI path** to the path found above.
+3. 打开 **设置 → Agent Client** 并将 **Gemini CLI 路径**设置为上面找到的路径。
 
-4. Ensure **Arguments** contains `--experimental-acp` (this is set by default).
+4. 确保 **参数**包含 `--experimental-acp`（默认已设置）。
 
-## Authentication
+## 身份验证
 
-Choose one of the following methods:
+选择以下方法之一：
 
-### Option A: Google Account Login (OAuth)
+### 选项 A：Google 账户登录（OAuth）
 
-If you have a Google account and prefer not to use an API key, you can log in directly.
+如果你有 Google 账户且不想使用 API 密钥，可以直接登录。
 
-1. Run Gemini CLI in your terminal and choose "Login with Google":
+1. 在终端中运行 Gemini CLI 并选择"使用 Google 登录"：
 
 ```bash
 gemini
 ```
 
-2. Follow the browser authentication flow.
+2. 按照浏览器身份验证流程操作。
 
-3. In **Settings → Agent Client**, leave the **API key field empty**.
+3. 在 **设置 → Agent Client** 中，**将 API 密钥字段留空**。
 
 ::: tip
-If you have a Gemini Code Assist License from your organization, add `GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID` in the **Environment variables** field.
+如果你的组织提供了 Gemini Code Assist 许可证，请在 **环境变量**字段中添加 `GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID`。
 :::
 
-### Option B: Gemini API Key
+### 选项 B：Gemini API 密钥
 
-If you prefer to use an API key for authentication:
+如果你更喜欢使用 API 密钥进行身份验证：
 
-1. Get your API key from [Google AI Studio](https://aistudio.google.com/apikey)
-2. Enter the API key in **Settings → Agent Client → Gemini CLI → API key**
+1. 从 [Google AI Studio](https://aistudio.google.com/apikey) 获取你的 API 密钥
+2. 在 **设置 → Agent Client → Gemini CLI → API 密钥** 中输入 API 密钥
 
-### Option C: Vertex AI
+### 选项 C：Vertex AI
 
-If you are using Vertex AI for enterprise workloads:
+如果你使用 Vertex AI 进行企业工作负载：
 
-1. In **Settings → Agent Client → Gemini CLI → Environment variables**, add:
+1. 在 **设置 → Agent Client → Gemini CLI → 环境变量** 中添加：
 
 ```
 GOOGLE_API_KEY=YOUR_API_KEY
 GOOGLE_GENAI_USE_VERTEXAI=true
 ```
 
-2. Leave the **API key field empty** (use Environment variables instead).
+2. **将 API 密钥字段留空**（改用环境变量）。
 
 ::: tip
-Gemini CLI natively supports ACP, so no additional adapter is required.
+Gemini CLI 原生支持 ACP，因此不需要额外的适配器。
 :::
 
-## Verify Setup
+## 验证设置
 
-1. Click the robot icon in the ribbon or use the command palette: **"Open agent chat"**
-2. Switch to Gemini CLI from the agent dropdown in the chat header
-3. Try sending a message to verify the connection
+1. 点击功能区中的机器人图标或使用命令面板：**"打开 agent 聊天"**
+2. 从聊天标题中的 agent 下拉菜单切换到 Gemini CLI
+3. 尝试发送消息以验证连接
 
-Having issues? See [Troubleshooting](/help/troubleshooting).
+遇到问题？请参阅 [故障排除](/help/troubleshooting)。

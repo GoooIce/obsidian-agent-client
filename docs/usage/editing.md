@@ -1,69 +1,69 @@
-# Editing
+# 编辑功能
 
-Agent Client allows AI agents to edit files in your vault and working directory.
+Agent Client 允许 AI agent 编辑你库和工作目录中的文件。
 
-## How Editing Works
+## 编辑的工作原理
 
-When you ask the agent to modify files:
+当你要求 agent 修改文件时：
 
-1. The agent proposes changes
-2. You see the proposed edits in the chat
-3. The agent may request permission to apply changes
-4. Changes are applied to your files
+1. Agent 提出更改
+2. 你在聊天中看到建议的编辑
+3. Agent 可能请求权限以应用更改
+4. 更改被应用到你的文件
 
 <p align="center">
-  <img src="/images/editing.webp" alt="Editing files with agents" width="400" />
+  <img src="/images/editing.webp" alt="使用 agent 编辑文件" width="400" />
 </p>
 
-## Permission Controls
+## 权限控制
 
-Some agents request permission before performing certain actions. When a permission request appears:
+某些 agent 在执行某些操作之前会请求权限。当权限请求出现时：
 
-1. Review the proposed action
-2. Select one of the available options provided by the agent
+1. 查看建议的操作
+2. 选择 agent 提供的可用选项之一
 
 ::: tip
-Permission options vary by agent. Some agents may not request permission at all and edit files directly.
+权限选项因 agent 而异。某些 agent 可能根本不请求权限而直接编辑文件。
 :::
 
-### Auto-Allow Permissions
+### 自动允许权限
 
-In **Settings → Agent Client → Permissions → Auto-allow permissions**, you can automatically allow all permission requests from agents.
+在 **设置 → Agent Client → 权限 → 自动允许权限** 中，你可以自动允许来自 agent 的所有权限请求。
 
 ::: warning
-Use with caution—this gives agents full access to your system without confirmation prompts.
+谨慎使用 — 这将给予 agent 对你系统的完全访问权限，无需确认提示。
 :::
 
-## Viewing Changes
+## 查看更改
 
-The chat displays file changes with:
+聊天显示文件更改：
 
-- **File path**: Which file was modified
-- **Diff view**: What was added/removed (when available)
-- **Status**: Success or failure of the operation
+- **文件路径**：哪个文件被修改
+- **差异视图**：添加/删除了什么（可用时）
+- **状态**：操作成功或失败
 
-### Auto-Collapse Long Diffs
+### 自动折叠长差异
 
-Large diffs can be automatically collapsed to keep the chat readable. This feature is **disabled by default**.
+大型差异可以自动折叠以保持聊天可读性。此功能**默认禁用**。
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| **Auto-collapse long diffs** | Off | Enable automatic collapsing of large diffs |
-| **Collapse threshold** | 10 lines | Diffs exceeding this line count are collapsed |
+| 设置 | 默认值 | 描述 |
+|------|--------|------|
+| **自动折叠长差异** | 关闭 | 启用自动折叠大型差异 |
+| **折叠阈值** | 10 行 | 超过此行数的差异会被折叠 |
 
-Configure these in **Settings → Agent Client → Display**.
+在 **设置 → Agent Client → 显示** 中配置这些设置。
 
-Collapsed diffs can be expanded by clicking on them.
+折叠的差异可以通过点击来展开。
 
-## Best Practices
+## 最佳实践
 
-1. **Use version control**: Keep your vault in Git before letting agents edit
-2. **Review changes**: Check diffs before confirming major modifications
-3. **Start small**: Test with minor edits before complex changes
+1. **使用版本控制**：在让 agent 编辑之前将你的库放入 Git
+2. **审查更改**：在确认重大修改之前检查差异
+3. **从小处开始**：在复杂更改之前先测试小的编辑
 
-## Undo Changes
+## 撤销更改
 
-If an agent makes unwanted changes:
+如果 agent 做出了不需要的更改：
 
-- Use **Editor**: Cmd/Ctrl+Z in the affected file
-- Use **Git**: `git checkout -- <file>` or `git restore <file>` (if your vault is version-controlled)
+- 使用 **编辑器**：在受影响的文件中按 Cmd/Ctrl+Z
+- 使用 **Git**：`git checkout -- <file>` 或 `git restore <file>`（如果你的库有版本控制）

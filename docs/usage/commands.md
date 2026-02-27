@@ -1,46 +1,46 @@
-# Commands & Hotkeys
+# 命令和快捷键
 
-All commands available in Agent Client. Open the command palette (`Cmd/Ctrl + P`) to access them, or assign keyboard shortcuts in **Settings → Hotkeys**.
+Agent Client 中所有可用的命令。打开命令面板（`Cmd/Ctrl + P`）访问它们，或在 **设置 → 快捷键** 中分配键盘快捷键。
 
 ::: tip
-Commands operate on the **last focused chat view**. Click on a chat view to focus it before running a command.
+命令在**最后聚焦的聊天视图**上操作。在运行命令之前点击聊天视图以聚焦它。
 :::
 
-## Chat Commands
+## 聊天命令
 
-| Command | Description |
-|---------|-------------|
-| **Open agent chat** | Open the chat panel |
-| **Open new chat view** | Open an additional chat view |
-| **New chat** | Start a fresh conversation |
-| **Export chat** | Export the current conversation to a note |
-| **Focus next chat view** | Move focus to the next chat view |
-| **Focus previous chat view** | Move focus to the previous chat view |
+| 命令 | 描述 |
+|------|------|
+| **打开 agent 聊天** | 打开聊天面板 |
+| **打开新聊天视图** | 打开额外的聊天视图 |
+| **新聊天** | 开始新对话 |
+| **导出聊天** | 将当前对话导出到笔记 |
+| **聚焦下一个聊天视图** | 将焦点移到下一个聊天视图 |
+| **聚焦上一个聊天视图** | 将焦点移到上一个聊天视图 |
 
-## Broadcast Commands
+## 广播命令
 
-Control multiple chat views at once. See [Multi-Session Chat](/usage/multi-session) for details.
+一次控制多个聊天视图。详见 [多会话聊天](/usage/multi-session)。
 
-| Command | Description |
-|---------|-------------|
-| **Broadcast prompt** | Copy the active view's input to all other views |
-| **Broadcast send** | Send messages in all views simultaneously |
-| **Broadcast cancel** | Cancel operations in all views |
+| 命令 | 描述 |
+|------|------|
+| **广播提示** | 将活动视图的输入复制到所有其他视图 |
+| **广播发送** | 同时在所有视图中发送消息 |
+| **广播取消** | 取消所有视图中的操作 |
 
-## Floating Chat Commands
+## 浮动聊天命令
 
-| Command | Description |
-|---------|-------------|
-| **Open floating chat window** | Open an existing floating window, or create one if none exist |
-| **Open new floating chat window** | Always create a new floating window |
-| **Close floating chat window** | Hide the focused floating window (session is preserved) |
+| 命令 | 描述 |
+|------|------|
+| **打开浮动聊天窗口** | 打开现有的浮动窗口，如果不存在则创建一个 |
+| **打开新浮动聊天窗口** | 始终创建新的浮动窗口 |
+| **关闭浮动聊天窗口** | 隐藏聚焦的浮动窗口（会话被保留） |
 
-## Agent Commands
+## Agent 命令
 
-| Command | Description |
-|---------|-------------|
-| **New chat with [Agent Name]** | Start a new chat with a specific agent |
+| 命令 | 描述 |
+|------|------|
+| **使用 [Agent 名称] 新建聊天** | 使用特定 agent 开始新聊天 |
 
 ::: tip
-Agent-specific commands are generated automatically based on your configured agents.
+特定于 agent 的命令会根据你配置的 agent 自动生成。
 :::

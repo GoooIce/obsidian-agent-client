@@ -1,68 +1,68 @@
-# Multi-Session Chat
+# 多会话聊天
 
-Run multiple independent agent conversations simultaneously.
+同时运行多个独立的 agent 对话。
 
 <p align="center">
-  <img src="/images/multi-session.webp" alt="Multiple chat views running simultaneously" />
+  <img src="/images/multi-session.webp" alt="同时运行多个聊天视图" />
 </p>
 
-## Overview
+## 概述
 
-Agent Client supports opening multiple chat views, each with its own:
-- Independent agent process
-- Separate session and message history
-- Individual agent selection
+Agent Client 支持打开多个聊天视图，每个都有自己的：
+- 独立的 agent 进程
+- 单独的会话和消息历史
+- 单独的 agent 选择
 
 ::: tip
-This is useful when you want to work with different agents side-by-side, or run parallel conversations for different tasks.
+当你想并排使用不同的 agent，或为不同任务运行并行对话时，这很有用。
 :::
 
-## Opening Multiple Views
+## 打开多个视图
 
-### Via Command Palette
+### 通过命令面板
 
-1. Open command palette (`Cmd/Ctrl + P`)
-2. Search for **"Open new chat view"**
-3. A new chat view opens in your configured location
+1. 打开命令面板（`Cmd/Ctrl + P`）
+2. 搜索 **"打开新聊天视图"**
+3. 新聊天视图在你配置的位置打开
 
-### Via Header Menu
+### 通过标题菜单
 
-1. Click the **⋮** (ellipsis) menu in the chat header
-2. Select **"Open new view"**
+1. 点击聊天标题中的 **⋮**（省略号）菜单
+2. 选择 **"打开新视图"**
 
-## Chat View Location
+## 聊天视图位置
 
-Configure where new chat views open in **Settings → Agent Client → Display → Chat view location**:
+在 **设置 → Agent Client → 显示 → 聊天视图位置** 中配置新聊天视图的打开位置：
 
-| Location | Description |
-|----------|-------------|
-| **Right pane (tabs)** (default) | Opens in the right sidebar |
-| **Editor area (tabs)** | Opens as a tab in the editor area |
-| **Editor area (split)** | Opens in a new split pane |
+| 位置 | 描述 |
+|------|------|
+| **右侧窗格（标签页）**（默认） | 在右侧边栏打开 |
+| **编辑区（标签页）** | 在编辑区作为标签页打开 |
+| **编辑区（分屏）** | 在新的分屏窗格中打开 |
 
-## Broadcast Commands
+## 广播命令
 
-Control multiple chat views at once from the command palette:
+从命令面板一次控制多个聊天视图：
 
-| Command | Description |
-|---------|-------------|
-| **Broadcast prompt** | Copy the active view's input text and images to all other views |
-| **Broadcast send** | Send messages in all views simultaneously |
-| **Broadcast cancel** | Cancel ongoing operations in all views |
+| 命令 | 描述 |
+|------|------|
+| **广播提示** | 将活动视图的输入文本和图片复制到所有其他视图 |
+| **广播发送** | 同时在所有视图中发送消息 |
+| **广播取消** | 取消所有视图中正在进行的操作 |
 
 ::: tip
-Broadcast commands are useful for comparing how different agents respond to the same prompt.
+广播命令对于比较不同 agent 对相同提示的响应很有用。
 :::
 
-## Focus Navigation
+## 焦点导航
 
-Quickly switch between chat views:
+在聊天视图之间快速切换：
 
-| Command | Description |
-|---------|-------------|
-| **Focus next chat view** | Move focus to the next chat view |
-| **Focus previous chat view** | Move focus to the previous chat view |
+| 命令 | 描述 |
+|------|------|
+| **聚焦下一个聊天视图** | 将焦点移到下一个聊天视图 |
+| **聚焦上一个聊天视图** | 将焦点移到上一个聊天视图 |
 
 ::: tip
-Assign keyboard shortcuts to these commands in **Settings → Hotkeys** for faster navigation.
+在 **设置 → 快捷键** 中为这些命令分配键盘快捷键以便更快导航。
 :::

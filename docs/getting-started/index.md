@@ -1,68 +1,68 @@
-# Installation
+# 安装
 
-::: info 🚧 Under Review
-This plugin is awaiting approval for **Obsidian Community Plugins**. For now, use **BRAT** (recommended) or manual installation.
+::: info 🚧 审核中
+此插件正在等待 **Obsidian 社区插件**审核。目前请使用 **BRAT**（推荐）或手动安装。
 :::
 
-## Install the Plugin
+## 安装插件
 
-### Via BRAT (Recommended)
+### 通过 BRAT（推荐）
 
-1. Install the [BRAT](https://github.com/TfTHacker/obsidian42-brat) plugin from the Community Plugins browser
-2. In Obsidian settings, go to **Community Plugins → BRAT → Add Beta Plugin**
-3. Paste this repo URL:
+1. 从社区插件浏览器安装 [BRAT](https://github.com/TfTHacker/obsidian42-brat) 插件
+2. 在 Obsidian 设置中，前往 **社区插件 → BRAT → 添加 Beta 插件**
+3. 粘贴此仓库 URL：
    ```
    https://github.com/RAIT-09/obsidian-agent-client
    ```
-4. BRAT will download the latest release and keep it auto-updated
-5. Enable **Agent Client** from the plugin list
+4. BRAT 将下载最新版本并保持自动更新
+5. 从插件列表中启用 **Agent Client**
 
-### Manual Installation
+### 手动安装
 
-1. Download the latest release files from [GitHub Releases](https://github.com/RAIT-09/obsidian-agent-client/releases):
+1. 从 [GitHub Releases](https://github.com/RAIT-09/obsidian-agent-client/releases) 下载最新版本文件：
    - `main.js`
    - `manifest.json`
    - `styles.css`
-2. Create the plugin folder: `VaultFolder/.obsidian/plugins/agent-client/`
-3. Place the downloaded files in this folder
-4. Enable the plugin in **Obsidian Settings → Community Plugins**
+2. 创建插件文件夹：`VaultFolder/.obsidian/plugins/agent-client/`
+3. 将下载的文件放入此文件夹
+4. 在 **Obsidian 设置 → 社区插件** 中启用插件
 
-## Prerequisites
+## 前置条件
 
 ### Node.js
 
-::: tip Not always required
-Node.js is needed for npm-based agents like Claude Code, Codex, and Gemini CLI. If your agent is a standalone binary, you can skip this step.
+::: tip 并非总是必需
+Node.js 是 npm 类 agent（如 Claude Code、Codex 和 Gemini CLI）所必需的。如果你的 agent 是独立的可执行文件，可以跳过此步骤。
 :::
 
-If you need Node.js:
+如果你需要 Node.js：
 
-1. Download from [nodejs.org](https://nodejs.org/)
-2. Install the LTS version (recommended)
+1. 从 [nodejs.org](https://nodejs.org/) 下载
+2. 安装 LTS 版本（推荐）
 
-### Find Your Node.js Path
+### 查找 Node.js 路径
 
-Open a terminal (Terminal on macOS/Linux, PowerShell on Windows) and run:
+打开终端（macOS/Linux 上是 Terminal，Windows 上是 PowerShell）并运行：
 
 ::: code-group
 
 ```bash [macOS/Linux]
 which node
-# Example output: /usr/local/bin/node
+# 示例输出：/usr/local/bin/node
 ```
 
 ```cmd [Windows]
 where.exe node
-# Example output: C:\Program Files\nodejs\node.exe
+# 示例输出：C:\Program Files\nodejs\node.exe
 ```
 
 :::
 
-### Configure Node.js Path
+### 配置 Node.js 路径
 
-1. Open **Settings → Agent Client**
-2. Enter the Node.js path in the **Node.js path** field
+1. 打开 **设置 → Agent Client**
+2. 在 **Node.js 路径** 字段中输入 Node.js 路径
 
-## Next Steps
+## 下一步
 
-Continue to [Quick Start](./quick-start) to set up your first agent and start chatting!
+继续阅读 [快速开始](./quick-start) 来设置你的第一个 agent 并开始聊天！

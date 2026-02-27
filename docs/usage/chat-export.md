@@ -1,34 +1,34 @@
-# Chat Export
+# 聊天导出
 
-Save your conversations with AI agents for future reference.
+保存与 AI agent 的对话以供将来参考。
 
-## Manual Export
+## 手动导出
 
-Click the **export button** in the chat header to export the current conversation.
+点击聊天标题中的 **导出按钮** 以导出当前对话。
 
 <p align="center">
-  <img src="/images/export.webp" alt="Export button in chat header" width="400" />
+  <img src="/images/export.webp" alt="聊天标题中的导出按钮" width="400" />
 </p>
 
-## Export Settings
+## 导出设置
 
-Configure export options in **Settings → Agent Client → Export**:
+在 **设置 → Agent Client → 导出** 中配置导出选项：
 
-| Setting | Description |
-|---------|-------------|
-| **Export folder** | Folder where chat exports will be saved (default: `Agent Client`) |
-| **Filename** | Template for filenames. Use `{date}` and `{time}` as placeholders |
-| **Frontmatter tag** | Tag added to exported notes (default: `agent-client`). Supports nested tags like `projects/agent-client` |
-| **Auto-export on new chat** | Automatically export when starting a new chat |
-| **Auto-export on close chat** | Automatically export when closing the chat view |
-| **Open note after export** | Automatically open the exported note |
-| **Include images** | Save images attached in messages (default: enabled) |
-| **Image location** | Where to save images: Obsidian's attachment folder, custom folder, or embed as Base64 |
-| **Custom image folder** | Folder path for images when using custom location |
+| 设置 | 描述 |
+|------|------|
+| **导出文件夹** | 聊天导出保存的文件夹（默认：`Agent Client`） |
+| **文件名** | 文件名模板。使用 `{date}` 和 `{time}` 作为占位符 |
+| **Frontmatter 标签** | 添加到导出笔记的标签（默认：`agent-client`）。支持嵌套标签如 `projects/agent-client` |
+| **新聊天时自动导出** | 开始新聊天时自动导出 |
+| **关闭聊天时自动导出** | 关闭聊天视图时自动导出 |
+| **导出后打开笔记** | 自动打开导出的笔记 |
+| **包含图片** | 保存消息中附加的图片（默认：启用） |
+| **图片位置** | 图片保存位置：Obsidian 的附件文件夹、自定义文件夹或嵌入为 Base64 |
+| **自定义图片文件夹** | 使用自定义位置时的图片文件夹路径 |
 
-## Export Format
+## 导出格式
 
-Chats are exported as Markdown files with YAML frontmatter:
+聊天导出为带有 YAML frontmatter 的 Markdown 文件：
 
 ```markdown
 ---
@@ -36,45 +36,45 @@ created: 2025-12-13T00:31:12
 agentDisplayName: Claude Code
 agentId: claude-agent-acp
 session_id: f95b4847-cb9c-441a-9f0b-08eb243ff5dd
-tags: [agent-client]  # Customizable in settings
+tags: [agent-client]  # 可在设置中自定义
 ---
 
 # Claude Code
 
-## 0:31:12 - User
+## 0:31:12 - 用户
 
 @[[Agent Client Plugin]]
-Summarize this, please.
+请总结一下。
 
 
 ---
 
-## 0:31:16 - Assistant
+## 0:31:16 - 助手
 
-### 🔧 Read File
+### 🔧 读取文件
 
-**Locations**: `/Users/rait09/Documents/dev_vault/Agent Client Plugin.md:0`
+**位置**：`/Users/rait09/Documents/dev_vault/Agent Client Plugin.md:0`
 
-**Status**: completed
+**状态**：已完成
 
-## Summary: Agent Client Plugin for Obsidian
+## 摘要：Obsidian 的 Agent Client 插件
 
-This is an Obsidian plugin that integrates AI coding agents (Claude Code, Codex, Gemini CLI) directly into your vault.
+这是一个 Obsidian 插件，直接在你的库中集成 AI 编码 agent（Claude Code、Codex、Gemini CLI）。
 ...
 ```
 
-## What Gets Exported
+## 导出内容
 
-- **Messages**: Full conversation history with timestamps
-- **Images**: Attached images (saved as files or embedded, based on settings)
-- **Tool calls**: Tool name, locations, status, and diffs
-- **Thinking**: Agent's reasoning (as collapsible callouts)
-- **Plans**: Task plans with status indicators
-- **Note mentions**: Auto-mention and manual mentions in `@[[note]]` format
+- **消息**：带时间戳的完整对话历史
+- **图片**：附加的图片（根据设置保存为文件或嵌入）
+- **工具调用**：工具名称、位置、状态和差异
+- **思考**：Agent 的推理（作为可折叠的标注）
+- **计划**：带状态指示器的任务计划
+- **笔记提及**：`@[[笔记]]` 格式的自动提及和手动提及
 
-## Use Cases
+## 使用场景
 
-- **Documentation**: Keep records of conversations and decisions
-- **Learning**: Review agent explanations later
-- **Sharing**: Share solutions with others
-- **Debugging**: Reference what the agent did for troubleshooting
+- **文档记录**：保留对话和决策记录
+- **学习**：稍后回顾 agent 的解释
+- **分享**：与他人分享解决方案
+- **调试**：参考 agent 所做的工作以进行故障排除

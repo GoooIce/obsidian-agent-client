@@ -1,76 +1,76 @@
-# Codex Setup
+# Codex 设置
 
-Codex is OpenAI's AI coding assistant. You can use it with either an **API key** or by **logging in with your OpenAI account**.
+Codex 是 OpenAI 的 AI 编码助手。你可以使用 **API 密钥**或通过 **登录 OpenAI 账户**来使用它。
 
-## Install and Configure
+## 安装和配置
 
-Open a terminal (Terminal on macOS/Linux, PowerShell on Windows) and run the following commands.
+打开终端（macOS/Linux 上是 Terminal，Windows 上是 PowerShell）并运行以下命令。
 
-1. Install codex-acp:
+1. 安装 codex-acp：
 
 ```bash
 npm install -g @zed-industries/codex-acp
 ```
 
-2. Find the installation path:
+2. 查找安装路径：
 
 ::: code-group
 
 ```bash [macOS/Linux]
 which codex-acp
-# Example output: /usr/local/bin/codex-acp
+# 示例输出：/usr/local/bin/codex-acp
 ```
 
 ```cmd [Windows]
 where.exe codex-acp
-# Example output: C:\Users\Username\AppData\Roaming\npm\codex-acp.cmd
+# 示例输出：C:\Users\Username\AppData\Roaming\npm\codex-acp.cmd
 ```
 
 :::
 
-3. Open **Settings → Agent Client** and set the **Codex path** to the path found above.
+3. 打开 **设置 → Agent Client** 并将 **Codex 路径**设置为上面找到的路径。
 
-## Authentication
+## 身份验证
 
-Choose one of the following methods:
+选择以下方法之一：
 
-### Option A: API Key
+### 选项 A：API 密钥
 
-1. Get your API key from [OpenAI Platform](https://platform.openai.com/api-keys)
-2. Enter the API key in **Settings → Agent Client → Codex → API key**
+1. 从 [OpenAI Platform](https://platform.openai.com/api-keys) 获取你的 API 密钥
+2. 在 **设置 → Agent Client → Codex → API 密钥** 中输入 API 密钥
 
-### Option B: Account Login
+### 选项 B：账户登录
 
-If you have a ChatGPT subscription and prefer not to use an API key, you can log in with your OpenAI account.
+如果你有 ChatGPT 订阅且不想使用 API 密钥，可以使用 OpenAI 账户登录。
 
-::: warning Important
-This requires installing **Codex CLI** separately. The CLI creates the login session that the plugin uses.
+::: warning 重要
+这需要单独安装 **Codex CLI**。CLI 创建插件使用的登录会话。
 :::
 
-1. Install Codex CLI by running the following command in your terminal:
+1. 在终端中运行以下命令安装 Codex CLI：
 
 ```bash
 npm install -g @openai/codex
 ```
 
-2. Login via CLI by running:
+2. 通过运行以下命令登录 CLI：
 
 ```bash
 codex
 ```
 
-Follow the prompts to authenticate with your OpenAI account.
+按照提示使用 OpenAI 账户进行身份验证。
 
-3. In **Settings → Agent Client**, leave the **API key field empty**.
+3. 在 **设置 → Agent Client** 中，**将 API 密钥字段留空**。
 
 ::: tip
-The ChatGPT app uses a different authentication system. Having ChatGPT running does **not** authenticate the plugin — you must log in via the CLI.
+ChatGPT 应用使用不同的身份验证系统。运行 ChatGPT 并**不能**验证插件 — 你必须通过 CLI 登录。
 :::
 
-## Verify Setup
+## 验证设置
 
-1. Click the robot icon in the ribbon or use the command palette: **"Open agent chat"**
-2. Switch to Codex from the agent dropdown in the chat header
-3. Try sending a message to verify the connection
+1. 点击功能区中的机器人图标或使用命令面板：**"打开 agent 聊天"**
+2. 从聊天标题中的 agent 下拉菜单切换到 Codex
+3. 尝试发送消息以验证连接
 
-Having issues? See [Troubleshooting](/help/troubleshooting).
+遇到问题？请参阅 [故障排除](/help/troubleshooting)。

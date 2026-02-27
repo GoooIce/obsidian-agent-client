@@ -3,35 +3,35 @@ layout: home
 
 hero:
   name: "Agent Client"
-  text: "AI Agents in Obsidian"
-  tagline: Chat with Claude Code, Codex, Gemini CLI, and more — right from your vault
+  text: "Obsidian 中的 AI Agent"
+  tagline: 与 Claude Code、Codex、Gemini CLI 等对话 — 就在你的库中
   actions:
     - theme: brand
-      text: Get Started
+      text: 开始使用
       link: /getting-started/
     - theme: alt
-      text: View on GitHub
+      text: 在 GitHub 上查看
       link: https://github.com/RAIT-09/obsidian-agent-client
 
 features:
   - icon: 🤖
-    title: Direct Agent Integration
-    details: Chat with AI coding agents in a dedicated right-side panel
+    title: 直接集成 Agent
+    details: 在专用的右侧面板中与 AI 编码 agent 对话
   - icon: 📝
-    title: Note Mentions
-    details: Mention any note with @notename to include its content in your prompt
+    title: 笔记提及
+    details: 使用 @笔记名 提及任何笔记，将其内容包含在你的提示中
   - icon: ⚡
-    title: Slash Commands
-    details: Use / commands to quickly trigger agent actions
+    title: 斜杠命令
+    details: 使用 / 命令快速触发 agent 操作
   - icon: 🔄
-    title: Multi-Agent Support
-    details: Switch between Claude Code, Codex, Gemini CLI, and custom agents
+    title: 多 Agent 支持
+    details: 在 Claude Code、Codex、Gemini CLI 和自定义 agent 之间切换
   - icon: 🎛️
-    title: Mode & Model Selection
-    details: Change AI models and agent modes directly from the chat
+    title: 模式和模型选择
+    details: 直接从聊天中更改 AI 模型和 agent 模式
   - icon: 💻
-    title: Terminal Integration
-    details: Let your agent execute commands and return results in chat
+    title: 终端集成
+    details: 让你的 agent 执行命令并在聊天中返回结果
 ---
 
 <div style="max-width: 800px; margin: 2rem auto;">
@@ -40,24 +40,24 @@ features:
   </video>
 </div>
 
-## What is Agent Client?
+## 什么是 Agent Client？
 
-Agent Client is an Obsidian plugin that brings AI coding agents directly into your vault. Built on the [Agent Client Protocol (ACP)](https://github.com/agentclientprotocol/agent-client-protocol), it enables seamless communication with various AI agents.
+Agent Client 是一个 Obsidian 插件，可以将 AI 编码 agent 直接带入你的库。基于 [Agent Client Protocol (ACP)](https://github.com/agentclientprotocol/agent-client-protocol) 构建，它可以与各种 AI agent 无缝通信。
 
-### Supported Agents
+### 支持的 Agent
 
-| Agent | Provider | Integration |
-|-------|----------|-------------|
-| **[Claude Code](https://github.com/anthropics/claude-code)** | Anthropic | via [Zed’s SDK adapter](https://github.com/zed-industries/claude-agent-acp) |
-| **[Codex](https://github.com/openai/codex)** | OpenAI | via [Zed’s adapter](https://github.com/zed-industries/codex-acp) |
-| **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** | Google | with `--experimental-acp` option |
-| **Custom** | Various | [Any ACP-compatible agent](https://agentclientprotocol.com/overview/agents) (e.g., OpenCode, Qwen Code, Kiro) |
+| Agent | 提供商 | 集成方式 |
+|-------|--------|----------|
+| **[Claude Code](https://github.com/anthropics/claude-code)** | Anthropic | 通过 [Zed 的 SDK 适配器](https://github.com/zed-industries/claude-agent-acp) |
+| **[Codex](https://github.com/openai/codex)** | OpenAI | 通过 [Zed 的适配器](https://github.com/zed-industries/codex-acp) |
+| **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** | Google | 使用 `--experimental-acp` 选项 |
+| **自定义** | 多种 | [任何兼容 ACP 的 agent](https://agentclientprotocol.com/overview/agents)（如 OpenCode、Qwen Code、Kiro） |
 
-### Key Features
+### 主要功能
 
-- **Note Mentions**: Reference your Obsidian notes in conversations with `@notename`
-- **File Editing**: Let agents read and modify files with permission controls
-- **Chat Export**: Save conversations for future reference
-- **Terminal Integration**: Agents can execute shell commands and show results inline
+- **笔记提及**：使用 `@笔记名` 在对话中引用你的 Obsidian 笔记
+- **文件编辑**：让 agent 在权限控制下读取和修改文件
+- **聊天导出**：保存对话以供将来参考
+- **终端集成**：Agent 可以执行 shell 命令并内联显示结果
 
-Ready to get started? Check out the [Installation Guide](/getting-started/).
+准备好了吗？查看 [安装指南](/getting-started/)。

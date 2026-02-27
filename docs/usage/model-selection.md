@@ -1,32 +1,32 @@
-# Model Selection
+# 模型选择
 
-Switch between different AI models to optimize for speed, capability, or cost.
+在不同的 AI 模型之间切换，以优化速度、能力或成本。
 
-## What are Models?
+## 什么是模型？
 
-Models are different versions of the AI with varying capabilities:
+模型是具有不同能力的 AI 不同版本：
 
-- **Larger models**: More capable, better reasoning, slower, higher cost
-- **Smaller models**: Faster responses, lower cost, good for simpler tasks
+- **更大的模型**：能力更强，推理更好，更慢，成本更高
+- **更小的模型**：响应更快，成本更低，适合简单任务
 
-## Changing Models
+## 更改模型
 
-1. Open the chat panel
-2. Look for the **model dropdown** below the input field
-3. Select the desired model from the available options
+1. 打开聊天面板
+2. 在输入框下方寻找 **模型下拉菜单**
+3. 从可用选项中选择所需的模型
 
 <p align="center">
-  <img src="/images/model-selection.webp" alt="Model selection dropdown" width="400" />
+  <img src="/images/model-selection.webp" alt="模型选择下拉菜单" width="400" />
 </p>
 
 ::: tip
-Available models depend on the active agent and your subscription/API plan.
+可用模型取决于当前活动的 agent 和你的订阅/API 计划。
 :::
 
-## Model Persistence
+## 模型持久性
 
-The selected model persists for the current session. Your preference is remembered across sessions.
+选择的模型在当前会话中保持有效。你的偏好会在会话之间被记住。
 
-## Cost Considerations
+## 成本考虑
 
-When using API keys, different models have different pricing. Check your provider's pricing page for current rates.
+使用 API 密钥时，不同模型有不同的定价。请查看提供商的定价页面了解当前费率。

@@ -1,211 +1,211 @@
-# Troubleshooting
+# 故障排除
 
-This guide covers common issues and solutions for Agent Client.
+本指南涵盖 Agent Client 的常见问题和解决方案。
 
-## Connection Issues
+## 连接问题
 
-### "Connecting to [Agent]..." doesn't complete
+### "正在连接 [Agent]..." 没有完成
 
-The plugin is trying to start the agent process but isn't receiving a response.
+插件正在尝试启动 agent 进程但没有收到响应。
 
-**Common causes:**
-- Incorrect agent path
-- Missing Node.js
-- Agent not installed
+**常见原因：**
+- agent 路径不正确
+- 缺少 Node.js
+- agent 未安装
 
-**Solutions:**
+**解决方案：**
 
-1. **Verify the agent path** in **Settings → Agent Client → [Agent Name] → Path**
-   - On macOS/Linux, find the path with: `which claude-agent-acp`
-   - On Windows, find the path with: `where claude-agent-acp`
+1. 在 **设置 → Agent Client → [Agent 名称] → 路径** 中**验证 agent 路径**
+   - 在 macOS/Linux 上，使用以下命令查找路径：`which claude-agent-acp`
+   - 在 Windows 上，使用以下命令查找路径：`where claude-agent-acp`
 
-2. **Verify Node.js path** in **Settings → Agent Client → Node.js path**
-   - Many agents require Node.js
-   - Find it with: `which node` (macOS/Linux) or `where node` (Windows)
+2. 在 **设置 → Agent Client → Node.js 路径** 中**验证 Node.js 路径**
+   - 许多 agent 需要 Node.js
+   - 使用以下命令查找：`which node`（macOS/Linux）或 `where node`（Windows）
 
-3. **Reload the plugin** after changing path settings (disable then re-enable in Settings → Community plugins)
+3. 更改路径设置后**重新加载插件**（在 设置 → 社区插件 中禁用然后重新启用）
 
-### "Command Not Found" error
+### "Command Not Found" 错误
 
-The agent executable cannot be found at the specified path.
+在指定路径找不到 agent 可执行文件。
 
-**Solutions:**
+**解决方案：**
 
-1. Use the full absolute path (e.g., `/usr/local/bin/claude-agent-acp` instead of just `claude-agent-acp`)
-2. Verify the agent is installed by running it directly in Terminal
-3. On Windows, include the `.cmd` extension if needed
+1. 使用完整的绝对路径（如 `/usr/local/bin/claude-agent-acp` 而不是只用 `claude-agent-acp`）
+2. 通过直接在终端中运行来验证 agent 已安装
+3. 在 Windows 上，如需要请包含 `.cmd` 扩展名
 
-## Authentication Issues
+## 身份验证问题
 
-### "Authentication Required" error
+### "Authentication Required" 错误
 
-The agent requires authentication before processing requests.
+agent 在处理请求之前需要身份验证。
 
-**For Claude Code:**
-- **API key**: Set in **Settings → Agent Client → Claude Code (ACP) → API key**
-- **Account login**: Run `claude` in Terminal first and complete the login flow
+**对于 Claude Code：**
+- **API 密钥**：在 **设置 → Agent Client → Claude Code (ACP) → API 密钥** 中设置
+- **账户登录**：先在终端中运行 `claude` 并完成登录流程
 
-**For Codex:**
-- Set your OpenAI API key in **Settings → Agent Client → Codex → API key**
+**对于 Codex：**
+- 在 **设置 → Agent Client → Codex → API 密钥** 中设置你的 OpenAI API 密钥
 
-**For Gemini CLI:**
-- Set your Google API key in **Settings → Agent Client → Gemini CLI → API key**
-- Or run `gemini` in Terminal first to authenticate with your Google account
+**对于 Gemini CLI：**
+- 在 **设置 → Agent Client → Gemini CLI → API 密钥** 中设置你的 Google API 密钥
+- 或先在终端中运行 `gemini` 以使用 Google 账户进行身份验证
 
-### "No Authentication Methods" error
+### "No Authentication Methods" 错误
 
-The agent didn't provide authentication options.
+agent 没有提供身份验证选项。
 
-**Solution:** Check your agent configuration. The agent may not be properly initialized—try reloading the plugin.
+**解决方案：** 检查你的 agent 配置。agent 可能没有正确初始化 — 尝试重新加载插件。
 
-## Rate Limiting
+## 速率限制
 
-### "Rate Limit Exceeded" error
+### "Rate Limit Exceeded" 错误
 
-You've sent too many requests.
+你发送了太多请求。
 
-**Solutions:**
+**解决方案：**
 
-1. Wait before sending another message
-2. Check your usage limits at the provider's console:
+1. 在发送另一条消息之前等待
+2. 在提供商的控制台检查你的使用限制：
    - Anthropic: [console.anthropic.com](https://console.anthropic.com/)
    - OpenAI: [platform.openai.com](https://platform.openai.com/)
    - Google: [console.cloud.google.com](https://console.cloud.google.com/)
 
-## Session Issues
+## 会话问题
 
-### "Session Creation Failed" error
+### "Session Creation Failed" 错误
 
-The agent connected but couldn't create a session.
+agent 已连接但无法创建会话。
 
-**Solutions:**
+**解决方案：**
 
-1. Click **New Chat** (+ button in header) to create a fresh session
-2. Check if your vault path contains special characters that might cause issues
-3. Reload the plugin
+1. 点击 **新聊天**（标题中的 + 按钮）创建新会话
+2. 检查你的库路径是否包含可能导致问题的特殊字符
+3. 重新加载插件
 
-### "Agent Not Found" error
+### "Agent Not Found" 错误
 
-The selected agent ID doesn't exist in settings.
+设置中不存在选定的 agent ID。
 
-**Solution:** Go to **Settings → Agent Client** and select a valid agent from the **Active agent** dropdown.
+**解决方案：** 前往 **设置 → Agent Client** 并从 **活动 agent** 下拉菜单中选择一个有效的 agent。
 
-## Message Sending Issues
+## 消息发送问题
 
-### "Cannot Send Message" error
+### "Cannot Send Message" 错误
 
-No active session available.
+没有可用的活动会话。
 
-**Solutions:**
+**解决方案：**
 
-1. Wait for the connection to complete (status shows agent name, not "Connecting...")
-2. Click **New Chat** to create a fresh session
+1. 等待连接完成（状态显示 agent 名称，而不是"正在连接..."）
+2. 点击 **新聊天** 创建新会话
 
-### "Send Message Failed" error
+### "Send Message Failed" 错误
 
-The message was sent but the agent returned an error.
+消息已发送但 agent 返回了错误。
 
-**Solutions:**
+**解决方案：**
 
-1. Check the error message for details
-2. Verify your API key or login status
-3. Try a simpler message to test the connection
+1. 查看错误消息了解详情
+2. 验证你的 API 密钥或登录状态
+3. 尝试发送更简单的消息以测试连接
 
-## Export Issues
+## 导出问题
 
-### "Failed to export chat" notification
+### "Failed to export chat" 通知
 
-The conversation couldn't be saved.
+无法保存对话。
 
-**Solutions:**
+**解决方案：**
 
-1. Check that the export folder exists (**Settings → Agent Client → Export → Export folder**)
-2. Verify the folder name is valid (no special characters that aren't allowed in folder names)
-3. Check the filename template for invalid characters (**Settings → Agent Client → Export → Filename**)
+1. 检查导出文件夹是否存在（**设置 → Agent Client → 导出 → 导出文件夹**）
+2. 验证文件夹名称有效（没有不允许在文件夹名称中使用的特殊字符）
+3. 检查文件名模板是否有无效字符（**设置 → Agent Client → 导出 → 文件名**）
 
-## Windows-Specific Issues
+## Windows 特定问题
 
-### WSL mode not working
+### WSL 模式不工作
 
-**Prerequisites:**
-- WSL must be installed: Run `wsl --status` in Command Prompt
-- A Linux distribution must be installed: Run `wsl --list`
+**前置条件：**
+- 必须安装 WSL：在命令提示符中运行 `wsl --status`
+- 必须安装 Linux 发行版：运行 `wsl --list`
 
-**Settings:**
-- Enable **Settings → Agent Client → Windows Subsystem for Linux → Enable WSL mode**
-- Optionally specify your distribution in **WSL distribution**
+**设置：**
+- 启用 **设置 → Agent Client → Windows Subsystem for Linux → 启用 WSL 模式**
+- 可选地在 **WSL 发行版** 中指定你的发行版
 
-### Agent works in Terminal but not in Obsidian
+### Agent 在终端中工作但在 Obsidian 中不工作
 
-The PATH environment may differ between Terminal and Obsidian.
+终端和 Obsidian 之间的 PATH 环境可能不同。
 
-**Solutions:**
+**解决方案：**
 
-1. Use full absolute paths for both agent and Node.js
-2. Enable WSL mode for better compatibility
-3. Add the agent's directory to your system PATH (not just user PATH)
+1. 对 agent 和 Node.js 都使用完整的绝对路径
+2. 启用 WSL 模式以获得更好的兼容性
+3. 将 agent 的目录添加到系统 PATH（不只是用户 PATH）
 
-## macOS-Specific Issues
+## macOS 特定问题
 
-### Agent installed via Homebrew not found
+### 通过 Homebrew 安装的 agent 找不到
 
-Homebrew binaries may not be in Obsidian's PATH.
+Homebrew 二进制文件可能不在 Obsidian 的 PATH 中。
 
-**Solution:** Use the full path. Find it with `which <agent-name>` in Terminal.
+**解决方案：** 使用完整路径。在终端中使用 `which <agent-name>` 查找它。
 
-## Linux-Specific Issues
+## Linux 特定问题
 
-### Agent not found when using Flatpak version of Obsidian
+### 使用 Flatpak 版 Obsidian 时找不到 agent
 
-The Flatpak version of Obsidian runs in a sandbox that cannot access paths like `/usr/local/bin`.
+Flatpak 版 Obsidian 在沙箱中运行，无法访问 `/usr/local/bin` 等路径。
 
-**Solution:** Use the AppImage or .deb version of Obsidian instead of Flatpak.
+**解决方案：** 使用 AppImage 或 .deb 版的 Obsidian 而不是 Flatpak。
 
-### Agent works in Terminal but not in Obsidian
+### Agent 在终端中工作但在 Obsidian 中不工作
 
-Desktop applications on Linux may not inherit PATH settings from `.bashrc`.
+Linux 上的桌面应用程序可能不会从 `.bashrc` 继承 PATH 设置。
 
-**Solutions:**
+**解决方案：**
 
-1. Use the full absolute path (e.g., `/usr/local/bin/gemini` instead of `gemini`)
-2. Ensure the agent is installed in a standard location (`/usr/bin` or `/usr/local/bin`)
+1. 使用完整的绝对路径（如 `/usr/local/bin/gemini` 而不是 `gemini`）
+2. 确保 agent 安装在标准位置（`/usr/bin` 或 `/usr/local/bin`）
 
-## Debug Mode
+## 调试模式
 
-If you need more detailed information about an issue, enable Debug mode:
+如果你需要更详细的问题信息，启用调试模式：
 
-1. Go to **Settings → Agent Client → Developer → Debug mode**
-2. Enable the toggle
-3. Open DevTools:
+1. 前往 **设置 → Agent Client → 开发者 → 调试模式**
+2. 启用开关
+3. 打开 DevTools：
    - macOS: `Cmd + Option + I`
    - Windows/Linux: `Ctrl + Shift + I`
-4. Go to the **Console** tab
-5. Filter by these prefixes:
-   - `[AcpAdapter]` - Agent communication
-   - `[useChat]` - Message handling
-   - `[useAgentSession]` - Session management
+4. 前往 **Console** 标签页
+5. 按这些前缀筛选：
+   - `[AcpAdapter]` - Agent 通信
+   - `[useChat]` - 消息处理
+   - `[useAgentSession]` - 会话管理
 
-## Common Error Messages
+## 常见错误消息
 
-| Error | Meaning | Quick Fix |
-|-------|---------|-----------|
-| Command Not Found | Agent executable not at specified path | Check Path setting |
-| Authentication Required | API key missing or login needed | Add API key or run agent in Terminal first |
-| No Authentication Methods | Agent configuration issue | Reload the plugin |
-| Rate Limit Exceeded | Too many API requests | Wait and retry |
-| Session Creation Failed | Agent couldn't start session | Click New Chat |
-| Agent Not Found | Invalid agent ID in settings | Select valid agent |
-| Cannot Send Message | No active session | Wait for connection or click New Chat |
-| Send Message Failed | Agent returned an error | Check error details |
+| 错误 | 含义 | 快速修复 |
+|------|------|----------|
+| Command Not Found | agent 可执行文件不在指定路径 | 检查路径设置 |
+| Authentication Required | 缺少 API 密钥或需要登录 | 添加 API 密钥或先在终端中运行 agent |
+| No Authentication Methods | agent 配置问题 | 重新加载插件 |
+| Rate Limit Exceeded | API 请求过多 | 等待并重试 |
+| Session Creation Failed | agent 无法启动会话 | 点击新聊天 |
+| Agent Not Found | 设置中的 agent ID 无效 | 选择有效的 agent |
+| Cannot Send Message | 没有活动会话 | 等待连接或点击新聊天 |
+| Send Message Failed | agent 返回了错误 | 检查错误详情 |
 
-## Getting Help
+## 获取帮助
 
-If you're still experiencing issues:
+如果你仍然遇到问题：
 
-1. Enable **Debug mode** and check console logs
-2. Search [GitHub Issues](https://github.com/RAIT-09/obsidian-agent-client/issues)
-3. Open a new issue with:
-   - Your OS and Obsidian version
-   - The agent you're using
-   - Steps to reproduce
-   - Error messages from Debug mode
+1. 启用 **调试模式** 并检查控制台日志
+2. 搜索 [GitHub Issues](https://github.com/RAIT-09/obsidian-agent-client/issues)
+3. 开启新 issue，包含：
+   - 你的操作系统和 Obsidian 版本
+   - 你使用的 agent
+   - 重现步骤
+   - 调试模式中的错误消息

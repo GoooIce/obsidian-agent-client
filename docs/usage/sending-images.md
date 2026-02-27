@@ -1,64 +1,64 @@
-# Sending Images
+# 发送图片
 
-Attach images to your messages to provide visual context to the AI agent.
+将图片附加到消息中，为 AI agent 提供视觉上下文。
 
-## Agent Support
+## Agent 支持
 
-Image attachments are agent-specific. Not all agents support image attachments.
+图片附件是 agent 特定的。并非所有 agent 都支持图片附件。
 
 ::: tip
-If your agent doesn't support images, you'll see a notification when attempting to attach one:
+如果你的 agent 不支持图片，尝试附加时会看到通知：
 
-`[Agent Client] This agent does not support image attachments`
+`[Agent Client] 此 agent 不支持图片附件`
 :::
 
-## Attaching Images
+## 附加图片
 
-### Paste from Clipboard
+### 从剪贴板粘贴
 
-1. Copy an image to your clipboard (screenshot, copied image, etc.)
-2. Focus the input field
-3. Paste with `Cmd/Ctrl + V`
+1. 将图片复制到剪贴板（截图、复制的图片等）
+2. 聚焦输入框
+3. 使用 `Cmd/Ctrl + V` 粘贴
 
-### Drag and Drop
+### 拖放
 
-1. Drag image files from Finder/Explorer
-2. Drop them onto the input area
-3. The input area highlights when you drag over it
-
-<p align="center">
-  <img src="/images/sending-images.webp" alt="Sending Images" width="400" />
-</p>
-
-## Managing Attachments
-
-Attached images appear as thumbnails below the text area.
-
-- **Remove an image**: Hover over the thumbnail and click the **×** button
-- **Images are sent with your message**: When you send, all attached images are included
+1. 从 Finder/资源管理器拖动图片文件
+2. 将它们放到输入区域
+3. 当你拖动到输入区域时会高亮显示
 
 <p align="center">
-  <img src="/images/remove-image.webp" alt="Remove image button" width="400" />
+  <img src="/images/sending-images.webp" alt="发送图片" width="400" />
 </p>
 
-## Supported Formats
+## 管理附件
 
-| Format | MIME Type |
-|--------|-----------|
+附加的图片显示为文本区域下方的小缩略图。
+
+- **移除图片**：将鼠标悬停在缩略图上并点击 **×** 按钮
+- **图片随消息发送**：发送时，所有附加的图片都会被包含
+
+<p align="center">
+  <img src="/images/remove-image.webp" alt="移除图片按钮" width="400" />
+</p>
+
+## 支持的格式
+
+| 格式 | MIME 类型 |
+|------|-----------|
 | PNG | `image/png` |
 | JPEG | `image/jpeg` |
 | GIF | `image/gif` |
 | WebP | `image/webp` |
 
-## Limits
+## 限制
 
-| Limit | Value |
-|-------|-------|
-| Maximum file size | 5 MB per image |
-| Maximum images | 10 per message |
+| 限制 | 值 |
+|------|-----|
+| 最大文件大小 | 每张图片 5 MB |
+| 最大图片数量 | 每条消息 10 张 |
 
 ::: info
-If you exceed these limits, a notification will inform you:
-- `[Agent Client] Image too large (max 5MB)`
-- `[Agent Client] Maximum 10 images allowed`
+如果超过这些限制，通知会告知你：
+- `[Agent Client] 图片太大（最大 5MB）`
+- `[Agent Client] 最多允许 10 张图片`
 :::

@@ -1,70 +1,70 @@
-# Note Mentions
+# 笔记提及
 
-Reference your Obsidian notes directly in conversations with AI agents.
+直接在 AI agent 的对话中引用你的 Obsidian 笔记。
 
-## Auto-Mention Active Note
+## 自动提及活动笔记
 
-When enabled, the plugin automatically includes the currently active note in your message. This is useful when you want to discuss or work on the note you're viewing.
+启用后，插件会自动将当前活动的笔记包含在你的消息中。当你想讨论或处理正在查看的笔记时，这很有用。
 
-Enable this in **Settings → Agent Client → Mentions → Auto-mention active note**.
+在 **设置 → Agent Client → 提及 → 自动提及活动笔记** 中启用。
 
-### How Auto-Mention Works
+### 自动提及的工作原理
 
-Unlike manual mentions, auto-mention only passes the **note's file path** to the agent—not its full content. The agent can then use its Read tool to examine the file if needed.
+与手动提及不同，自动提及只将**笔记的文件路径**传递给 agent — 而不是其完整内容。Agent 然后可以使用其读取工具在需要时检查文件。
 
-When auto-mention is active, a badge appears above the input field showing the current note name (e.g., `@My Note`).
+当自动提及处于活动状态时，输入框上方会显示一个徽章，显示当前笔记名称（如 `@我的笔记`）。
 
-### Temporary Disable
+### 临时禁用
 
-You can temporarily disable auto-mention for a single message by clicking the **×** button next to the badge. Click the **+** button to re-enable it. This toggle only affects the current message—auto-mention will be active again for subsequent messages.
-
-<p align="center">
-  <img src="/images/temporary-disable.gif" alt="Temporarily disabling auto-mention" />
-</p>
-
-### Selection Context
-
-If you select text in your note, the selected lines are passed as context to the agent. The badge will show the line range (e.g., `@My Note:5-10`), and the agent receives both the file path and the selected content.
+你可以通过点击徽章旁边的 **×** 按钮为单条消息临时禁用自动提及。点击 **+** 按钮重新启用。此切换仅影响当前消息 — 自动提及将在后续消息中再次激活。
 
 <p align="center">
-  <img src="/images/selection-context.gif" alt="Selection context feature" />
+  <img src="/images/temporary-disable.gif" alt="临时禁用自动提及" />
 </p>
 
-## Manual Mentions
+### 选区上下文
 
-Use the `@` syntax to reference specific notes:
+如果你在笔记中选择文本，选中的行将作为上下文传递给 agent。徽章会显示行范围（如 `@我的笔记:5-10`），agent 会收到文件路径和选中的内容。
+
+<p align="center">
+  <img src="/images/selection-context.gif" alt="选区上下文功能" />
+</p>
+
+## 手动提及
+
+使用 `@` 语法引用特定笔记：
 
 ```
-@[[My Note]]
+@[[我的笔记]]
 ```
 
-As you type `@`, a dropdown appears with matching notes from your vault. Select a note to insert the mention.
+当你输入 `@` 时，会显示一个下拉菜单，其中包含库中匹配的笔记。选择一个笔记以插入提及。
 
-### How Manual Mentions Work
+### 手动提及的工作原理
 
-When you send a message with manual mentions:
+当你发送带有手动提及的消息时：
 
-1. The plugin reads the content of the mentioned notes
-2. The note content is included in the message sent to the agent
-3. The agent can then reference, analyze, or modify the note content
+1. 插件读取被提及笔记的内容
+2. 笔记内容包含在发送给 agent 的消息中
+3. Agent 然后可以引用、分析或修改笔记内容
 
-## Length Limits
+## 长度限制
 
-To prevent excessively large messages, the plugin limits the amount of content included:
+为防止消息过大，插件限制了包含的内容量：
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| **Max note length** | 10,000 characters | Maximum characters per mentioned note |
-| **Max selection length** | 10,000 characters | Maximum characters for text selection in auto-mention |
+| 设置 | 默认值 | 描述 |
+|------|--------|------|
+| **最大笔记长度** | 10,000 字符 | 每个被提及笔记的最大字符数 |
+| **最大选区长度** | 10,000 字符 | 自动提及中文本选择的最大字符数 |
 
-Configure these in **Settings → Agent Client → Mentions**.
+在 **设置 → Agent Client → 提及** 中配置这些设置。
 
 ::: tip
-Content exceeding the limit is truncated with a note indicating the original length.
+超过限制的内容会被截断，并附带说明原始长度的注释。
 :::
 
-## Tips
+## 提示
 
-- Use manual mentions to include specific notes as context
-- Mention multiple notes to give the agent a broader understanding
-- For large notes, consider selecting the relevant portion and using auto-mention instead
+- 使用手动提及将特定笔记作为上下文包含
+- 提及多个笔记可以让 agent 获得更广泛的理解
+- 对于大型笔记，考虑选择相关部分并改用自动提及

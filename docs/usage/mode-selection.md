@@ -1,28 +1,28 @@
-# Mode Selection
+# 模式选择
 
-Some agents support different operational modes that change how the agent behaves.
+某些 agent 支持不同的操作模式，这些模式会改变 agent 的行为方式。
 
-## What are Modes?
+## 什么是模式？
 
-Modes are predefined configurations that alter the agent's behavior for specific tasks. For example:
+模式是预定义的配置，用于改变 agent 在特定任务中的行为。例如：
 
-- **Default Mode**: General-purpose assistance
-- **Plan Mode**: Focus on planning and architecture before implementation
+- **默认模式**：通用辅助
+- **计划模式**：在实现之前专注于规划和架构
 
-## Changing Modes
+## 更改模式
 
-1. Open the chat panel
-2. Look for the **mode dropdown** below the input field
-3. Select the desired mode from the available options
+1. 打开聊天面板
+2. 在输入框下方寻找 **模式下拉菜单**
+3. 从可用选项中选择所需的模式
 
 <p align="center">
-  <img src="/images/mode-selection.webp" alt="Mode selection dropdown" width="400" />
+  <img src="/images/mode-selection.webp" alt="模式选择下拉菜单" width="400" />
 </p>
 
 ::: tip
-Available modes depend on the active agent. Not all agents support multiple modes.
+可用模式取决于当前活动的 agent。并非所有 agent 都支持多种模式。
 :::
 
-## Mode Persistence
+## 模式持久性
 
-The selected mode persists for the current session. Starting a new chat resets to the default mode.
+选择的模式在当前会话中保持有效。开始新聊天会重置为默认模式。

@@ -1,44 +1,44 @@
-# Slash Commands
+# 斜杠命令
 
-Use slash commands to trigger actions provided by your current agent.
+使用斜杠命令触发当前 agent 提供的操作。
 
-## Agent Support
+## Agent 支持
 
-Slash commands are agent-specific. Not all agents support slash commands.
+斜杠命令是 agent 特定的。并非所有 agent 都支持斜杠命令。
 
 ::: tip
-If the input field placeholder shows `/ for commands`, the current agent supports slash commands. If not, the agent does not support this feature.
+如果输入框占位符显示 `/ 输入命令`，则当前 agent 支持斜杠命令。如果没有，则 agent 不支持此功能。
 :::
 
-## Using Slash Commands
+## 使用斜杠命令
 
-1. Type `/` in the input field
-2. A dropdown appears showing available commands
-3. Select a command or continue typing to filter
-4. Press `Enter` to execute the command
+1. 在输入框中输入 `/`
+2. 会出现一个下拉菜单显示可用命令
+3. 选择一个命令或继续输入以筛选
+4. 按 `Enter` 执行命令
 
 <p align="center">
-  <img src="/images/slash-commands-1.webp" alt="Slash commands dropdown" width="400" />
+  <img src="/images/slash-commands-1.webp" alt="斜杠命令下拉菜单" width="400" />
 </p>
 
 <p align="center">
-  <img src="/images/slash-commands-2.webp" alt="Filtering slash commands" width="400" />
+  <img src="/images/slash-commands-2.webp" alt="筛选斜杠命令" width="400" />
 </p>
 
-## Available Commands
+## 可用命令
 
-Available commands are determined entirely by the agent—not by this plugin. Each agent provides its own set of commands.
+可用命令完全由 agent 决定 — 不是由本插件决定。每个 agent 提供自己的命令集。
 
-For example, Claude Code offers commands like `/compact`, `/init`, and `/review`, while other agents may have completely different commands or none at all.
+例如，Claude Code 提供如 `/compact`、`/init` 和 `/review` 等命令，而其他 agent 可能有完全不同的命令或根本没有。
 
-Refer to your agent's documentation for a full list of supported commands.
+请参阅 agent 的文档以获取支持命令的完整列表。
 
-## Command Arguments
+## 命令参数
 
-Some commands accept arguments:
+某些命令接受参数：
 
 ```
-/command keyword
+/command 关键词
 ```
 
-Type the command followed by a space and your arguments.
+输入命令后跟一个空格和你的参数。

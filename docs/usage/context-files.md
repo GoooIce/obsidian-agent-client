@@ -1,57 +1,57 @@
-# Context Files
+# 上下文文件
 
-Provide additional context to your AI agent using context files.
+使用上下文文件为你的 AI agent 提供额外的上下文。
 
-## What are Context Files?
+## 什么是上下文文件？
 
-Context files are special Markdown files that contain instructions, preferences, or information that the agent should know about. These files are automatically read by the agent at the start of a session.
+上下文文件是特殊的 Markdown 文件，包含 agent 应该知道的指令、偏好或信息。这些文件会在会话开始时被 agent 自动读取。
 
 ::: tip
-Context files are an agent feature, not a plugin feature. Refer to your agent's documentation for details.
+上下文文件是 agent 功能，不是插件功能。有关详情请参阅 agent 的文档。
 :::
 
-## Supported Context Files
+## 支持的上下文文件
 
-Each agent uses its own context file:
+每个 agent 使用自己的上下文文件：
 
-| Agent | Context File |
-|-------|--------------|
+| Agent | 上下文文件 |
+|-------|-----------|
 | Claude Code | `CLAUDE.md` |
 | Codex | `AGENTS.md` |
 | Gemini CLI | `GEMINI.md` |
 
-Place the context file in your **vault root** to have the agent read it automatically.
+将上下文文件放在你的**库根目录**中，让 agent 自动读取它。
 
-## Example
+## 示例
 
 ```markdown
-# Vault Context
+# 库上下文
 
-## Overview
-This vault contains my personal notes and research.
+## 概述
+这个库包含我的个人笔记和研究。
 
-## Preferences
-- Write in a concise, clear style
-- Use bullet points for lists
-- Prefer Markdown formatting
+## 偏好
+- 使用简洁、清晰的风格写作
+- 列表使用项目符号
+- 首选 Markdown 格式
 
-## Important Notes
-- `Templates/` - Note templates
-- `Daily/` - Daily notes
+## 重要笔记
+- `Templates/` - 笔记模板
+- `Daily/` - 日记
 
-## Conventions
-- Use YYYY-MM-DD format for dates
-- Tag notes with relevant topics
+## 约定
+- 日期使用 YYYY-MM-DD 格式
+- 为笔记标记相关主题
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Keep it focused**: Include only relevant information
-2. **Update regularly**: Keep context current with your vault
-3. **Be specific**: Provide concrete examples and preferences
+1. **保持专注**：只包含相关信息
+2. **定期更新**：保持上下文与你的库同步
+3. **具体明确**：提供具体的示例和偏好
 
-## What to Avoid
+## 避免事项
 
-- Sensitive information (API keys, passwords)
-- Very long files (agents have context limits)
-- Outdated information
+- 敏感信息（API 密钥、密码）
+- 非常长的文件（agent 有上下文限制）
+- 过时的信息

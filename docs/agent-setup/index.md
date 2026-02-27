@@ -1,34 +1,34 @@
-# Agent Setup Overview
+# Agent 设置概览
 
-Agent Client supports multiple AI agents through the [Agent Client Protocol (ACP)](https://github.com/zed-industries/agent-client-protocol). This section covers how to set up each supported agent.
+Agent Client 通过 [Agent Client Protocol (ACP)](https://github.com/zed-industries/agent-client-protocol) 支持多种 AI agent。本节介绍如何设置每个支持的 agent。
 
-## Supported Agents
+## 支持的 Agent
 
-| Agent | Provider | Package |
-|-------|----------|---------|
+| Agent | 提供商 | 包名 |
+|-------|--------|------|
 | [Claude Code](./claude-code) | Anthropic | `@zed-industries/claude-agent-acp` |
 | [Codex](./codex) | OpenAI | `@zed-industries/codex-acp` |
 | [Gemini CLI](./gemini-cli) | Google | `@google/gemini-cli` |
-| [Custom Agents](./custom-agents) | Various | Any ACP-compatible agent |
+| [自定义 Agent](./custom-agents) | 多种 | 任何兼容 ACP 的 agent |
 
-## Common Setup Steps
+## 通用设置步骤
 
-All agents follow a similar setup pattern:
+所有 agent 遵循类似的设置模式：
 
-1. **Install the agent package** via npm
-2. **Find the installation path** using `which` (macOS/Linux) or `where.exe` (Windows)
-3. **Configure the path** in Settings → Agent Client
-4. **Set up authentication** (API key or account login)
+1. **通过 npm 安装** agent 包
+2. **查找安装路径**，使用 `which`（macOS/Linux）或 `where.exe`（Windows）
+3. **配置路径**在 设置 → Agent Client
+4. **设置身份验证**（API 密钥或账户登录）
 
-## WSL Mode (Windows)
+## WSL 模式（Windows）
 
-For Windows users, we recommend using **WSL Mode** for better compatibility:
+对于 Windows 用户，我们建议使用 **WSL 模式**以获得更好的兼容性：
 
-1. Install [WSL](https://docs.microsoft.com/en-us/windows/wsl/install)
-2. Install Node.js and agents inside WSL
-3. Enable **WSL Mode** in Settings → Agent Client
-4. Use Linux-style paths (e.g., `/usr/local/bin/node`)
+1. 安装 [WSL](https://docs.microsoft.com/zh-cn/windows/wsl/install)
+2. 在 WSL 内安装 Node.js 和 agent
+3. 在 设置 → Agent Client 中启用 **WSL 模式**
+4. 使用 Linux 风格的路径（如 `/usr/local/bin/node`）
 
-## Switching Agents
+## 切换 Agent
 
-Once you have multiple agents configured, you can switch between them using the **⋮** menu in the chat header. To change the default agent for new chat views, go to **Settings → Agent Client → Default agent**.
+配置多个 agent 后，你可以使用聊天标题中的 **⋮** 菜单在它们之间切换。要更改新聊天视图的默认 agent，请前往 **设置 → Agent Client → 默认 agent**。

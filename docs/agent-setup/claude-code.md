@@ -1,53 +1,53 @@
-# Claude Code Setup
+# Claude Code 设置
 
-Claude Code is Anthropic's AI coding assistant. You can use it with either an **API key** or by **logging in with your Anthropic account**.
+Claude Code 是 Anthropic 的 AI 编码助手。你可以使用 **API 密钥**或通过 **登录 Anthropic 账户**来使用它。
 
-## Install and Configure
+## 安装和配置
 
-Open a terminal (Terminal on macOS/Linux, PowerShell on Windows) and run the following commands.
+打开终端（macOS/Linux 上是 Terminal，Windows 上是 PowerShell）并运行以下命令。
 
-1. Install claude-agent-acp:
+1. 安装 claude-agent-acp：
 
 ```bash
 npm install -g @zed-industries/claude-agent-acp
 ```
 
-2. Find the installation path:
+2. 查找安装路径：
 
 ::: code-group
 
 ```bash [macOS/Linux]
 which claude-agent-acp
-# Example output: /usr/local/bin/claude-agent-acp
+# 示例输出：/usr/local/bin/claude-agent-acp
 ```
 
 ```cmd [Windows]
 where.exe claude-agent-acp
-# Example output: C:\Users\Username\AppData\Roaming\npm\claude-agent-acp.cmd
+# 示例输出：C:\Users\Username\AppData\Roaming\npm\claude-agent-acp.cmd
 ```
 
 :::
 
-3. Open **Settings → Agent Client** and set the **Claude Code path** to the path found above.
+3. 打开 **设置 → Agent Client** 并将 **Claude Code 路径**设置为上面找到的路径。
 
-## Authentication
+## 身份验证
 
-Choose one of the following methods:
+选择以下方法之一：
 
-### Option A: API Key
+### 选项 A：API 密钥
 
-1. Get your API key from [Anthropic Console](https://console.anthropic.com/)
-2. Enter the API key in **Settings → Agent Client → Claude Code → API key**
+1. 从 [Anthropic Console](https://console.anthropic.com/) 获取你的 API 密钥
+2. 在 **设置 → Agent Client → Claude Code → API 密钥** 中输入 API 密钥
 
-### Option B: Account Login
+### 选项 B：账户登录
 
-If you have a Claude subscription and prefer not to use an API key, you can log in with your Anthropic account.
+如果你有 Claude 订阅且不想使用 API 密钥，可以使用 Anthropic 账户登录。
 
-::: warning Important
-This requires installing **Claude Code CLI** separately. The CLI creates the login session that the plugin uses.
+::: warning 重要
+这需要单独安装 **Claude Code CLI**。CLI 创建插件使用的登录会话。
 :::
 
-1. Install Claude Code CLI by running the following command in your terminal:
+1. 在终端中运行以下命令安装 Claude Code CLI：
 
 ::: code-group
 
@@ -61,24 +61,24 @@ irm https://claude.ai/install.ps1 | iex
 
 :::
 
-2. Login via CLI by running:
+2. 通过运行以下命令登录 CLI：
 
 ```bash
 claude
 ```
 
-Follow the prompts to authenticate with your Anthropic account.
+按照提示使用 Anthropic 账户进行身份验证。
 
-3. In **Settings → Agent Client**, leave the **API key field empty**.
+3. 在 **设置 → Agent Client** 中，**将 API 密钥字段留空**。
 
 ::: tip
-The Claude Desktop app uses a different authentication system. Having Claude Desktop running does **not** authenticate the plugin — you must log in via the CLI.
+Claude Desktop 应用使用不同的身份验证系统。运行 Claude Desktop 并**不能**验证插件 — 你必须通过 CLI 登录。
 :::
 
-## Verify Setup
+## 验证设置
 
-1. Click the robot icon in the ribbon or use the command palette: **"Open agent chat"**
-2. You should see the chat panel open and connect to Claude Code
-3. Try sending a message to verify the connection
+1. 点击功能区中的机器人图标或使用命令面板：**"打开 agent 聊天"**
+2. 你应该看到聊天面板打开并连接到 Claude Code
+3. 尝试发送消息以验证连接
 
-Having issues? See [Troubleshooting](/help/troubleshooting).
+遇到问题？请参阅 [故障排除](/help/troubleshooting)。

@@ -1,33 +1,33 @@
-# MCP Tools
+# MCP 工具
 
-AI agents can use Model Context Protocol (MCP) tools to interact with external services and perform specialized tasks.
+AI agent 可以使用 Model Context Protocol (MCP) 工具与外部服务交互并执行专门任务。
 
-## What is MCP?
+## 什么是 MCP？
 
-The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) is an open standard that allows AI agents to connect to external tools and data sources.
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) 是一个开放标准，允许 AI agent 连接到外部工具和数据源。
 
 ::: tip
-MCP support and configuration depend on the agent. Refer to your agent's documentation for details.
+MCP 支持和配置取决于 agent。有关详情请参阅 agent 的文档。
 :::
 
-## How MCP Works
+## MCP 的工作原理
 
-When an agent uses an MCP tool:
+当 agent 使用 MCP 工具时：
 
-1. The agent decides which tool to use
-2. The tool call appears in the chat
-3. The tool executes and returns results
-4. The agent uses the results to continue
+1. Agent 决定使用哪个工具
+2. 工具调用出现在聊天中
+3. 工具执行并返回结果
+4. Agent 使用结果继续
 
-## Viewing Tool Calls
+## 查看工具调用
 
-Tool calls are displayed in the chat with:
+工具调用在聊天中显示：
 
-- **Tool name**: What tool was used
-- **Status**: Running, completed, or failed
+- **工具名称**：使用了什么工具
+- **状态**：运行中、已完成或失败
 
-## Permissions
+## 权限
 
-Some MCP tool calls may require your permission before executing. When a permission request appears, select one of the available options provided by the agent.
+某些 MCP 工具调用在执行前可能需要你的权限。当权限请求出现时，选择 agent 提供的可用选项之一。
 
-See [Editing](/usage/editing#permission-controls) for permission settings.
+详见 [编辑](/usage/editing#权限控制) 了解权限设置。

@@ -1,181 +1,181 @@
-# FAQ
+# 常见问题
 
-Frequently asked questions about Agent Client.
+关于 Agent Client 的常见问题。
 
-## General
+## 一般问题
 
-### What is Agent Client?
+### 什么是 Agent Client？
 
-Agent Client is an Obsidian plugin that lets you chat with AI agents directly within Obsidian. It supports Claude Code, Codex, Gemini CLI, and any ACP-compatible agent. The plugin uses the [Agent Client Protocol (ACP)](https://agentclientprotocol.com/) to communicate with agents.
+Agent Client 是一个 Obsidian 插件，让你可以直接在 Obsidian 中与 AI agent 聊天。它支持 Claude Code、Codex、Gemini CLI 以及任何兼容 ACP 的 agent。该插件使用 [Agent Client Protocol (ACP)](https://agentclientprotocol.com/) 与 agent 通信。
 
-### Is this an official Anthropic/OpenAI/Google plugin?
+### 这是官方的 Anthropic/OpenAI/Google 插件吗？
 
-No. Agent Client is a community-developed plugin. It uses official agent packages but is not affiliated with any AI provider.
+不是。Agent Client 是社区开发的插件。它使用官方的 agent 包，但不隶属于任何 AI 提供商。
 
-### Does this work on mobile?
+### 在移动端上能用吗？
 
-No. Agent Client is desktop-only. Agents run as local processes, which is not supported on mobile devices.
+不能。Agent Client 仅限桌面端。Agent 作为本地进程运行，这在移动设备上不受支持。
 
-### Is my data sent to AI providers?
+### 我的数据会发送给 AI 提供商吗？
 
-Yes. When you send a message, it's processed by the AI provider behind your selected agent (Anthropic, OpenAI, Google, etc.). Review each provider's privacy policy for details.
+是的。当你发送消息时，它由你选择的 agent 背后的 AI 提供商（Anthropic、OpenAI、Google 等）处理。请查看每个提供商的隐私政策以了解详情。
 
-## Note Mentions
+## 笔记提及
 
-### How do I reference my notes in a conversation?
+### 如何在对话中引用我的笔记？
 
-Type `@` in the input field and a dropdown appears with matching notes. Select a note to insert a mention in `@[[Note Name]]` format. The note's content is sent to the agent.
+在输入框中输入 `@`，会出现一个包含匹配笔记的下拉菜单。选择一个笔记以 `@[[笔记名称]]` 格式插入提及。笔记的内容会发送给 agent。
 
-See [Note Mentions](/usage/mentions) for details.
+详见 [笔记提及](/usage/mentions)。
 
-### Can I change the character limit for mentions?
+### 我可以更改提及的字符限制吗？
 
-Yes. Configure **Max note length** and **Max selection length** in **Settings → Agent Client → Mentions**. The default is 10,000 characters each.
+可以。在 **设置 → Agent Client → 提及** 中配置 **最大笔记长度** 和 **最大选区长度**。默认各为 10,000 字符。
 
-### What is auto-mention?
+### 什么是自动提及？
 
-When enabled (**Settings → Agent Client → Mentions → Auto-mention active note**), the currently open note is automatically included as context. Unlike manual mentions, auto-mention only sends the note's file path—not its content. The agent can use its Read tool to access the content if needed.
+启用后（**设置 → Agent Client → 提及 → 自动提及活动笔记**），当前打开的笔记会自动作为上下文包含。与手动提及不同，自动提及只发送笔记的文件路径 — 不发送其内容。Agent 可以使用其读取工具在需要时访问内容。
 
-### Can I include just part of a note?
+### 我可以只包含笔记的一部分吗？
 
-Yes. If you select text in your note, only that selection is sent as context. The auto-mention badge shows the line range (e.g., `@My Note:5-10`).
+可以。如果你在笔记中选择文本，只有该选区会作为上下文发送。自动提及徽章会显示行范围（如 `@我的笔记:5-10`）。
 
-### How do I temporarily disable auto-mention?
+### 如何临时禁用自动提及？
 
-Click the **×** button next to the auto-mention badge above the input field. Click **+** to re-enable it. This only affects the current message.
+点击输入框上方自动提及徽章旁边的 **×** 按钮。点击 **+** 重新启用。这仅影响当前消息。
 
-## Agents
+## Agent
 
-### How do I switch between agents?
+### 如何在 agent 之间切换？
 
-Click the **⋮** (ellipsis) menu in the chat header and select **"Switch agent"**. The agent switches immediately. This is a one-time change for that view only.
+点击聊天标题中的 **⋮**（省略号）菜单并选择 **"切换 agent"**。Agent 会立即切换。这仅对该视图进行一次性更改。
 
-To change the default agent for new chat views, go to **Settings → Agent Client → Default agent**.
+要更改新聊天视图的默认 agent，请前往 **设置 → Agent Client → 默认 agent**。
 
-### Can I run multiple agents at the same time?
+### 我可以同时运行多个 agent 吗？
 
-Yes. Open multiple chat views using **"Open new chat view"** from the command palette or the **⋮** menu in the chat header. Each view runs an independent agent process.
+可以。使用命令面板中的 **"打开新聊天视图"** 或聊天标题中的 **⋮** 菜单打开多个聊天视图。每个视图运行独立的 agent 进程。
 
-See [Multi-Session Chat](/usage/multi-session) for details.
+详见 [多会话聊天](/usage/multi-session)。
 
-### How do I send the same prompt to multiple agents?
+### 如何向多个 agent 发送相同的提示？
 
-Use the **Broadcast** commands:
-1. Type your prompt in one chat view
-2. Open command palette and run **"Broadcast prompt"** to copy it to all views
-3. Run **"Broadcast send"** to send simultaneously
+使用 **广播** 命令：
+1. 在一个聊天视图中输入提示
+2. 打开命令面板并运行 **"广播提示"** 将其复制到所有视图
+3. 运行 **"广播发送"** 同时发送
 
-### Where do new chat views open?
+### 新聊天视图在哪里打开？
 
-By default, new views open in the right pane. You can change this in **Settings → Agent Client → Display → Chat view location** to open in editor tabs or splits instead.
+默认情况下，新视图在右侧窗格打开。你可以在 **设置 → Agent Client → 显示 → 聊天视图位置** 中更改此设置，改为在编辑区标签页或分屏中打开。
 
-### What is a custom agent?
+### 什么是自定义 agent？
 
-Any ACP-compatible agent beyond the built-in ones (Claude Code, Codex, Gemini CLI). You can add custom agents in **Settings → Agent Client → Custom agents**. See [Custom Agents](/agent-setup/custom-agents).
+任何兼容 ACP 的 agent，超出内置的（Claude Code、Codex、Gemini CLI）。你可以在 **设置 → Agent Client → 自定义 agent** 中添加自定义 agent。详见 [自定义 Agent](/agent-setup/custom-agents)。
 
-### Do all agents support the same features?
+### 所有 agent 都支持相同的功能吗？
 
-No. Features like slash commands, modes, and models depend on the agent. The plugin adapts its UI based on what the agent supports. For example, the mode dropdown only appears if the agent provides multiple modes.
+不是。斜杠命令、模式和模型等功能取决于 agent。插件根据 agent 支持的内容调整其 UI。例如，模式下拉菜单只在 agent 提供多种模式时才会出现。
 
-## Slash Commands
+## 斜杠命令
 
-### Why don't I see slash commands?
+### 为什么我看不到斜杠命令？
 
-Slash commands are provided by the agent, not the plugin. If the input placeholder doesn't show `/ for commands`, your current agent doesn't support slash commands.
+斜杠命令由 agent 提供，不是插件提供。如果输入占位符不显示 `/ 输入命令`，你当前的 agent 不支持斜杠命令。
 
-### Why are the commands different from what I expected?
+### 为什么命令与我预期的不同？
 
-Each agent provides its own commands. Claude Code, Codex, and Gemini CLI all have different command sets. Refer to your agent's documentation for available commands.
+每个 agent 提供自己的命令。Claude Code、Codex 和 Gemini CLI 都有不同的命令集。请参阅 agent 的文档了解可用命令。
 
-## Permissions
+## 权限
 
-### Why does the agent ask for permission?
+### 为什么 agent 请求权限？
 
-Some agents request permission before performing certain actions (like editing files or running commands). This is a safety feature controlled by the agent.
+某些 agent 在执行某些操作（如编辑文件或运行命令）之前会请求权限。这是由 agent 控制的安全功能。
 
-### Can I auto-approve all permissions?
+### 我可以自动批准所有权限吗？
 
-Yes. Enable **Settings → Agent Client → Permissions → Auto-allow permissions**. Use with caution—this gives agents full access without confirmation prompts.
+可以。启用 **设置 → Agent Client → 权限 → 自动允许权限**。谨慎使用 — 这将给予 agent 完全访问权限，无需确认提示。
 
-### Some agents don't ask for permission at all?
+### 有些 agent 根本不请求权限？
 
-Correct. Permission behavior is agent-specific. Some agents may edit files directly without requesting permission.
+是的。权限行为是 agent 特定的。某些 agent 可能直接编辑文件而不请求权限。
 
-## Exporting
+## 导出
 
-### How do I export a conversation?
+### 如何导出对话？
 
-Click the **export button** in the chat header. The conversation is saved as a Markdown file in your vault.
+点击聊天标题中的 **导出按钮**。对话会作为 Markdown 文件保存在你的库中。
 
-### Where are exports saved?
+### 导出保存在哪里？
 
-By default, exports are saved to the `Agent Client` folder in your vault. You can change this in **Settings → Agent Client → Export → Export folder**.
+默认情况下，导出保存在你库中的 `Agent Client` 文件夹。你可以在 **设置 → Agent Client → 导出 → 导出文件夹** 中更改此设置。
 
-### Can I auto-export conversations?
+### 我可以自动导出对话吗？
 
-Yes. Enable **Auto-export on new chat** or **Auto-export on close chat** in export settings.
+可以。在导出设置中启用 **新聊天时自动导出** 或 **关闭聊天时自动导出**。
 
-### Can I customize the frontmatter tag?
+### 我可以自定义 frontmatter 标签吗？
 
-Yes. In **Settings → Agent Client → Export → Frontmatter tag**, you can set a custom tag. Nested tags like `projects/agent-client` are supported.
+可以。在 **设置 → Agent Client → 导出 → Frontmatter 标签** 中，你可以设置自定义标签。支持嵌套标签如 `projects/agent-client`。
 
-## Session History
+## 会话历史
 
-### How do I resume a previous conversation?
+### 如何恢复之前的对话？
 
-Click the **History** button (clock icon) in the chat header to open the session history modal. Select a session and click the **Restore** button (play icon) to continue where you left off.
+点击聊天标题中的 **历史** 按钮（时钟图标）打开会话历史模态框。选择一个会话并点击 **恢复** 按钮（播放图标）从你离开的地方继续。
 
-See [Session History](/usage/session-history) for details.
+详见 [会话历史](/usage/session-history)。
 
-### What's the difference between Restore and Fork?
+### 恢复和分支有什么区别？
 
-**Restore** continues the existing session—new messages are added to the same conversation. **Fork** creates a new session branching from that point, leaving the original session unchanged.
+**恢复**继续现有会话 — 新消息添加到同一个对话中。**分支**从该点创建新会话，原始会话保持不变。
 
-### The modal says "This agent does not support session restoration"
+### 模态框显示"此 agent 不支持会话恢复"
 
-Not all agents support session restoration. You can still view and delete locally saved sessions, but you won't be able to restore or fork them with that agent.
+并非所有 agent 都支持会话恢复。你仍然可以查看和删除本地保存的会话，但无法用该 agent 恢复或分支它们。
 
-### Are my sessions saved automatically?
+### 我的会话会自动保存吗？
 
-Yes. The plugin automatically saves session metadata and message history when you send messages. Sessions are stored locally in Obsidian's data folder.
+会。当你发送消息时，插件会自动保存会话元数据和消息历史。会话本地存储在 Obsidian 的数据文件夹中。
 
-### Can I delete old sessions?
+### 我可以删除旧会话吗？
 
-Yes. Open the session history modal and click the **Delete** button (trash icon) on any session. Deletion is permanent.
+可以。打开会话历史模态框并点击任何会话上的 **删除** 按钮（垃圾桶图标）。删除是永久性的。
 
 ## Windows
 
-### What is WSL mode?
+### 什么是 WSL 模式？
 
-WSL (Windows Subsystem for Linux) mode runs agents inside a Linux environment on Windows. Enable it in **Settings → Agent Client → Windows Subsystem for Linux → Enable WSL mode**. This is useful for agents that work better in Linux environments.
+WSL（Windows Subsystem for Linux）模式在 Windows 上的 Linux 环境中运行 agent。在 **设置 → Agent Client → Windows Subsystem for Linux → 启用 WSL 模式** 中启用它。这对于在 Linux 环境中工作更好的 agent 很有用。
 
-### Do I need to specify a WSL distribution?
+### 我需要指定 WSL 发行版吗？
 
-Only if you have multiple WSL distributions installed and want to use a specific one. Leave it empty to use your default distribution.
+只有当你安装了多个 WSL 发行版并想使用特定一个时才需要。留空以使用你的默认发行版。
 
-## Cost & Billing
+## 成本和计费
 
-### Is Agent Client free?
+### Agent Client 是免费的吗？
 
-The plugin itself is free and open source. However, using AI agents may incur costs depending on the agent and your authentication method.
+插件本身是免费和开源的。但是，使用 AI agent 可能会产生费用，具体取决于 agent 和你的身份验证方式。
 
-### API key vs account login—what's the difference?
+### API 密钥 vs 账户登录 — 有什么区别？
 
-- **API key**: Billed per usage by the AI provider. You pay for what you use.
-- **Account login**: Uses your subscription's included usage. May have limits depending on your plan.
+- **API 密钥**：按用量由 AI 提供商计费。你为你使用的付费。
+- **账户登录**：使用你订阅的包含用量。可能有限制，具体取决于你的计划。
 
-## Getting Help
+## 获取帮助
 
-### Where can I get help?
+### 哪里可以获得帮助？
 
-1. Check the [Troubleshooting](/help/troubleshooting) page
-2. Search [GitHub Issues](https://github.com/RAIT-09/obsidian-agent-client/issues)
-3. Open a new issue if your problem isn't covered
+1. 查看 [故障排除](/help/troubleshooting) 页面
+2. 搜索 [GitHub Issues](https://github.com/RAIT-09/obsidian-agent-client/issues)
+3. 如果你的问题没有被覆盖，开启新 issue
 
-### How do I report a bug?
+### 如何报告 bug？
 
-[Open an issue on GitHub](https://github.com/RAIT-09/obsidian-agent-client/issues/new) with:
-- Your OS and Obsidian version
-- The agent you're using
-- Steps to reproduce
-- Error messages (enable **Debug Mode** in **Settings → Agent Client → Developer**)
+在 [GitHub 上开启 issue](https://github.com/RAIT-09/obsidian-agent-client/issues/new)，包含：
+- 你的操作系统和 Obsidian 版本
+- 你使用的 agent
+- 重现步骤
+- 错误消息（在 **设置 → Agent Client → 开发者** 中启用 **调试模式**）

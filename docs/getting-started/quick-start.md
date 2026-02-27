@@ -1,38 +1,38 @@
-# Quick Start
+# 快速开始
 
-This guide will get you chatting with an AI agent in just a few minutes.
+本指南将在几分钟内帮助你开始与 AI agent 对话。
 
-## Step 1: Choose Your Agent
+## 第一步：选择你的 Agent
 
-Agent Client supports multiple AI agents. Choose one to start:
+Agent Client 支持多种 AI agent。选择一个开始：
 
-| Agent | Provider | Integration |
-|-------|----------|-------------|
-| **[Claude Code](/agent-setup/claude-code)** | Anthropic | via [Zed's SDK adapter](https://github.com/zed-industries/claude-agent-acp) |
-| **[Codex](/agent-setup/codex)** | OpenAI | via [Zed's adapter](https://github.com/zed-industries/codex-acp) |
-| **[Gemini CLI](/agent-setup/gemini-cli)** | Google | with `--experimental-acp` option |
-| **[Custom](/agent-setup/custom-agents)** | Various | [Any ACP-compatible agent](https://agentclientprotocol.com/overview/agents) (e.g., OpenCode, Qwen Code, Kiro) |
+| Agent | 提供商 | 集成方式 |
+|-------|--------|----------|
+| **[Claude Code](/agent-setup/claude-code)** | Anthropic | 通过 [Zed 的 SDK 适配器](https://github.com/zed-industries/claude-agent-acp) |
+| **[Codex](/agent-setup/codex)** | OpenAI | 通过 [Zed 的适配器](https://github.com/zed-industries/codex-acp) |
+| **[Gemini CLI](/agent-setup/gemini-cli)** | Google | 使用 `--experimental-acp` 选项 |
+| **[自定义](/agent-setup/custom-agents)** | 多种 | [任何兼容 ACP 的 agent](https://agentclientprotocol.com/overview/agents)（如 OpenCode、Qwen Code、Kiro） |
 
-## Step 2: Install and Configure the Agent
+## 第二步：安装并配置 Agent
 
-Follow the setup guide for your chosen agent:
+按照你选择的 agent 设置指南操作：
 
-- [Claude Code Setup](/agent-setup/claude-code)
-- [Codex Setup](/agent-setup/codex)
-- [Gemini CLI Setup](/agent-setup/gemini-cli)
-- [Custom Agents](/agent-setup/custom-agents)
+- [Claude Code 设置](/agent-setup/claude-code)
+- [Codex 设置](/agent-setup/codex)
+- [Gemini CLI 设置](/agent-setup/gemini-cli)
+- [自定义 Agent](/agent-setup/custom-agents)
 
-Each guide covers installation, path configuration, and authentication.
+每个指南都涵盖安装、路径配置和身份验证。
 
-## Step 3: Start Chatting
+## 第三步：开始聊天
 
-1. Click the **robot icon** in the left ribbon, or
-2. Open the command palette (`Cmd/Ctrl + P`) and search for **"Open agent chat"**
+1. 点击左侧功能区的 **机器人图标**，或
+2. 打开命令面板（`Cmd/Ctrl + P`）并搜索 **"打开 agent 聊天"**
 
-The chat panel opens in the right sidebar. Type a message and press Enter!
+聊天面板会在右侧边栏打开。输入消息并按 Enter！
 
-## What's Next?
+## 接下来做什么？
 
-- Learn about [Note Mentions](/usage/mentions) to reference your notes in conversations
-- Explore [Slash Commands](/usage/slash-commands) for quick actions
-- Set up additional agents in [Agent Setup](/agent-setup/)
+- 了解 [笔记提及](/usage/mentions) 在对话中引用你的笔记
+- 探索 [斜杠命令](/usage/slash-commands) 进行快速操作
+- 在 [Agent 设置](/agent-setup/) 中设置其他 agent

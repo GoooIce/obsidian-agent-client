@@ -1,83 +1,83 @@
-# Floating Chat
+# 浮动聊天
 
-A persistent, draggable chat window that floats over your workspace. Perfect for quick conversations without leaving your current view.
-
-<p align="center">
-  <img src="/images/floating-chat-view.webp" alt="Floating chat window open over the editor" />
-</p>
-
-## Overview
-
-The Floating Chat provides a lightweight alternative to the sidebar chat view:
-
-- **Draggable window** — move it anywhere on screen
-- **Resizable** — drag the edges to adjust size
-- **Collapsible** — hide the window without losing your session
-- **Multi-window** — open multiple floating windows simultaneously
-- **Independent sessions** — each window runs its own agent session
-
-::: tip
-Enable the floating chat in **Settings → Agent Client → Floating chat → Show floating button**.
-:::
-
-## Getting Started
-
-1. Enable **Show floating button** in settings
-2. A floating button appears in the bottom-right corner
-3. Click the button to open a chat window
-4. Start chatting — the window works just like the sidebar chat
+一个持久的、可拖动的聊天窗口，浮动在你的工作区上方。非常适合在不离开当前视图的情况下进行快速对话。
 
 <p align="center">
-  <img src="/images/floating-chat-button.webp" alt="Floating button in the bottom-right corner" width="200" />
+  <img src="/images/floating-chat-view.webp" alt="浮动聊天窗口在编辑器上方打开" />
 </p>
 
-## Moving and Resizing
+## 概述
 
-- **Drag** the header bar to move the window
-- **Resize** by dragging the bottom-right corner of the window
-- Position and size are saved automatically
+浮动聊天提供了侧边栏聊天视图的轻量级替代方案：
 
-## Multiple Windows
+- **可拖动窗口** — 在屏幕上任意移动
+- **可调整大小** — 拖动边缘调整大小
+- **可折叠** — 隐藏窗口而不丢失会话
+- **多窗口** — 同时打开多个浮动窗口
+- **独立会话** — 每个窗口运行自己的 agent 会话
 
-Open more than one floating chat window to run parallel conversations.
+::: tip
+在 **设置 → Agent Client → 浮动聊天 → 显示浮动按钮** 中启用浮动聊天。
+:::
 
-### Opening Additional Windows
+## 开始使用
 
-- Click the **copy-plus** icon in the floating window header
-- Or use the command **"Open new floating chat window"** from the command palette
-
-### Switching Between Windows
-
-When multiple windows exist, clicking the floating button shows an instance menu:
+1. 在设置中启用 **显示浮动按钮**
+2. 右下角会出现一个浮动按钮
+3. 点击按钮打开聊天窗口
+4. 开始聊天 — 窗口的工作方式与侧边栏聊天一样
 
 <p align="center">
-  <img src="/images/floating-chat-instance-menu.webp" alt="Instance menu with multiple sessions listed" width="300" />
+  <img src="/images/floating-chat-button.webp" alt="右下角的浮动按钮" width="200" />
 </p>
 
-- Click a session name to expand that window
-- Click **×** to close a session
+## 移动和调整大小
+
+- **拖动**标题栏移动窗口
+- 通过拖动窗口右下角**调整大小**
+- 位置和大小会自动保存
+
+## 多窗口
+
+打开多个浮动聊天窗口以运行并行对话。
+
+### 打开其他窗口
+
+- 点击浮动窗口标题中的 **复制加号** 图标
+- 或从命令面板使用 **"打开新浮动聊天窗口"** 命令
+
+### 在窗口之间切换
+
+当存在多个窗口时，点击浮动按钮会显示实例菜单：
+
+<p align="center">
+  <img src="/images/floating-chat-instance-menu.webp" alt="列出多个会话的实例菜单" width="300" />
+</p>
+
+- 点击会话名称展开该窗口
+- 点击 **×** 关闭会话
 
 ::: tip
-The focused floating window is always displayed in front of other floating windows.
+聚焦的浮动窗口始终显示在其他浮动窗口的前面。
 :::
 
-## Commands
+## 命令
 
-| Command | Description |
-|---------|-------------|
-| **Open floating chat window** | Open an existing floating window, or create one if none exist |
-| **Open new floating chat window** | Always create a new floating window |
-| **Close floating chat window** | Hide the focused floating window (session is preserved) |
+| 命令 | 描述 |
+|------|------|
+| **打开浮动聊天窗口** | 打开现有的浮动窗口，如果不存在则创建一个 |
+| **打开新浮动聊天窗口** | 始终创建新的浮动窗口 |
+| **关闭浮动聊天窗口** | 隐藏聚焦的浮动窗口（会话被保留） |
 
 ::: tip
-Assign keyboard shortcuts to these commands in **Settings → Hotkeys** for quick access.
+在 **设置 → 快捷键** 中为这些命令分配键盘快捷键以便快速访问。
 :::
 
-## Configuration
+## 配置
 
-Customize the floating chat in **Settings → Agent Client → Floating chat**:
+在 **设置 → Agent Client → 浮动聊天** 中自定义浮动聊天：
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| **Show floating button** | Off | Display the floating button and enable floating chat |
-| **Floating button image** | Default icon | URL or vault path to a custom button image |
+| 设置 | 默认值 | 描述 |
+|------|--------|------|
+| **显示浮动按钮** | 关闭 | 显示浮动按钮并启用浮动聊天 |
+| **浮动按钮图片** | 默认图标 | 自定义按钮图片的 URL 或库路径 |
