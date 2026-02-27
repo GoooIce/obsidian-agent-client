@@ -84,6 +84,13 @@ export interface CodexAgentSettings extends BaseAgentSettings {
 }
 
 /**
+ * Configuration for OpenCode agent.
+ *
+ * Uses only the base settings as OpenCode doesn't require an API key.
+ */
+export interface OpenCodeAgentSettings extends BaseAgentSettings {}
+
+/**
  * Configuration for custom ACP-compatible agents.
  *
  * Uses only the base settings, allowing users to configure

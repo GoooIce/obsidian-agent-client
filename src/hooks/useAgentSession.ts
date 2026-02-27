@@ -173,6 +173,10 @@ function getAvailableAgentsFromSettings(
 			id: settings.gemini.id,
 			displayName: settings.gemini.displayName || settings.gemini.id,
 		},
+		{
+			id: settings.opencode.id,
+			displayName: settings.opencode.displayName || settings.opencode.id,
+		},
 		...settings.customAgents.map((agent) => ({
 			id: agent.id,
 			displayName: agent.displayName || agent.id,
@@ -216,6 +220,9 @@ function findAgentSettings(
 	}
 	if (agentId === settings.gemini.id) {
 		return settings.gemini;
+	}
+	if (agentId === settings.opencode.id) {
+		return settings.opencode;
 	}
 	// Search in custom agents
 	const customAgent = settings.customAgents.find(

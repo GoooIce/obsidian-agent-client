@@ -32,6 +32,7 @@ import {
 	GeminiAgentSettings,
 	ClaudeAgentSettings,
 	CodexAgentSettings,
+	OpenCodeAgentSettings,
 	CustomAgentSettings,
 } from "./domain/models/agent-config";
 import type { SavedSessionInfo } from "./domain/models/session-info";
@@ -64,6 +65,7 @@ export interface AgentClientPluginSettings {
 	gemini: GeminiAgentSettings;
 	claude: ClaudeAgentSettings;
 	codex: CodexAgentSettings;
+	opencode: OpenCodeAgentSettings;
 	customAgents: CustomAgentSettings[];
 	/** Default agent ID for new views (renamed from activeAgentId for multi-session) */
 	defaultAgentId: string;
@@ -135,16 +137,14 @@ const DEFAULT_SETTINGS: AgentClientPluginSettings = {
 		args: ["--experimental-acp"],
 		env: [],
 	},
-	customAgents: [
-		{
-			id: "opencode",
-			displayName: "OpenCode",
-			enabled: true,
-			path: "opencode",
-			args: ["acp"],
-			env: [],
-		},
-	],
+	opencode: {
+		id: "opencode",
+		displayName: "OpenCode",
+		command: "",
+		args: ["acp"],
+		env: [],
+	},
+	customAgents: [],
 	defaultAgentId: "opencode",
 	autoAllowPermissions: false,
 	autoMentionActiveNote: true,
@@ -611,7 +611,7 @@ export default class AgentClientPlugin extends Plugin {
 	}
 
 	/**
-	 * Get all available agents (claude, codex, gemini, custom)
+	 * Get all available agents (claude, codex, gemini, opencode, custom)
 	 */
 	getAvailableAgents(): Array<{ id: string; displayName: string }> {
 		return [
@@ -629,6 +629,11 @@ export default class AgentClientPlugin extends Plugin {
 				id: this.settings.gemini.id,
 				displayName:
 					this.settings.gemini.displayName || this.settings.gemini.id,
+			},
+			{
+				id: this.settings.opencode.id,
+				displayName:
+					this.settings.opencode.displayName || this.settings.opencode.id,
 			},
 			...this.settings.customAgents.map((agent) => ({
 				id: agent.id,
@@ -879,6 +884,7 @@ export default class AgentClientPlugin extends Plugin {
 			DEFAULT_SETTINGS.claude.id,
 			DEFAULT_SETTINGS.codex.id,
 			DEFAULT_SETTINGS.gemini.id,
+			DEFAULT_SETTINGS.opencode.id,
 			...customAgents.map((agent) => agent.id),
 		];
 		// Migration: support both old activeAgentId and new defaultAgentId
@@ -965,6 +971,44 @@ export default class AgentClientPlugin extends Plugin {
 						: DEFAULT_SETTINGS.gemini.args,
 				env: resolvedGeminiEnv.length > 0 ? resolvedGeminiEnv : [],
 			},
+			opencode: (() => {
+				const rawOpenCode = rawSettings.opencode as
+					| Record<string, unknown>
+					| null
+					| undefined;
+				const opencodeObj =
+					rawOpenCode && typeof rawOpenCode === "object"
+						? rawOpenCode
+						: {};
+				const resolvedOpenCodeArgs = sanitizeArgs(
+					Array.isArray(opencodeObj.args)
+						? (opencodeObj.args as string[])
+						: DEFAULT_SETTINGS.opencode.args,
+				);
+				const resolvedOpenCodeEnv = normalizeEnvVars(
+					Array.isArray(opencodeObj.env)
+						? (opencodeObj.env as AgentEnvVar[])
+						: [],
+				);
+				return {
+					id: DEFAULT_SETTINGS.opencode.id,
+					displayName:
+						typeof opencodeObj.displayName === "string" &&
+						opencodeObj.displayName.trim().length > 0
+							? opencodeObj.displayName.trim()
+							: DEFAULT_SETTINGS.opencode.displayName,
+					command:
+						typeof opencodeObj.command === "string" &&
+						opencodeObj.command.trim().length > 0
+							? opencodeObj.command.trim()
+							: DEFAULT_SETTINGS.opencode.command,
+					args:
+						resolvedOpenCodeArgs.length > 0
+							? resolvedOpenCodeArgs
+							: DEFAULT_SETTINGS.opencode.args,
+					env: resolvedOpenCodeEnv,
+				};
+			})(),
 			customAgents: customAgents,
 			defaultAgentId,
 			autoAllowPermissions:
@@ -1278,6 +1322,7 @@ export default class AgentClientPlugin extends Plugin {
 		ids.add(this.settings.claude.id);
 		ids.add(this.settings.codex.id);
 		ids.add(this.settings.gemini.id);
+		ids.add(this.settings.opencode.id);
 		for (const agent of this.settings.customAgents) {
 			if (agent.id && agent.id.length > 0) {
 				ids.add(agent.id);

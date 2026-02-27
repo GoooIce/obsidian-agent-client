@@ -473,6 +473,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		this.renderClaudeSettings(containerEl);
 		this.renderCodexSettings(containerEl);
 		this.renderGeminiSettings(containerEl);
+		this.renderOpenCodeSettings(containerEl);
 
 		new Setting(containerEl).setName("Custom agents").setHeading();
 
@@ -756,6 +757,11 @@ export class AgentClientSettingTab extends PluginSettingTab {
 				this.plugin.settings.gemini.displayName ||
 					this.plugin.settings.gemini.id,
 			),
+			toOption(
+				this.plugin.settings.opencode.id,
+				this.plugin.settings.opencode.displayName ||
+					this.plugin.settings.opencode.id,
+			),
 		];
 		for (const agent of this.plugin.settings.customAgents) {
 			if (agent.id && agent.id.length > 0) {
@@ -973,6 +979,56 @@ export class AgentClientSettingTab extends PluginSettingTab {
 					.setValue(this.formatEnv(codex.env))
 					.onChange(async (value) => {
 						this.plugin.settings.codex.env = this.parseEnv(value);
+						await this.plugin.saveSettings();
+					});
+				text.inputEl.rows = 3;
+			});
+	}
+
+	private renderOpenCodeSettings(sectionEl: HTMLElement) {
+		const opencode = this.plugin.settings.opencode;
+
+		new Setting(sectionEl)
+			.setName(opencode.displayName || "OpenCode")
+			.setHeading();
+
+		new Setting(sectionEl)
+			.setName("Path")
+			.setDesc(
+				'Absolute path to the opencode executable. On macOS/Linux, use "which opencode", and on Windows, use "where opencode" to find it.',
+			)
+			.addText((text) => {
+				text.setPlaceholder("Absolute path to opencode")
+					.setValue(opencode.command)
+					.onChange(async (value) => {
+						this.plugin.settings.opencode.command = value.trim();
+						await this.plugin.saveSettings();
+					});
+			});
+
+		new Setting(sectionEl)
+			.setName("Arguments")
+			.setDesc(
+				"Enter one argument per line. Default is 'acp' for ACP protocol support.",
+			)
+			.addTextArea((text) => {
+				text.setPlaceholder("")
+					.setValue(this.formatArgs(opencode.args))
+					.onChange(async (value) => {
+						this.plugin.settings.opencode.args = this.parseArgs(value);
+						await this.plugin.saveSettings();
+					});
+				text.inputEl.rows = 3;
+			});
+
+		new Setting(sectionEl)
+			.setName("Environment variables")
+			.setDesc("Enter KEY=VALUE pairs, one per line.")
+			.addTextArea((text) => {
+				text.setPlaceholder("")
+					.setValue(this.formatEnv(opencode.env))
+					.onChange(async (value) => {
+						this.plugin.settings.opencode.env = this.parseEnv(value);
 						await this.plugin.saveSettings();
 					});
 				text.inputEl.rows = 3;

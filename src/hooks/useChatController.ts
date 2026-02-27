@@ -290,6 +290,11 @@ export function useChatController(
 				plugin.settings.gemini.displayName || plugin.settings.gemini.id
 			);
 		}
+		if (activeId === plugin.settings.opencode.id) {
+			return (
+				plugin.settings.opencode.displayName || plugin.settings.opencode.id
+			);
+		}
 		const custom = plugin.settings.customAgents.find(
 			(agent) => agent.id === activeId,
 		);
