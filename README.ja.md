@@ -83,12 +83,12 @@ https://github.com/user-attachments/assets/1c538349-b3fb-44dd-a163-7331cbca7824
 
 ### セットアップガイド
 
-- [Claude Code](https://gooice.github.io/obsidian-agent-client/agent-setup/claude-code.html)
-- [Codex](https://gooice.github.io/obsidian-agent-client/agent-setup/codex.html)
-- [Gemini CLI](https://gooice.github.io/obsidian-agent-client/agent-setup/gemini-cli.html)
-- [カスタムエージェント](https://gooice.github.io/obsidian-agent-client/agent-setup/custom-agents.html)（OpenCode、Qwen Code、Kiro、Mistral Vibeなど）
+- [Claude Code](https://goooice.github.io/obsidian-agent-client/agent-setup/claude-code.html)
+- [Codex](https://goooice.github.io/obsidian-agent-client/agent-setup/codex.html)
+- [Gemini CLI](https://goooice.github.io/obsidian-agent-client/agent-setup/gemini-cli.html)
+- [カスタムエージェント](https://goooice.github.io/obsidian-agent-client/agent-setup/custom-agents.html)（OpenCode、Qwen Code、Kiro、Mistral Vibeなど）
 
-**[ドキュメント全文](https://gooice.github.io/obsidian-agent-client/)**
+**[ドキュメント全文](https://goooice.github.io/obsidian-agent-client/)**
 
 ## 開発
 

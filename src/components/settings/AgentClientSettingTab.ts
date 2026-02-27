@@ -47,7 +47,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		docContainer.createSpan({ text: "Need help? Check out the " });
 		docContainer.createEl("a", {
 			text: "documentation",
-			href: "https://gooice.github.io/obsidian-agent-client/",
+			href: "https://goooice.github.io/obsidian-agent-client/",
 		});
 		docContainer.createSpan({ text: "." });
 

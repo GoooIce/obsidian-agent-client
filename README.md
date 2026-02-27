@@ -83,12 +83,12 @@ Open a terminal (Terminal on macOS/Linux, PowerShell on Windows) and run the fol
 
 ### Setup Guides
 
-- [Claude Code](https://gooice.github.io/obsidian-agent-client/agent-setup/claude-code.html)
-- [Codex](https://gooice.github.io/obsidian-agent-client/agent-setup/codex.html)
-- [Gemini CLI](https://gooice.github.io/obsidian-agent-client/agent-setup/gemini-cli.html)
-- [Custom Agents](https://gooice.github.io/obsidian-agent-client/agent-setup/custom-agents.html) (OpenCode, Qwen Code, Kiro, Mistral Vibe, etc.)
+- [Claude Code](https://goooice.github.io/obsidian-agent-client/agent-setup/claude-code.html)
+- [Codex](https://goooice.github.io/obsidian-agent-client/agent-setup/codex.html)
+- [Gemini CLI](https://goooice.github.io/obsidian-agent-client/agent-setup/gemini-cli.html)
+- [Custom Agents](https://goooice.github.io/obsidian-agent-client/agent-setup/custom-agents.html) (OpenCode, Qwen Code, Kiro, Mistral Vibe, etc.)
 
-**[Full Documentation](https://gooice.github.io/obsidian-agent-client/)**
+**[Full Documentation](https://goooice.github.io/obsidian-agent-client/)**
 
 ## Development
 
