@@ -8,6 +8,10 @@
 </p>
 
 <p align="center">
+  <a href="README.md">English</a> | <a href="README.zh.md">中文</a>
+</p>
+
+<p align="center">
   <a href="https://www.buymeacoffee.com/rait09" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50" ></a>
 </p>
 
