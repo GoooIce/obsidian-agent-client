@@ -41,7 +41,7 @@ This plugin focuses on **ACP client implementation** + **features that make ACP 
 ### Prerequisites
 
 - Node.js 18.x or later
-- npm
+- npm or bun
 
 ### Setup Steps
 
@@ -60,6 +60,31 @@ npm install
 # Start development build (watch mode)
 npm run dev
 ```
+
+### Alternative: Using Symlinks (Recommended for Fork Development)
+
+If you're developing from your own fork and want to keep the code in a separate location:
+
+```bash
+# 1. Clone your fork anywhere you prefer
+git clone https://github.com/YOUR_USERNAME/obsidian-agent-client.git
+cd obsidian-agent-client
+
+# 2. Install dependencies
+npm install  # or: bun install
+
+# 3. Build the plugin
+npm run build  # or: bun run build
+
+# 4. Create symlinks to your Obsidian vault
+VAULT_PATH="/path/to/your/vault/.obsidian/plugins/agent-client"
+mkdir -p "$VAULT_PATH"
+ln -sf "$(pwd)/main.js" "$VAULT_PATH/main.js"
+ln -sf "$(pwd)/manifest.json" "$VAULT_PATH/manifest.json"
+ln -sf "$(pwd)/styles.css" "$VAULT_PATH/styles.css"
+```
+
+After setup, run `npm run build` (or `bun run build`) in your repo directory to update the plugin. The changes are immediately available in Obsidian after reloading the plugin.
 
 ### Testing in Obsidian
 
