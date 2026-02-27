@@ -26,7 +26,7 @@ export default defineConfig({
       "meta",
       {
         name: "og:url",
-        content: "https://rait-09.github.io/obsidian-agent-client/",
+        content: "https://gooice.github.io/obsidian-agent-client/",
       },
     ],
   ],

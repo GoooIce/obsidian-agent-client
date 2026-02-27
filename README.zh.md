@@ -83,12 +83,12 @@ https://github.com/user-attachments/assets/1c538349-b3fb-44dd-a163-7331cbca7824
 
 ### 设置指南
 
-- [Claude Code](https://rait-09.github.io/obsidian-agent-client/agent-setup/claude-code.html)
-- [Codex](https://rait-09.github.io/obsidian-agent-client/agent-setup/codex.html)
-- [Gemini CLI](https://rait-09.github.io/obsidian-agent-client/agent-setup/gemini-cli.html)
-- [自定义智能体](https://rait-09.github.io/obsidian-agent-client/agent-setup/custom-agents.html)（OpenCode、Qwen Code、Kiro、Mistral Vibe 等）
+- [Claude Code](https://gooice.github.io/obsidian-agent-client/agent-setup/claude-code.html)
+- [Codex](https://gooice.github.io/obsidian-agent-client/agent-setup/codex.html)
+- [Gemini CLI](https://gooice.github.io/obsidian-agent-client/agent-setup/gemini-cli.html)
+- [自定义智能体](https://gooice.github.io/obsidian-agent-client/agent-setup/custom-agents.html)（OpenCode、Qwen Code、Kiro、Mistral Vibe 等）
 
-**[完整文档](https://rait-09.github.io/obsidian-agent-client/)**
+**[完整文档](https://gooice.github.io/obsidian-agent-client/)**
 
 ## 开发
 
