@@ -203,7 +203,7 @@ Linux 上的桌面应用程序可能不会从 `.bashrc` 继承 PATH 设置。
 如果你仍然遇到问题：
 
 1. 启用 **调试模式** 并检查控制台日志
-2. 搜索 [GitHub Issues](https://github.com/RAIT-09/obsidian-agent-client/issues)
+2. 搜索 [GitHub Issues](https://github.com/GoooIce/obsidian-agent-client/issues)
 3. 开启新 issue，包含：
    - 你的操作系统和 Obsidian 版本
    - 你使用的 agent

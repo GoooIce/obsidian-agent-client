@@ -1237,7 +1237,7 @@ export default class AgentClientPlugin extends Plugin {
 	 */
 	private async fetchLatestStable(): Promise<string | null> {
 		const response = await requestUrl({
-			url: "https://api.github.com/repos/RAIT-09/obsidian-agent-client/releases/latest",
+			url: "https://api.github.com/repos/GoooIce/obsidian-agent-client/releases/latest",
 		});
 		const data = response.json as { tag_name?: string };
 		return data.tag_name ? semver.clean(data.tag_name) : null;
@@ -1248,7 +1248,7 @@ export default class AgentClientPlugin extends Plugin {
 	 */
 	private async fetchLatestPrerelease(): Promise<string | null> {
 		const response = await requestUrl({
-			url: "https://api.github.com/repos/RAIT-09/obsidian-agent-client/releases",
+			url: "https://api.github.com/repos/GoooIce/obsidian-agent-client/releases",
 		});
 		const releases = response.json as Array<{
 			tag_name: string;

@@ -1,10 +1,10 @@
 <h1 align="center">Agent Client Plugin for Obsidian</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/RAIT-09/obsidian-agent-client/total" alt="GitHub Downloads">
-  <img src="https://img.shields.io/github/license/RAIT-09/obsidian-agent-client" alt="License">
-  <img src="https://img.shields.io/github/v/release/RAIT-09/obsidian-agent-client" alt="GitHub release">
-  <img src="https://img.shields.io/github/last-commit/RAIT-09/obsidian-agent-client" alt="GitHub last commit">
+  <img src="https://img.shields.io/github/downloads/GoooIce/obsidian-agent-client/total" alt="GitHub Downloads">
+  <img src="https://img.shields.io/github/license/GoooIce/obsidian-agent-client" alt="License">
+  <img src="https://img.shields.io/github/v/release/GoooIce/obsidian-agent-client" alt="GitHub release">
+  <img src="https://img.shields.io/github/last-commit/GoooIce/obsidian-agent-client" alt="GitHub last commit">
 </p>
 
 <p align="center">
@@ -40,12 +40,12 @@ https://github.com/user-attachments/assets/1c538349-b3fb-44dd-a163-7331cbca7824
 
 1. [BRAT](https://github.com/TfTHacker/obsidian42-brat) プラグインをインストール
 2. **設定 → BRAT → Add Beta Plugin** に移動
-3. 貼り付け: `https://github.com/RAIT-09/obsidian-agent-client`
+3. 貼り付け: `https://github.com/GoooIce/obsidian-agent-client`
 4. プラグインリストから **Agent Client** を有効化
 
 ### 手動インストール
 
-1. [リリース](https://github.com/RAIT-09/obsidian-agent-client/releases)から `main.js`、`manifest.json`、`styles.css` をダウンロード
+1. [リリース](https://github.com/GoooIce/obsidian-agent-client/releases)から `main.js`、`manifest.json`、`styles.css` をダウンロード
 2. `VaultFolder/.obsidian/plugins/agent-client/` に配置
 3. **設定 → コミュニティプラグイン** でプラグインを有効化
 
@@ -108,4 +108,4 @@ Apache License 2.0 - 詳細は [LICENSE](LICENSE) を参照。
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=RAIT-09/obsidian-agent-client&type=Date)](https://www.star-history.com/#RAIT-09/obsidian-agent-client&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=GoooIce/obsidian-agent-client&type=Date)](https://www.star-history.com/#GoooIce/obsidian-agent-client&Date)

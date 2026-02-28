@@ -1,10 +1,10 @@
 <h1 align="center">Agent Client Plugin for Obsidian</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/RAIT-09/obsidian-agent-client/total" alt="GitHub Downloads">
-  <img src="https://img.shields.io/github/license/RAIT-09/obsidian-agent-client" alt="License">
-  <img src="https://img.shields.io/github/v/release/RAIT-09/obsidian-agent-client" alt="GitHub release">
-  <img src="https://img.shields.io/github/last-commit/RAIT-09/obsidian-agent-client" alt="GitHub last commit">
+  <img src="https://img.shields.io/github/downloads/GoooIce/obsidian-agent-client/total" alt="GitHub Downloads">
+  <img src="https://img.shields.io/github/license/GoooIce/obsidian-agent-client" alt="License">
+  <img src="https://img.shields.io/github/v/release/GoooIce/obsidian-agent-client" alt="GitHub release">
+  <img src="https://img.shields.io/github/last-commit/GoooIce/obsidian-agent-client" alt="GitHub last commit">
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
 
 > ⚠️ **个人实验版**
 >
-> 这是一个个人实验版本，用于测试和探索功能。如需稳定版本，请使用[上游官方仓库](https://github.com/RAIT-09/obsidian-agent-client)。
+> 这是一个个人实验版本，用于测试和探索功能。如需稳定版本，请使用[上游官方仓库](https://github.com/GoooIce/obsidian-agent-client)。
 
 将 AI 智能体（Claude Code、Codex、Gemini CLI）直接集成到 Obsidian 中。在您的 Vault 内与 AI 助手聊天。
 
@@ -40,12 +40,12 @@ https://github.com/user-attachments/assets/1c538349-b3fb-44dd-a163-7331cbca7824
 
 1. 安装 [BRAT](https://github.com/TfTHacker/obsidian42-brat) 插件
 2. 进入 **设置 → BRAT → Add Beta Plugin**
-3. 粘贴：`https://github.com/RAIT-09/obsidian-agent-client`
+3. 粘贴：`https://github.com/GoooIce/obsidian-agent-client`
 4. 在插件列表中启用 **Agent Client**
 
 ### 手动安装
 
-1. 从 [Releases](https://github.com/RAIT-09/obsidian-agent-client/releases) 下载 `main.js`、`manifest.json`、`styles.css`
+1. 从 [Releases](https://github.com/GoooIce/obsidian-agent-client/releases) 下载 `main.js`、`manifest.json`、`styles.css`
 2. 将它们放入 `VaultFolder/.obsidian/plugins/agent-client/`
 3. 在 **设置 → 社区插件** 中启用该插件
 
@@ -104,7 +104,7 @@ npm run build
 
 ## 致谢
 
-本项目 Fork 自 [RAIT-09/obsidian-agent-client](https://github.com/RAIT-09/obsidian-agent-client)，感谢原作者的出色工作！
+本项目 Fork 自 [GoooIce/obsidian-agent-client](https://github.com/GoooIce/obsidian-agent-client)，感谢原作者的出色工作！
 
 同时也感谢以下项目：
 - [Zed Industries](https://github.com/zed-industries) - 提供 [Agent Client Protocol (ACP)](https://github.com/zed-industries/agent-client-protocol)
@@ -116,4 +116,4 @@ Apache License 2.0 - 详见 [LICENSE](LICENSE)。
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=RAIT-09/obsidian-agent-client&type=Date)](https://www.star-history.com/#RAIT-09/obsidian-agent-client&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=GoooIce/obsidian-agent-client&type=Date)](https://www.star-history.com/#GoooIce/obsidian-agent-client&Date)

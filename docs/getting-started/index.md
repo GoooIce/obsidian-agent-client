@@ -12,14 +12,14 @@
 2. 在 Obsidian 设置中，前往 **社区插件 → BRAT → 添加 Beta 插件**
 3. 粘贴此仓库 URL：
    ```
-   https://github.com/RAIT-09/obsidian-agent-client
+   https://github.com/GoooIce/obsidian-agent-client
    ```
 4. BRAT 将下载最新版本并保持自动更新
 5. 从插件列表中启用 **Agent Client**
 
 ### 手动安装
 
-1. 从 [GitHub Releases](https://github.com/RAIT-09/obsidian-agent-client/releases) 下载最新版本文件：
+1. 从 [GitHub Releases](https://github.com/GoooIce/obsidian-agent-client/releases) 下载最新版本文件：
    - `main.js`
    - `manifest.json`
    - `styles.css`

@@ -169,12 +169,12 @@ WSL（Windows Subsystem for Linux）模式在 Windows 上的 Linux 环境中运�
 ### 哪里可以获得帮助？
 
 1. 查看 [故障排除](/help/troubleshooting) 页面
-2. 搜索 [GitHub Issues](https://github.com/RAIT-09/obsidian-agent-client/issues)
+2. 搜索 [GitHub Issues](https://github.com/GoooIce/obsidian-agent-client/issues)
 3. 如果你的问题没有被覆盖，开启新 issue
 
 ### 如何报告 bug？
 
-在 [GitHub 上开启 issue](https://github.com/RAIT-09/obsidian-agent-client/issues/new)，包含：
+在 [GitHub 上开启 issue](https://github.com/GoooIce/obsidian-agent-client/issues/new)，包含：
 - 你的操作系统和 Obsidian 版本
 - 你使用的 agent
 - 重现步骤
