@@ -26,6 +26,11 @@ import {
 	normalizeCustomAgent,
 	ensureUniqueCustomAgentIds,
 } from "./shared/settings-utils";
+import {
+	detectCommand,
+	detectAgents,
+	BUILTIN_AGENT_CONFIGS,
+} from "./shared/agent-detector";
 import { parseChatFontSize } from "./shared/display-settings";
 import {
 	AgentEnvVar,
@@ -205,6 +210,9 @@ export default class AgentClientPlugin extends Plugin {
 		await this.loadSettings();
 
 		initializeLogger(this.settings);
+
+		// Auto-detect agents with empty command paths
+		await this.autoDetectAgents();
 
 		// Initialize settings store
 		this.settingsStore = createSettingsStore(this.settings, this);
@@ -1220,6 +1228,78 @@ export default class AgentClientPlugin extends Plugin {
 		};
 
 		this.ensureDefaultAgentId();
+	}
+
+	/**
+	 * Auto-detect agent paths for agents with empty command fields.
+	 * Only runs on plugin startup and does not block startup on failure.
+	 */
+	private async autoDetectAgents(): Promise<void> {
+		try {
+			const results = await detectAgents(BUILTIN_AGENT_CONFIGS, {
+				wslMode: this.settings.windowsWslMode,
+				wslDistribution: this.settings.windowsWslDistribution,
+			});
+
+			let hasChanges = false;
+
+			for (const result of results) {
+				// Only update if the current command is empty and detection found a path
+				if (result.path && result.path.length > 0) {
+					if (result.agentId === this.settings.claude.id && !this.settings.claude.command) {
+						this.settings.claude.command = result.path;
+						console.log(`[AgentClient] Auto-detected claude: ${result.path}`);
+						hasChanges = true;
+					} else if (result.agentId === this.settings.codex.id && !this.settings.codex.command) {
+						this.settings.codex.command = result.path;
+						console.log(`[AgentClient] Auto-detected codex: ${result.path}`);
+						hasChanges = true;
+					} else if (result.agentId === this.settings.gemini.id && !this.settings.gemini.command) {
+						this.settings.gemini.command = result.path;
+						console.log(`[AgentClient] Auto-detected gemini: ${result.path}`);
+						hasChanges = true;
+					} else if (result.agentId === this.settings.opencode.id && !this.settings.opencode.command) {
+						this.settings.opencode.command = result.path;
+						console.log(`[AgentClient] Auto-detected opencode: ${result.path}`);
+						hasChanges = true;
+					}
+				}
+			}
+
+			if (hasChanges) {
+				await this.saveSettings();
+			}
+		} catch (error) {
+			// Don't block plugin startup on detection failure
+			console.warn("[AgentClient] Agent auto-detection failed:", error);
+		}
+	}
+
+	/**
+	 * Manually detect a specific agent's command path.
+	 * @param agentId - The agent ID to detect
+	 * @returns The detected path, or null if not found
+	 */
+	async detectAgentCommand(agentId: string): Promise<string | null> {
+		const config = BUILTIN_AGENT_CONFIGS.find((c) => c.agentId === agentId);
+		if (!config) {
+			return null;
+		}
+
+		return detectCommand(config.commandName, {
+			wslMode: this.settings.windowsWslMode,
+			wslDistribution: this.settings.windowsWslDistribution,
+		});
+	}
+
+	/**
+	 * Manually detect all agents and return results.
+	 */
+	async detectAllAgents() {
+		return detectAgents(BUILTIN_AGENT_CONFIGS, {
+			wslMode: this.settings.windowsWslMode,
+			wslDistribution: this.settings.windowsWslDistribution,
+		});
 	}
 
 	async saveSettings() {

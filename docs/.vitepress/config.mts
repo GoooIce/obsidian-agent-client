@@ -59,6 +59,7 @@ export default defineConfig({
             text: "Agent 设置",
             items: [
               { text: "概览", link: "/agent-setup/" },
+              { text: "OpenCode", link: "/agent-setup/opencode" },
               { text: "Claude Code", link: "/agent-setup/claude-code" },
               { text: "Codex", link: "/agent-setup/codex" },
               { text: "Gemini CLI", link: "/agent-setup/gemini-cli" },
@@ -152,6 +153,7 @@ export default defineConfig({
             text: "Agent Setup",
             items: [
               { text: "Overview", link: "/en/agent-setup/" },
+              { text: "OpenCode", link: "/en/agent-setup/opencode" },
               { text: "Claude Code", link: "/en/agent-setup/claude-code" },
               { text: "Codex", link: "/en/agent-setup/codex" },
               { text: "Gemini CLI", link: "/en/agent-setup/gemini-cli" },

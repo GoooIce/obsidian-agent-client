@@ -2084,3 +2084,133 @@ If your plugin does not need CSS, delete this file.
 	color: var(--text-normal);
 	font-size: 12px;
 }
+
+/* ===== Collapsible Section (Settings) ===== */
+.agent-client-collapsible-section {
+	margin-bottom: 8px;
+	border-radius: 8px;
+	overflow: hidden;
+	position: relative;
+}
+
+.agent-client-collapsible-chevron {
+	position: absolute;
+	left: 8px;
+	top: 14px;
+	font-size: 12px;
+	color: var(--text-muted);
+	pointer-events: none;
+	z-index: 1;
+	width: 16px;
+	text-align: center;
+}
+
+.agent-client-collapsible-header {
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+.agent-client-collapsible-header:hover {
+	background-color: var(--background-secondary);
+}
+
+.agent-client-collapsible-header-setting {
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+.agent-client-collapsible-section:first-child .agent-client-collapsible-header-setting {
+	border-top: none;
+}
+
+.agent-client-collapsible-header .setting-item-name {
+	font-weight: 600;
+	color: var(--text-normal);
+}
+
+.agent-client-collapsible-content {
+	padding-left: 8px;
+	overflow: hidden;
+	transition: max-height 0.3s ease, opacity 0.2s ease;
+	max-height: 5000px;
+	opacity: 1;
+}
+
+.agent-client-collapsible-content.agent-client-collapsed {
+	max-height: 0 !important;
+	opacity: 0;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Badge styling */
+.agent-client-badge {
+	display: inline-block;
+	padding: 2px 6px;
+	margin-left: 8px;
+	font-size: 11px;
+	font-weight: 500;
+	color: var(--text-accent);
+	background-color: var(--background-modifier-accent);
+	border-radius: 4px;
+}
+
+/* Agent config section styling */
+.agent-client-agent-config-section {
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	margin-bottom: 8px;
+	background-color: var(--background-secondary);
+}
+
+.agent-client-agent-config-section .agent-client-collapsible-header-setting {
+	border-top: none;
+}
+
+.agent-client-agent-config-section.agent-client-section-collapsed {
+	background-color: transparent;
+	border-color: var(--background-modifier-border-hover);
+}
+
+.agent-client-agent-config-section .agent-client-collapsible-content {
+	padding: 0 16px 8px 16px;
+}
+
+/* Quick start tip */
+.agent-client-quick-start {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	margin-bottom: 16px;
+	background-color: var(--background-secondary);
+	border-radius: 8px;
+	font-size: 13px;
+	color: var(--text-muted);
+}
+
+.agent-client-quick-start-icon {
+	color: var(--text-accent);
+}
+
+/* Agent selector compact */
+.agent-client-agent-selector-compact {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 16px;
+	background-color: var(--background-secondary);
+	border-radius: 8px;
+	margin-bottom: 16px;
+}
+
+.agent-client-agent-selector-compact .setting-item {
+	flex: 1;
+	border-top: none;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.agent-client-agent-selector-compact .setting-item-control {
+	flex: 0 1 auto;
+	min-width: 200px;
+}
