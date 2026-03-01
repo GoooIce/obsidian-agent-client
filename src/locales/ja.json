@@ -1,0 +1,261 @@
+{
+  "common": {
+    "default": "デフォルト",
+    "detecting": "検出中...",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "add": "追加",
+    "remove": "削除",
+    "edit": "編集",
+    "delete": "削除",
+    "enabled": "有効",
+    "disabled": "無効"
+  },
+  "settings": {
+    "needHelp": "ヘルプが必要ですか？{link}を確認してください。",
+    "documentation": "ドキュメント",
+    "defaultAgent": {
+      "name": "デフォルトエージェント",
+      "desc": "新しいチャットビューを開くときに使用するエージェントを選択します。"
+    },
+    "detectAll": "すべて検出",
+    "detectAllTooltip": "インストールされているすべてのエージェントを自動検出",
+    "detectionComplete": "[Agent Client] {count}個のエージェントを検出しました",
+    "noAgentsDetected": "[Agent Client] 新しいエージェントは検出されませんでした",
+    "detectionFailed": "[Agent Client] 検出に失敗しました。詳細はコンソールを確認してください。",
+    "sections": {
+      "display": "表示",
+      "mentions": "メンション",
+      "floatingChat": "フローティングチャット",
+      "export": "エクスポート",
+      "permissions": "権限",
+      "advanced": "詳細設定",
+      "customAgents": "カスタムエージェント"
+    },
+    "display": {
+      "language": {
+        "name": "言語",
+        "desc": "インターフェースの言語"
+      },
+      "chatViewLocation": {
+        "name": "チャットビューの場所",
+        "desc": "新しいチャットビューを開く場所"
+      },
+      "locationOptions": {
+        "rightTab": "右ペイン（タブ）",
+        "rightSplit": "右ペイン（分割）",
+        "editorTab": "エディタエリア（タブ）",
+        "editorSplit": "エディタエリア（分割）"
+      },
+      "fontSize": {
+        "name": "チャットフォントサイズ",
+        "desc": "フォントサイズ（ピクセル）。空欄の場合はデフォルト値を使用"
+      },
+      "showEmojis": {
+        "name": "絵文字を表示",
+        "desc": "チャットインターフェースで絵文字を表示する"
+      },
+      "autoCollapseDiffs": {
+        "name": "長い差分を自動的に折りたたむ",
+        "desc": "しきい値を超える差分ブロックを自動的に折りたたみます"
+      },
+      "collapseThreshold": {
+        "name": "折りたたみしきい値",
+        "desc": "差分を折りたたむ行数"
+      },
+      "sendMessageShortcut": {
+        "name": "メッセージ送信のショートカット",
+        "desc": "メッセージを送信するキーの組み合わせを選択します"
+      },
+      "shortcutOptions": {
+        "enter": "Enterで送信、Shift+Enterで改行",
+        "cmdEnter": "Cmd/Ctrl+Enterで送信、Enterで改行"
+      }
+    },
+    "mentions": {
+      "autoMentionActiveNote": {
+        "name": "アクティブなノートを自動的にメンション",
+        "desc": "アクティブなノートを会話に自動的に含めます"
+      },
+      "maxNoteLength": {
+        "name": "ノートの最大長",
+        "desc": "アクティブなノートから含める最大文字数"
+      },
+      "maxSelectionLength": {
+        "name": "選択テキストの最大長",
+        "desc": "選択したテキストから含める最大文字数"
+      }
+    },
+    "floatingChat": {
+      "showButton": {
+        "name": "フローティングボタンを表示",
+        "desc": "チャットを素早く開くためのフローティングボタンを表示する"
+      },
+      "buttonImage": {
+        "name": "フローティングボタンの画像",
+        "desc": "フローティングボタン用のカスタム画像（空欄の場合はデフォルト）"
+      }
+    },
+    "export": {
+      "folder": {
+        "name": "エクスポートフォルダ",
+        "desc": "チャットのエクスポートを保存するフォルダ"
+      },
+      "filename": {
+        "name": "ファイル名",
+        "desc": "エクスポートファイル名のテンプレート。使用可能な変数：{date}、{time}、{agent}"
+      },
+      "frontmatterTag": {
+        "name": "Frontmatterタグ",
+        "desc": "エクスポートしたノートのfrontmatterに追加するタグ"
+      },
+      "includeImages": {
+        "name": "画像を含める",
+        "desc": "エクスポートするMarkdownファイルに画像を含める"
+      },
+      "imageLocation": {
+        "name": "画像の場所",
+        "desc": "エクスポートした画像の保存先"
+      },
+      "imageLocationOptions": {
+        "obsidian": "Obsidianの添付フォルダ",
+        "custom": "カスタムフォルダ",
+        "base64": "base64として埋め込み"
+      },
+      "customImageFolder": {
+        "name": "カスタム画像フォルダ",
+        "desc": "エクスポート画像用のカスタムフォルダパス"
+      },
+      "autoExportNewChat": {
+        "name": "新しいチャット時に自動エクスポート",
+        "desc": "新しいチャットを開始するときに自動的にエクスポートする"
+      },
+      "autoExportCloseChat": {
+        "name": "チャット終了時に自動エクスポート",
+        "desc": "チャットビューを閉じるときに自動的にエクスポートする"
+      },
+      "openAfterExport": {
+        "name": "エクスポート後にノートを開く",
+        "desc": "エクスポート後に自動的にエクスポートしたノートを開く"
+      }
+    },
+    "permissions": {
+      "autoAllow": {
+        "name": "権限を自動的に許可",
+        "desc": "すべての権限リクエストを自動的に承認する"
+      }
+    },
+    "advanced": {
+      "nodePath": {
+        "name": "Node.jsのパス",
+        "desc": "Node.js実行ファイルのカスタムパス（空欄の場合はデフォルト）"
+      },
+      "wsl": {
+        "name": "WSLモードを有効にする",
+        "desc": "Windows Subsystem for Linuxでエージェントを実行する"
+      },
+      "wslDistribution": {
+        "name": "WSLディストリビューション",
+        "desc": "使用するWSLディストリビューションの名前"
+      },
+      "debugMode": {
+        "name": "デバッグモード",
+        "desc": "トラブルシューティングのため詳細なログを有効にする"
+      }
+    },
+    "agent": {
+      "apiKey": {
+        "name": "APIキー",
+        "desc": "このエージェントのAPIキー"
+      },
+      "path": {
+        "name": "パス",
+        "desc": "エージェント実行ファイルの絶対パス"
+      },
+      "arguments": {
+        "name": "引数",
+        "desc": "コマンドライン引数（1行に1つ）"
+      },
+      "envVars": {
+        "name": "環境変数",
+        "desc": "KEY=VALUEのペアを入力します。1行に1つ。"
+      },
+      "agentId": {
+        "name": "エージェントID",
+        "desc": "このエージェントを参照するための一意の識別子。"
+      },
+      "displayName": {
+        "name": "表示名",
+        "desc": "メニューやヘッダーに表示される名前。"
+      },
+      "noApiKeyRequired": "組み込みエージェント • APIキーは不要です"
+    },
+    "customAgents": {
+      "add": "カスタムエージェントを追加",
+      "edit": "エージェントを編集",
+      "delete": "エージェントを削除",
+      "deleteConfirm": "このエージェントを削除してもよろしいですか？",
+      "empty": "カスタムエージェントが設定されていません"
+    }
+  },
+  "chat": {
+    "input": {
+      "placeholder": "メッセージを入力...",
+      "send": "送信",
+      "attachFile": "ファイルを添付",
+      "cancelRequest": "リクエストをキャンセル"
+    },
+    "header": {
+      "newChat": "新しいチャット",
+      "export": "チャットをエクスポート",
+      "model": "モデル",
+      "updateAvailable": "プラグインの更新があります！",
+      "sessionHistory": "セッション履歴",
+      "more": "もっと見る"
+    },
+    "message": {
+      "user": "あなた",
+      "assistant": "アシスタント",
+      "thinking": "思考中...",
+      "processing": "処理中...",
+      "error": "エラー",
+      "retry": "再試行"
+    },
+    "permission": {
+      "title": "権限リクエスト",
+      "allow": "許可",
+      "deny": "拒否",
+      "alwaysAllow": "常に許可"
+    },
+    "diff": {
+      "expand": "差分を展開",
+      "collapse": "差分を折りたたむ",
+      "copied": "コピーしました！"
+    },
+    "export": {
+      "success": "チャットを{path}にエクスポートしました",
+      "error": "チャットのエクスポートに失敗しました：{error}"
+    },
+    "empty": {
+      "title": "会話を始める",
+      "desc": "下にメッセージを入力して、AIエージェントとのチャットを始めてください。"
+    }
+  },
+  "commands": {
+    "openChat": "エージェントチャットを開く",
+    "focusNext": "次のチャットビューにフォーカス",
+    "focusPrevious": "前のチャットビューにフォーカス",
+    "openNewChat": "新しいチャットビューを開く",
+    "openFloatingChat": "フローティングチャットウィンドウを開く",
+    "openNewFloatingChat": "新しいフローティングチャットウィンドウを開く",
+    "closeFloatingChat": "フローティングチャットウィンドウを閉じる"
+  },
+  "ribbon": {
+    "tooltip": "エージェントクライアントを開く"
+  },
+  "errors": {
+    "connectionFailed": "エージェントへの接続に失敗しました",
+    "timeout": "リクエストがタイムアウトしました",
+    "unknown": "不明なエラーが発生しました"
+  }
+}

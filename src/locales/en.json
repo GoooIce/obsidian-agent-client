@@ -1,0 +1,261 @@
+{
+  "common": {
+    "default": "Default",
+    "detecting": "Detecting...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "add": "Add",
+    "remove": "Remove",
+    "edit": "Edit",
+    "delete": "Delete",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
+  },
+  "settings": {
+    "needHelp": "Need help? Check out the {link}.",
+    "documentation": "documentation",
+    "defaultAgent": {
+      "name": "Default agent",
+      "desc": "Choose which agent is used when opening a new chat view."
+    },
+    "detectAll": "Detect all",
+    "detectAllTooltip": "Auto-detect all installed agents",
+    "detectionComplete": "[Agent Client] Detected {count} agent(s)",
+    "noAgentsDetected": "[Agent Client] No new agents detected",
+    "detectionFailed": "[Agent Client] Detection failed. Check console for details.",
+    "sections": {
+      "display": "Display",
+      "mentions": "Mentions",
+      "floatingChat": "Floating chat",
+      "export": "Export",
+      "permissions": "Permissions",
+      "advanced": "Advanced",
+      "customAgents": "Custom Agents"
+    },
+    "display": {
+      "language": {
+        "name": "Language",
+        "desc": "Interface language"
+      },
+      "chatViewLocation": {
+        "name": "Chat view location",
+        "desc": "Where to open new chat views"
+      },
+      "locationOptions": {
+        "rightTab": "Right pane (tabs)",
+        "rightSplit": "Right pane (split)",
+        "editorTab": "Editor area (tabs)",
+        "editorSplit": "Editor area (split)"
+      },
+      "fontSize": {
+        "name": "Chat font size",
+        "desc": "Font size in pixels (leave empty for default)"
+      },
+      "showEmojis": {
+        "name": "Show emojis",
+        "desc": "Display emojis in the chat interface"
+      },
+      "autoCollapseDiffs": {
+        "name": "Auto-collapse long diffs",
+        "desc": "Automatically collapse diff blocks larger than the threshold"
+      },
+      "collapseThreshold": {
+        "name": "Collapse threshold",
+        "desc": "Number of lines after which diffs are collapsed"
+      },
+      "sendMessageShortcut": {
+        "name": "Send message shortcut",
+        "desc": "Choose which key combination sends the message"
+      },
+      "shortcutOptions": {
+        "enter": "Enter to send, Shift+Enter for newline",
+        "cmdEnter": "Cmd/Ctrl+Enter to send, Enter for newline"
+      }
+    },
+    "mentions": {
+      "autoMentionActiveNote": {
+        "name": "Auto-mention active note",
+        "desc": "Automatically include the active note in the conversation"
+      },
+      "maxNoteLength": {
+        "name": "Max note length",
+        "desc": "Maximum characters to include from the active note"
+      },
+      "maxSelectionLength": {
+        "name": "Max selection length",
+        "desc": "Maximum characters to include from selected text"
+      }
+    },
+    "floatingChat": {
+      "showButton": {
+        "name": "Show floating button",
+        "desc": "Display a floating button to quickly open chat"
+      },
+      "buttonImage": {
+        "name": "Floating button image",
+        "desc": "Custom image for the floating button (leave empty for default)"
+      }
+    },
+    "export": {
+      "folder": {
+        "name": "Export folder",
+        "desc": "Folder where chat exports will be saved"
+      },
+      "filename": {
+        "name": "Filename",
+        "desc": "Template for exported filenames. Available variables: {date}, {time}, {agent}"
+      },
+      "frontmatterTag": {
+        "name": "Frontmatter tag",
+        "desc": "Tag to add to the frontmatter of exported notes"
+      },
+      "includeImages": {
+        "name": "Include images",
+        "desc": "Include images in exported markdown files"
+      },
+      "imageLocation": {
+        "name": "Image location",
+        "desc": "Where to save exported images"
+      },
+      "imageLocationOptions": {
+        "obsidian": "Obsidian attachments folder",
+        "custom": "Custom folder",
+        "base64": "Embed as base64"
+      },
+      "customImageFolder": {
+        "name": "Custom image folder",
+        "desc": "Custom folder path for exported images"
+      },
+      "autoExportNewChat": {
+        "name": "Auto-export on new chat",
+        "desc": "Automatically export when starting a new chat"
+      },
+      "autoExportCloseChat": {
+        "name": "Auto-export on close chat",
+        "desc": "Automatically export when closing a chat view"
+      },
+      "openAfterExport": {
+        "name": "Open note after export",
+        "desc": "Automatically open the exported note after exporting"
+      }
+    },
+    "permissions": {
+      "autoAllow": {
+        "name": "Auto-allow permissions",
+        "desc": "Automatically approve all permission requests"
+      }
+    },
+    "advanced": {
+      "nodePath": {
+        "name": "Node.js path",
+        "desc": "Custom path to Node.js executable (leave empty for default)"
+      },
+      "wsl": {
+        "name": "Enable WSL mode",
+        "desc": "Run agents in Windows Subsystem for Linux"
+      },
+      "wslDistribution": {
+        "name": "WSL distribution",
+        "desc": "Name of the WSL distribution to use"
+      },
+      "debugMode": {
+        "name": "Debug mode",
+        "desc": "Enable detailed logging for troubleshooting"
+      }
+    },
+    "agent": {
+      "apiKey": {
+        "name": "API key",
+        "desc": "Your API key for this agent"
+      },
+      "path": {
+        "name": "Path",
+        "desc": "Absolute path to the agent executable"
+      },
+      "arguments": {
+        "name": "Arguments",
+        "desc": "Command-line arguments (one per line)"
+      },
+      "envVars": {
+        "name": "Environment variables",
+        "desc": "Enter KEY=VALUE pairs, one per line."
+      },
+      "agentId": {
+        "name": "Agent ID",
+        "desc": "Unique identifier used to reference this agent."
+      },
+      "displayName": {
+        "name": "Display name",
+        "desc": "Shown in menus and headers."
+      },
+      "noApiKeyRequired": "Built-in agent • No API key required"
+    },
+    "customAgents": {
+      "add": "Add custom agent",
+      "edit": "Edit agent",
+      "delete": "Delete agent",
+      "deleteConfirm": "Are you sure you want to delete this agent?",
+      "empty": "No custom agents configured"
+    }
+  },
+  "chat": {
+    "input": {
+      "placeholder": "Type a message...",
+      "send": "Send",
+      "attachFile": "Attach file",
+      "cancelRequest": "Cancel request"
+    },
+    "header": {
+      "newChat": "New chat",
+      "export": "Export chat",
+      "model": "Model",
+      "updateAvailable": "Plugin update available!",
+      "sessionHistory": "Session history",
+      "more": "More"
+    },
+    "message": {
+      "user": "You",
+      "assistant": "Assistant",
+      "thinking": "Thinking...",
+      "processing": "Processing...",
+      "error": "Error",
+      "retry": "Retry"
+    },
+    "permission": {
+      "title": "Permission Request",
+      "allow": "Allow",
+      "deny": "Deny",
+      "alwaysAllow": "Always allow"
+    },
+    "diff": {
+      "expand": "Expand diff",
+      "collapse": "Collapse diff",
+      "copied": "Copied!"
+    },
+    "export": {
+      "success": "Chat exported to {path}",
+      "error": "Failed to export chat: {error}"
+    },
+    "empty": {
+      "title": "Start a conversation",
+      "desc": "Type a message below to begin chatting with your AI agent."
+    }
+  },
+  "commands": {
+    "openChat": "Open agent chat",
+    "focusNext": "Focus next chat view",
+    "focusPrevious": "Focus previous chat view",
+    "openNewChat": "Open new chat view",
+    "openFloatingChat": "Open floating chat window",
+    "openNewFloatingChat": "Open new floating chat window",
+    "closeFloatingChat": "Close floating chat window"
+  },
+  "ribbon": {
+    "tooltip": "Open agent client"
+  },
+  "errors": {
+    "connectionFailed": "Failed to connect to agent",
+    "timeout": "Request timed out",
+    "unknown": "An unknown error occurred"
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "common": {
+    "default": "默认",
+    "detecting": "检测中...",
+    "save": "保存",
+    "cancel": "取消",
+    "add": "添加",
+    "remove": "移除",
+    "edit": "编辑",
+    "delete": "删除",
+    "enabled": "已启用",
+    "disabled": "已禁用"
+  },
+  "settings": {
+    "needHelp": "需要帮助？查看{link}。",
+    "documentation": "文档",
+    "defaultAgent": {
+      "name": "默认代理",
+      "desc": "选择打开新聊天视图时使用的代理。"
+    },
+    "detectAll": "全部检测",
+    "detectAllTooltip": "自动检测所有已安装的代理",
+    "detectionComplete": "[Agent Client] 检测到 {count} 个代理",
+    "noAgentsDetected": "[Agent Client] 未检测到新代理",
+    "detectionFailed": "[Agent Client] 检测失败。查看控制台获取详细信息。",
+    "sections": {
+      "display": "显示",
+      "mentions": "提及",
+      "floatingChat": "浮动聊天",
+      "export": "导出",
+      "permissions": "权限",
+      "advanced": "高级",
+      "customAgents": "自定义代理"
+    },
+    "display": {
+      "language": {
+        "name": "语言",
+        "desc": "界面语言"
+      },
+      "chatViewLocation": {
+        "name": "聊天视图位置",
+        "desc": "打开新聊天视图的位置"
+      },
+      "locationOptions": {
+        "rightTab": "右侧面板（标签页）",
+        "rightSplit": "右侧面板（分屏）",
+        "editorTab": "编辑区（标签页）",
+        "editorSplit": "编辑区（分屏）"
+      },
+      "fontSize": {
+        "name": "聊天字体大小",
+        "desc": "字体大小（像素），留空使用默认值"
+      },
+      "showEmojis": {
+        "name": "显示表情符号",
+        "desc": "在聊天界面中显示表情符号"
+      },
+      "autoCollapseDiffs": {
+        "name": "自动折叠长差异",
+        "desc": "自动折叠超过阈值的差异块"
+      },
+      "collapseThreshold": {
+        "name": "折叠阈值",
+        "desc": "差异内容折叠的行数阈值"
+      },
+      "sendMessageShortcut": {
+        "name": "发送消息快捷键",
+        "desc": "选择发送消息的按键组合"
+      },
+      "shortcutOptions": {
+        "enter": "Enter 发送，Shift+Enter 换行",
+        "cmdEnter": "Cmd/Ctrl+Enter 发送，Enter 换行"
+      }
+    },
+    "mentions": {
+      "autoMentionActiveNote": {
+        "name": "自动提及当前笔记",
+        "desc": "自动将当前笔记包含到对话中"
+      },
+      "maxNoteLength": {
+        "name": "笔记最大长度",
+        "desc": "从当前笔记中包含的最大字符数"
+      },
+      "maxSelectionLength": {
+        "name": "选中内容最大长度",
+        "desc": "从选中文本中包含的最大字符数"
+      }
+    },
+    "floatingChat": {
+      "showButton": {
+        "name": "显示浮动按钮",
+        "desc": "显示浮动按钮以快速打开聊天"
+      },
+      "buttonImage": {
+        "name": "浮动按钮图片",
+        "desc": "浮动按钮的自定义图片，留空使用默认图片"
+      }
+    },
+    "export": {
+      "folder": {
+        "name": "导出文件夹",
+        "desc": "保存聊天导出的文件夹"
+      },
+      "filename": {
+        "name": "文件名",
+        "desc": "导出文件名模板。可用变量：{date}、{time}、{agent}"
+      },
+      "frontmatterTag": {
+        "name": "Frontmatter 标签",
+        "desc": "添加到导出笔记 frontmatter 的标签"
+      },
+      "includeImages": {
+        "name": "包含图片",
+        "desc": "在导出的 Markdown 文件中包含图片"
+      },
+      "imageLocation": {
+        "name": "图片位置",
+        "desc": "导出图片的保存位置"
+      },
+      "imageLocationOptions": {
+        "obsidian": "Obsidian 附件文件夹",
+        "custom": "自定义文件夹",
+        "base64": "嵌入为 base64"
+      },
+      "customImageFolder": {
+        "name": "自定义图片文件夹",
+        "desc": "导出图片的自定义文件夹路径"
+      },
+      "autoExportNewChat": {
+        "name": "新聊天时自动导出",
+        "desc": "开始新聊天时自动导出"
+      },
+      "autoExportCloseChat": {
+        "name": "关闭聊天时自动导出",
+        "desc": "关闭聊天视图时自动导出"
+      },
+      "openAfterExport": {
+        "name": "导出后打开笔记",
+        "desc": "导出后自动打开导出的笔记"
+      }
+    },
+    "permissions": {
+      "autoAllow": {
+        "name": "自动允许权限",
+        "desc": "自动批准所有权限请求"
+      }
+    },
+    "advanced": {
+      "nodePath": {
+        "name": "Node.js 路径",
+        "desc": "Node.js 可执行文件的自定义路径，留空使用默认路径"
+      },
+      "wsl": {
+        "name": "启用 WSL 模式",
+        "desc": "在 Linux 子系统 (WSL) 中运行代理"
+      },
+      "wslDistribution": {
+        "name": "WSL 发行版",
+        "desc": "要使用的 WSL 发行版名称"
+      },
+      "debugMode": {
+        "name": "调试模式",
+        "desc": "启用详细日志记录以进行故障排除"
+      }
+    },
+    "agent": {
+      "apiKey": {
+        "name": "API 密钥",
+        "desc": "此代理的 API 密钥"
+      },
+      "path": {
+        "name": "路径",
+        "desc": "代理可执行文件的绝对路径"
+      },
+      "arguments": {
+        "name": "参数",
+        "desc": "命令行参数，每行一个"
+      },
+      "envVars": {
+        "name": "环境变量",
+        "desc": "输入 KEY=VALUE 对，每行一个"
+      },
+      "agentId": {
+        "name": "代理 ID",
+        "desc": "用于引用此代理的唯一标识符"
+      },
+      "displayName": {
+        "name": "显示名称",
+        "desc": "在菜单和标题中显示的名称"
+      },
+      "noApiKeyRequired": "内置代理 • 无需 API 密钥"
+    },
+    "customAgents": {
+      "add": "添加自定义代理",
+      "edit": "编辑代理",
+      "delete": "删除代理",
+      "deleteConfirm": "确定要删除此代理吗？",
+      "empty": "未配置自定义代理"
+    }
+  },
+  "chat": {
+    "input": {
+      "placeholder": "输入消息...",
+      "send": "发送",
+      "attachFile": "附加文件",
+      "cancelRequest": "取消请求"
+    },
+    "header": {
+      "newChat": "新聊天",
+      "export": "导出聊天",
+      "model": "模型",
+      "updateAvailable": "有新版本可用！",
+      "sessionHistory": "会话历史",
+      "more": "更多"
+    },
+    "message": {
+      "user": "你",
+      "assistant": "助手",
+      "thinking": "思考中...",
+      "processing": "处理中...",
+      "error": "错误",
+      "retry": "重试"
+    },
+    "permission": {
+      "title": "权限请求",
+      "allow": "允许",
+      "deny": "拒绝",
+      "alwaysAllow": "始终允许"
+    },
+    "diff": {
+      "expand": "展开差异",
+      "collapse": "折叠差异",
+      "copied": "已复制！"
+    },
+    "export": {
+      "success": "聊天已导出到 {path}",
+      "error": "导出聊天失败：{error}"
+    },
+    "empty": {
+      "title": "开始对话",
+      "desc": "在下方输入消息，开始与 AI 代理聊天。"
+    }
+  },
+  "commands": {
+    "openChat": "打开代理聊天",
+    "focusNext": "聚焦下一个聊天视图",
+    "focusPrevious": "聚焦上一个聊天视图",
+    "openNewChat": "打开新聊天视图",
+    "openFloatingChat": "打开浮动聊天窗口",
+    "openNewFloatingChat": "打开新浮动聊天窗口",
+    "closeFloatingChat": "关闭浮动聊天窗口"
+  },
+  "ribbon": {
+    "tooltip": "打开代理客户端"
+  },
+  "errors": {
+    "connectionFailed": "连接代理失败",
+    "timeout": "请求超时",
+    "unknown": "发生未知错误"
+  }
+}

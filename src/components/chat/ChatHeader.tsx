@@ -1,5 +1,6 @@
 import * as React from "react";
 import { HeaderButton } from "./HeaderButton";
+import { t } from "../../shared/i18n";
 
 /**
  * Props for ChatHeader component
@@ -47,30 +48,30 @@ export function ChatHeader({
 			</div>
 			{isUpdateAvailable && (
 				<p className="agent-client-chat-view-header-update">
-					Plugin update available!
+					{t("chat.header.updateAvailable")}
 				</p>
 			)}
 			<div className="agent-client-chat-view-header-actions">
 				<HeaderButton
 					iconName="plus"
-					tooltip="New chat"
+					tooltip={t("chat.header.newChat")}
 					onClick={onNewChat}
 				/>
 				{onOpenHistory && (
 					<HeaderButton
 						iconName="history"
-						tooltip="Session history"
+						tooltip={t("chat.header.sessionHistory")}
 						onClick={onOpenHistory}
 					/>
 				)}
 				<HeaderButton
 					iconName="save"
-					tooltip="Export chat to Markdown"
+					tooltip={t("chat.header.export")}
 					onClick={onExportChat}
 				/>
 				<HeaderButton
 					iconName="more-vertical"
-					tooltip="More"
+					tooltip={t("chat.header.more")}
 					onClick={onShowMenu}
 				/>
 			</div>

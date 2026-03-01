@@ -19,6 +19,7 @@ import {
 	parseChatFontSize,
 } from "../../shared/display-settings";
 import { CollapsibleSection } from "./CollapsibleSection";
+import { t } from "../../shared/i18n";
 
 export class AgentClientSettingTab extends PluginSettingTab {
 	plugin: AgentClientPlugin;
@@ -46,9 +47,9 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		const docContainer = containerEl.createDiv({
 			cls: "agent-client-doc-link",
 		});
-		docContainer.createSpan({ text: "Need help? Check out the " });
+		docContainer.createSpan({ text: t("settings.needHelp", { link: "" }).replace("{}", "") });
 		docContainer.createEl("a", {
-			text: "documentation",
+			text: t("settings.documentation"),
 			href: "https://goooice.github.io/obsidian-agent-client/",
 		});
 		docContainer.createSpan({ text: "." });
@@ -90,9 +91,10 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			cls: "agent-client-agent-selector-compact",
 		});
 
+		// Row 1: Default agent
 		new Setting(selectorContainer)
-			.setName("Default agent")
-			.setDesc("Choose which agent is used when opening a new chat view.")
+			.setName(t("settings.defaultAgent.name"))
+			.setDesc(t("settings.defaultAgent.desc"))
 			.addDropdown((dropdown) => {
 				this.agentSelector = dropdown;
 				this.populateAgentDropdown(dropdown);
@@ -105,13 +107,40 @@ export class AgentClientSettingTab extends PluginSettingTab {
 					this.plugin.ensureDefaultAgentId();
 					await this.plugin.saveSettingsAndNotify(nextSettings);
 				});
-			})
+			});
+
+		// Row 2: Language
+		new Setting(selectorContainer)
+			.setName(t("settings.display.language.name"))
+			.setDesc(t("settings.display.language.desc"))
+			.addDropdown((dropdown) =>
+				dropdown
+					.addOption("en", "English")
+					.addOption("zh", "中文")
+					.addOption("ja", "日本語")
+					.setValue(this.plugin.settings.language)
+					.onChange(async (value) => {
+						this.plugin.settings.language = value as
+							| "en"
+							| "zh"
+							| "ja";
+						// Update i18n language immediately
+						const { setLanguage } = await import("../../shared/i18n");
+						setLanguage(this.plugin.settings.language);
+						await this.plugin.saveSettings();
+						// Refresh settings page to apply new language
+						this.display();
+					}),
+			);
+
+		// Row 3: Detect all button
+		new Setting(selectorContainer)
 			.addButton((button) =>
 				button
-					.setButtonText("Detect all")
-					.setTooltip("Auto-detect all installed agents")
+					.setButtonText(t("settings.detectAll"))
+					.setTooltip(t("settings.detectAllTooltip"))
 					.onClick(async () => {
-						button.setButtonText("Detecting...");
+						button.setButtonText(t("common.detecting"));
 						button.setDisabled(true);
 
 						try {
@@ -161,11 +190,11 @@ export class AgentClientSettingTab extends PluginSettingTab {
 								await this.plugin.saveSettings();
 								this.display(); // Refresh UI
 								new Notice(
-									`[Agent Client] Detected ${updatedCount} agent(s)`,
+									t("settings.detectionComplete", { count: updatedCount }),
 								);
 							} else {
 								new Notice(
-									"[Agent Client] No new agents detected",
+									t("settings.noAgentsDetected"),
 								);
 							}
 						} catch (error) {
@@ -174,10 +203,10 @@ export class AgentClientSettingTab extends PluginSettingTab {
 								error,
 							);
 							new Notice(
-								"[Agent Client] Detection failed. Check console for details.",
+								t("settings.detectionFailed"),
 							);
 						} finally {
-							button.setButtonText("Detect all");
+							button.setButtonText(t("settings.detectAll"));
 							button.setDisabled(false);
 						}
 					}),
@@ -210,7 +239,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			{
 				id: this.plugin.settings.opencode.id,
 				title: (this.plugin.settings.opencode.displayName || "OpenCode"),
-				description: "Built-in agent • No API key required",
+				description: t("settings.agent.noApiKeyRequired"),
 				render: (el: HTMLElement) => this.renderOpenCodeConfig(el),
 			},
 		];
@@ -223,7 +252,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 					id: `agent-${agent.id}`,
 					title: agent.title,
 					description: agent.description,
-					badge: isDefault ? "当前默认" : undefined,
+					badge: isDefault ? t("common.default") : undefined,
 					defaultCollapsed: !isDefault,
 					containerClass: "agent-client-agent-config-section",
 					onToggle: (collapsed) => {
@@ -242,7 +271,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			containerEl,
 			{
 				id: "custom-agents",
-				title: "Custom Agents",
+				title: t("settings.sections.customAgents"),
 				defaultCollapsed: true,
 			},
 			(el) => this.renderCustomAgents(el),
@@ -258,7 +287,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			containerEl,
 			{
 				id: "display-settings",
-				title: "Display",
+				title: t("settings.sections.display"),
 				defaultCollapsed: true,
 			},
 			(el) => this.renderDisplaySettings(el),
@@ -269,7 +298,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			containerEl,
 			{
 				id: "mentions-settings",
-				title: "Mentions",
+				title: t("settings.sections.mentions"),
 				defaultCollapsed: true,
 			},
 			(el) => this.renderMentionsSettings(el),
@@ -280,7 +309,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			containerEl,
 			{
 				id: "floating-chat-settings",
-				title: "Floating chat",
+				title: t("settings.sections.floatingChat"),
 				defaultCollapsed: true,
 			},
 			(el) => this.renderFloatingChatSettings(el),
@@ -291,7 +320,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			containerEl,
 			{
 				id: "export-settings",
-				title: "Export",
+				title: t("settings.sections.export"),
 				defaultCollapsed: true,
 			},
 			(el) => this.renderExportSettings(el),
@@ -302,7 +331,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			containerEl,
 			{
 				id: "permissions-settings",
-				title: "Permissions",
+				title: t("settings.sections.permissions"),
 				defaultCollapsed: true,
 			},
 			(el) => this.renderPermissionsSettings(el),
@@ -313,7 +342,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			containerEl,
 			{
 				id: "advanced-settings",
-				title: "Advanced",
+				title: t("settings.sections.advanced"),
 				defaultCollapsed: true,
 			},
 			(el) => this.renderAdvancedSettings(el),
@@ -326,14 +355,14 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 	private renderDisplaySettings(containerEl: HTMLElement) {
 		new Setting(containerEl)
-			.setName("Chat view location")
-			.setDesc("Where to open new chat views")
+			.setName(t("settings.display.chatViewLocation.name"))
+			.setDesc(t("settings.display.chatViewLocation.desc"))
 			.addDropdown((dropdown) =>
 				dropdown
-					.addOption("right-tab", "Right pane (tabs)")
-					.addOption("right-split", "Right pane (split)")
-					.addOption("editor-tab", "Editor area (tabs)")
-					.addOption("editor-split", "Editor area (split)")
+					.addOption("right-tab", t("settings.display.locationOptions.rightTab"))
+					.addOption("right-split", t("settings.display.locationOptions.rightSplit"))
+					.addOption("editor-tab", t("settings.display.locationOptions.editorTab"))
+					.addOption("editor-split", t("settings.display.locationOptions.editorSplit"))
 					.setValue(this.plugin.settings.chatViewLocation)
 					.onChange(async (value) => {
 						this.plugin.settings.chatViewLocation =
@@ -343,10 +372,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Chat font size")
-			.setDesc(
-				`Adjust the font size of the chat message area (${CHAT_FONT_SIZE_MIN}-${CHAT_FONT_SIZE_MAX}px).`,
-			)
+			.setName(t("settings.display.fontSize.name"))
+			.setDesc(t("settings.display.fontSize.desc"))
 			.addText((text) => {
 				const getCurrentDisplayValue = (): string => {
 					const currentFontSize =
@@ -440,10 +467,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Show emojis")
-			.setDesc(
-				"Display emoji icons in tool calls, thoughts, plans, and terminal blocks.",
-			)
+			.setName(t("settings.display.showEmojis.name"))
+			.setDesc(t("settings.display.showEmojis.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.displaySettings.showEmojis)
@@ -454,10 +479,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Auto-collapse long diffs")
-			.setDesc(
-				"Automatically collapse diffs that exceed the line threshold.",
-			)
+			.setName(t("settings.display.autoCollapseDiffs.name"))
+			.setDesc(t("settings.display.autoCollapseDiffs.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(
@@ -473,10 +496,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 		if (this.plugin.settings.displaySettings.autoCollapseDiffs) {
 			new Setting(containerEl)
-				.setName("Collapse threshold")
-				.setDesc(
-					"Diffs with more lines than this will be collapsed by default.",
-				)
+				.setName(t("settings.display.collapseThreshold.name"))
+				.setDesc(t("settings.display.collapseThreshold.desc"))
 				.addText((text) =>
 					text
 						.setPlaceholder("10")
@@ -499,19 +520,17 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 		// Message shortcut
 		new Setting(containerEl)
-			.setName("Send message shortcut")
-			.setDesc(
-				"Choose the keyboard shortcut to send messages. Note: If using Cmd/Ctrl+Enter, you may need to remove any hotkeys assigned to Cmd/Ctrl+Enter (Settings → Hotkeys).",
-			)
+			.setName(t("settings.display.sendMessageShortcut.name"))
+			.setDesc(t("settings.display.sendMessageShortcut.desc"))
 			.addDropdown((dropdown) =>
 				dropdown
 					.addOption(
 						"enter",
-						"Enter to send, Shift+Enter for newline",
+						t("settings.display.shortcutOptions.enter"),
 					)
 					.addOption(
 						"cmd-enter",
-						"Cmd/Ctrl+Enter to send, Enter for newline",
+						t("settings.display.shortcutOptions.cmdEnter"),
 					)
 					.setValue(this.plugin.settings.sendMessageShortcut)
 					.onChange(async (value) => {
@@ -525,10 +544,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 	private renderMentionsSettings(containerEl: HTMLElement) {
 		new Setting(containerEl)
-			.setName("Auto-mention active note")
-			.setDesc(
-				"Include the current note in your messages automatically. The agent will have access to its content without typing @notename.",
-			)
+			.setName(t("settings.mentions.autoMentionActiveNote.name"))
+			.setDesc(t("settings.mentions.autoMentionActiveNote.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.autoMentionActiveNote)
@@ -539,10 +556,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Max note length")
-			.setDesc(
-				"Maximum characters per mentioned note. Notes longer than this will be truncated.",
-			)
+			.setName(t("settings.mentions.maxNoteLength.name"))
+			.setDesc(t("settings.mentions.maxNoteLength.desc"))
 			.addText((text) =>
 				text
 					.setPlaceholder("10000")
@@ -562,10 +577,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Max selection length")
-			.setDesc(
-				"Maximum characters for text selection in auto-mention. Selections longer than this will be truncated.",
-			)
+			.setName(t("settings.mentions.maxSelectionLength.name"))
+			.setDesc(t("settings.mentions.maxSelectionLength.desc"))
 			.addText((text) =>
 				text
 					.setPlaceholder("10000")
@@ -588,10 +601,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 	private renderFloatingChatSettings(containerEl: HTMLElement) {
 		new Setting(containerEl)
-			.setName("Show floating button")
-			.setDesc(
-				"Display a floating chat button that opens a draggable chat window.",
-			)
+			.setName(t("settings.floatingChat.showButton.name"))
+			.setDesc(t("settings.floatingChat.showButton.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.showFloatingButton)
@@ -617,10 +628,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Floating button image")
-			.setDesc(
-				"URL or path to an image for the floating button. Leave empty for default icon.",
-			)
+			.setName(t("settings.floatingChat.buttonImage.name"))
+			.setDesc(t("settings.floatingChat.buttonImage.desc"))
 			.addText((text) =>
 				text
 					.setPlaceholder("https://example.com/avatar.png")
@@ -634,8 +643,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 	private renderExportSettings(containerEl: HTMLElement) {
 		new Setting(containerEl)
-			.setName("Export folder")
-			.setDesc("Folder where chat exports will be saved")
+			.setName(t("settings.export.folder.name"))
+			.setDesc(t("settings.export.folder.desc"))
 			.addText((text) =>
 				text
 					.setPlaceholder("Agent Client")
@@ -648,10 +657,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Filename")
-			.setDesc(
-				"Template for exported filenames. Use {date} for date and {time} for time",
-			)
+			.setName(t("settings.export.filename.name"))
+			.setDesc(t("settings.export.filename.desc"))
 			.addText((text) =>
 				text
 					.setPlaceholder("agent_client_{date}_{time}")
@@ -666,10 +673,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Frontmatter tag")
-			.setDesc(
-				"Tag to add to exported notes. Supports nested tags (e.g., projects/agent-client). Leave empty to disable.",
-			)
+			.setName(t("settings.export.frontmatterTag.name"))
+			.setDesc(t("settings.export.frontmatterTag.desc"))
 			.addText((text) =>
 				text
 					.setPlaceholder("agent-client")
@@ -684,8 +689,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Include images")
-			.setDesc("Include images in exported markdown files")
+			.setName(t("settings.export.includeImages.name"))
+			.setDesc(t("settings.export.includeImages.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.exportSettings.includeImages)
@@ -699,18 +704,18 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 		if (this.plugin.settings.exportSettings.includeImages) {
 			new Setting(containerEl)
-				.setName("Image location")
-				.setDesc("Where to save exported images")
+				.setName(t("settings.export.imageLocation.name"))
+				.setDesc(t("settings.export.imageLocation.desc"))
 				.addDropdown((dropdown) =>
 					dropdown
 						.addOption(
 							"obsidian",
-							"Use Obsidian's attachment setting",
+							t("settings.export.imageLocationOptions.obsidian"),
 						)
-						.addOption("custom", "Save to custom folder")
+						.addOption("custom", t("settings.export.imageLocationOptions.custom"))
 						.addOption(
 							"base64",
-							"Embed as Base64 (not recommended)",
+							t("settings.export.imageLocationOptions.base64"),
 						)
 						.setValue(
 							this.plugin.settings.exportSettings.imageLocation,
@@ -727,10 +732,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 				this.plugin.settings.exportSettings.imageLocation === "custom"
 			) {
 				new Setting(containerEl)
-					.setName("Custom image folder")
-					.setDesc(
-						"Folder path for exported images (relative to vault root)",
-					)
+					.setName(t("settings.export.customImageFolder.name"))
+					.setDesc(t("settings.export.customImageFolder.desc"))
 					.addText((text) =>
 						text
 							.setPlaceholder("Agent Client")
@@ -748,10 +751,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		}
 
 		new Setting(containerEl)
-			.setName("Auto-export on new chat")
-			.setDesc(
-				"Automatically export the current chat when starting a new chat",
-			)
+			.setName(t("settings.export.autoExportNewChat.name"))
+			.setDesc(t("settings.export.autoExportNewChat.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(
@@ -765,10 +766,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Auto-export on close chat")
-			.setDesc(
-				"Automatically export the current chat when closing the chat view",
-			)
+			.setName(t("settings.export.autoExportCloseChat.name"))
+			.setDesc(t("settings.export.autoExportCloseChat.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(
@@ -783,8 +782,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Open note after export")
-			.setDesc("Automatically open the exported note after exporting")
+			.setName(t("settings.export.openAfterExport.name"))
+			.setDesc(t("settings.export.openAfterExport.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(
@@ -800,10 +799,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 	private renderPermissionsSettings(containerEl: HTMLElement) {
 		new Setting(containerEl)
-			.setName("Auto-allow permissions")
-			.setDesc(
-				"Automatically allow all permission requests from agents. ⚠️ Use with caution - this gives agents full access to your system.",
-			)
+			.setName(t("settings.permissions.autoAllow.name"))
+			.setDesc(t("settings.permissions.autoAllow.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.autoAllowPermissions)
@@ -817,10 +814,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 	private renderAdvancedSettings(containerEl: HTMLElement) {
 		// Node.js path
 		new Setting(containerEl)
-			.setName("Node.js path")
-			.setDesc(
-				'Absolute path to Node.js executable. On macOS/Linux, use "which node", and on Windows, use "where node" to find it.',
-			)
+			.setName(t("settings.advanced.nodePath.name"))
+			.setDesc(t("settings.advanced.nodePath.desc"))
 			.addText((text) => {
 				text.setPlaceholder("Absolute path to node")
 					.setValue(this.plugin.settings.nodePath)
@@ -833,10 +828,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		// WSL settings (Windows only)
 		if (Platform.isWin) {
 			new Setting(containerEl)
-				.setName("Enable WSL mode")
-				.setDesc(
-					"Run agents inside Windows Subsystem for Linux. Recommended for agents like Codex that don't work well in native Windows environments.",
-				)
+				.setName(t("settings.advanced.wsl.name"))
+				.setDesc(t("settings.advanced.wsl.desc"))
 				.addToggle((toggle) =>
 					toggle
 						.setValue(this.plugin.settings.windowsWslMode)
@@ -849,10 +842,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 			if (this.plugin.settings.windowsWslMode) {
 				new Setting(containerEl)
-					.setName("WSL distribution")
-					.setDesc(
-						"Specify WSL distribution name (leave empty for default). Example: Ubuntu, Debian",
-					)
+					.setName(t("settings.advanced.wslDistribution.name"))
+					.setDesc(t("settings.advanced.wslDistribution.desc"))
 					.addText((text) =>
 						text
 							.setPlaceholder("Leave empty for default")
@@ -871,10 +862,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 
 		// Debug mode
 		new Setting(containerEl)
-			.setName("Debug mode")
-			.setDesc(
-				"Enable debug logging to console. Useful for development and troubleshooting.",
-			)
+			.setName(t("settings.advanced.debugMode.name"))
+			.setDesc(t("settings.advanced.debugMode.desc"))
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.debugMode)
@@ -893,10 +882,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		const claude = this.plugin.settings.claude;
 
 		new Setting(containerEl)
-			.setName("API key")
-			.setDesc(
-				"Anthropic API key. Required if not logging in with an Anthropic account. (Stored as plain text)",
-			)
+			.setName(t("settings.agent.apiKey.name"))
+			.setDesc(t("settings.agent.apiKey.desc"))
 			.addText((text) => {
 				text.setPlaceholder("Enter your Anthropic API key")
 					.setValue(claude.apiKey)
@@ -908,7 +895,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Path")
+			.setName(t("settings.agent.path.name"))
 			.setDesc(
 				'Absolute path to the claude-agent-acp. On macOS/Linux, use "which claude-agent-acp", and on Windows, use "where claude-agent-acp" to find it.',
 			)
@@ -958,7 +945,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Arguments")
+			.setName(t("settings.agent.arguments.name"))
 			.setDesc(
 				"Enter one argument per line. Leave empty to run without arguments.",
 			)
@@ -974,7 +961,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Environment variables")
+			.setName(t("settings.agent.envVars.name"))
 			.setDesc(
 				"Enter KEY=VALUE pairs, one per line. ANTHROPIC_API_KEY is derived from the field above.",
 			)
@@ -993,7 +980,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		const codex = this.plugin.settings.codex;
 
 		new Setting(containerEl)
-			.setName("API key")
+			.setName(t("settings.agent.apiKey.name"))
 			.setDesc(
 				"OpenAI API key. Required if not logging in with an OpenAI account. (Stored as plain text)",
 			)
@@ -1008,7 +995,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Path")
+			.setName(t("settings.agent.path.name"))
 			.setDesc(
 				'Absolute path to the codex-acp. On macOS/Linux, use "which codex-acp", and on Windows, use "where codex-acp" to find it.',
 			)
@@ -1056,7 +1043,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Arguments")
+			.setName(t("settings.agent.arguments.name"))
 			.setDesc(
 				"Enter one argument per line. Leave empty to run without arguments.",
 			)
@@ -1071,7 +1058,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Environment variables")
+			.setName(t("settings.agent.envVars.name"))
 			.setDesc(
 				"Enter KEY=VALUE pairs, one per line. OPENAI_API_KEY is derived from the field above.",
 			)
@@ -1090,7 +1077,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		const gemini = this.plugin.settings.gemini;
 
 		new Setting(containerEl)
-			.setName("API key")
+			.setName(t("settings.agent.apiKey.name"))
 			.setDesc(
 				"Gemini API key. Required if not logging in with a Google account. (Stored as plain text)",
 			)
@@ -1105,7 +1092,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Path")
+			.setName(t("settings.agent.path.name"))
 			.setDesc(
 				'Absolute path to the Gemini CLI. On macOS/Linux, use "which gemini", and on Windows, use "where gemini" to find it.',
 			)
@@ -1155,7 +1142,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Arguments")
+			.setName(t("settings.agent.arguments.name"))
 			.setDesc(
 				'Enter one argument per line. Leave empty to run without arguments.(Currently, the Gemini CLI requires the "--experimental-acp" option.)',
 			)
@@ -1171,7 +1158,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Environment variables")
+			.setName(t("settings.agent.envVars.name"))
 			.setDesc(
 				"Enter KEY=VALUE pairs, one per line. Required to authenticate with Vertex AI. GEMINI_API_KEY is derived from the field above.(Stored as plain text)",
 			)
@@ -1190,7 +1177,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		const opencode = this.plugin.settings.opencode;
 
 		new Setting(containerEl)
-			.setName("Path")
+			.setName(t("settings.agent.path.name"))
 			.setDesc(
 				'Absolute path to the opencode executable. On macOS/Linux, use "which opencode", and on Windows, use "where opencode" to find it.',
 			)
@@ -1240,7 +1227,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Arguments")
+			.setName(t("settings.agent.arguments.name"))
 			.setDesc(
 				"Enter one argument per line. The default 'acp' argument enables ACP protocol support. Usually no changes needed.",
 			)
@@ -1255,8 +1242,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Environment variables")
-			.setDesc("Enter KEY=VALUE pairs, one per line.")
+			.setName(t("settings.agent.envVars.name"))
+			.setDesc(t("settings.agent.envVars.desc"))
 			.addTextArea((text) => {
 				text.setPlaceholder("")
 					.setValue(this.formatEnv(opencode.env))
@@ -1311,8 +1298,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		});
 
 		const idSetting = new Setting(blockEl)
-			.setName("Agent ID")
-			.setDesc("Unique identifier used to reference this agent.")
+			.setName(t("settings.agent.agentId.name"))
+			.setDesc(t("settings.agent.agentId.desc"))
 			.addText((text) => {
 				text.setPlaceholder("custom-agent")
 					.setValue(agent.id)
@@ -1350,8 +1337,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 		});
 
 		new Setting(blockEl)
-			.setName("Display name")
-			.setDesc("Shown in menus and headers.")
+			.setName(t("settings.agent.displayName.name"))
+			.setDesc(t("settings.agent.displayName.desc"))
 			.addText((text) => {
 				text.setPlaceholder("Custom agent")
 					.setValue(agent.displayName || agent.id)
@@ -1367,8 +1354,8 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(blockEl)
-			.setName("Path")
-			.setDesc("Absolute path to the custom agent.")
+			.setName(t("settings.agent.path.name"))
+			.setDesc(t("settings.agent.path.desc"))
 			.addText((text) => {
 				text.setPlaceholder("Absolute path to custom agent")
 					.setValue(agent.command)
@@ -1380,7 +1367,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(blockEl)
-			.setName("Arguments")
+			.setName(t("settings.agent.arguments.name"))
 			.setDesc(
 				"Enter one argument per line. Leave empty to run without arguments.",
 			)
@@ -1396,7 +1383,7 @@ export class AgentClientSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(blockEl)
-			.setName("Environment variables")
+			.setName(t("settings.agent.envVars.name"))
 			.setDesc(
 				"Enter KEY=VALUE pairs, one per line. (Stored as plain text)",
 			)

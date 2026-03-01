@@ -42,6 +42,13 @@ import {
 } from "./domain/models/agent-config";
 import type { SavedSessionInfo } from "./domain/models/session-info";
 import { initializeLogger } from "./shared/logger";
+import {
+	initI18n,
+	preloadTranslations,
+	setLanguage,
+	t,
+	type SupportedLanguage,
+} from "./shared/i18n";
 
 // Re-export for backward compatibility
 export type { AgentEnvVar, CustomAgentSettings };
@@ -74,6 +81,8 @@ export interface AgentClientPluginSettings {
 	customAgents: CustomAgentSettings[];
 	/** Default agent ID for new views (renamed from activeAgentId for multi-session) */
 	defaultAgentId: string;
+	/** Interface language (en, zh, ja) */
+	language: "en" | "zh" | "ja";
 	autoAllowPermissions: boolean;
 	autoMentionActiveNote: boolean;
 	debugMode: boolean;
@@ -151,6 +160,7 @@ const DEFAULT_SETTINGS: AgentClientPluginSettings = {
 	},
 	customAgents: [],
 	defaultAgentId: "opencode",
+	language: "en",
 	autoAllowPermissions: false,
 	autoMentionActiveNote: true,
 	debugMode: false,
@@ -211,6 +221,11 @@ export default class AgentClientPlugin extends Plugin {
 
 		initializeLogger(this.settings);
 
+		// Initialize i18n
+		initI18n(this);
+		setLanguage(this.settings.language);
+		await preloadTranslations();
+
 		// Auto-detect agents with empty command paths
 		await this.autoDetectAgents();
 
@@ -230,7 +245,7 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addCommand({
 			id: "open-chat-view",
-			name: "Open agent chat",
+			name: t("commands.openChat"),
 			callback: () => {
 				void this.activateView();
 			},
@@ -238,7 +253,7 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addCommand({
 			id: "focus-next-chat-view",
-			name: "Focus next chat view",
+			name: t("commands.focusNext"),
 			callback: () => {
 				this.focusChatView("next");
 			},
@@ -246,7 +261,7 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addCommand({
 			id: "focus-previous-chat-view",
-			name: "Focus previous chat view",
+			name: t("commands.focusPrevious"),
 			callback: () => {
 				this.focusChatView("previous");
 			},
@@ -254,7 +269,7 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addCommand({
 			id: "open-new-chat-view",
-			name: "Open new chat view",
+			name: t("commands.openNewChat"),
 			callback: () => {
 				void this.openNewChatViewWithAgent(
 					this.settings.defaultAgentId,
@@ -270,7 +285,7 @@ export default class AgentClientPlugin extends Plugin {
 		// Floating chat window commands
 		this.addCommand({
 			id: "open-floating-chat",
-			name: "Open floating chat window",
+			name: t("commands.openFloatingChat"),
 			callback: () => {
 				if (!this.settings.showFloatingButton) return;
 				const instances = this.getFloatingChatInstances();
@@ -293,7 +308,7 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addCommand({
 			id: "open-new-floating-chat",
-			name: "Open new floating chat window",
+			name: t("commands.openNewFloatingChat"),
 			callback: () => {
 				if (!this.settings.showFloatingButton) return;
 				this.openNewFloatingChat(true);
@@ -302,7 +317,7 @@ export default class AgentClientPlugin extends Plugin {
 
 		this.addCommand({
 			id: "close-floating-chat",
-			name: "Close floating chat window",
+			name: t("commands.closeFloatingChat"),
 			callback: () => {
 				const focused = this.viewRegistry.getFocused();
 				if (focused && focused.viewType === "floating") {
@@ -1019,6 +1034,12 @@ export default class AgentClientPlugin extends Plugin {
 			})(),
 			customAgents: customAgents,
 			defaultAgentId,
+			language:
+				rawSettings.language === "en" ||
+				rawSettings.language === "zh" ||
+				rawSettings.language === "ja"
+					? rawSettings.language
+					: DEFAULT_SETTINGS.language,
 			autoAllowPermissions:
 				typeof rawSettings.autoAllowPermissions === "boolean"
 					? rawSettings.autoAllowPermissions
